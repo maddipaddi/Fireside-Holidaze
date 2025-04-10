@@ -1,12 +1,171 @@
-# React + Vite
+# Fireside Holidaze - Project Exam 2
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## About the Project
 
-Currently, two official plugins are available:
+This project is a collaboration between Veronika Aas, Herman Hylland, and Madelen Sletteberg.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Welcome to Holidaze**
+"Each getaway is handpicked to deliver the essence of slow living — think crackling fireplaces, cozy interiors, and snow-dusted pines just outside your window. From serene forest hideaways to mountainside retreats, our collection invites you to pause, breathe, and rediscover the beauty of being still. At Holidaze, comfort isn't a feature — it's the entire experience."
 
-## Expanding the ESLint configuration
+This project is the **frontend implementation** of Holidaze, built on an existing backend API provided by Noroff. The API handles user management, venue listings, and booking functionality, while this frontend will bring the user interface to life with a cozy, responsive design.
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Table of Contents
+
+1. [Features (Planned)](#features-planned)
+2. [Target Audience](#target-audience)
+3. [Getting Started](#getting-started)
+   - [Prerequisites](#prerequisites)
+   - [Installation and Setup](#installation-and-setup)
+4. [Development Tools and Configuration](#development-tools-and-configuration)
+   - [Tools Used](#tools-used)
+   - [Linting and Formatting](#linting-and-formatting)
+5. [Commit Message Guidelines](#commit-message-guidelines)
+   - [Format](#format)
+   - [Types](#types)
+6. [License](#license)
+7. [Future Updates](#future-updates)
+
+---
+
+## Features (Planned)
+
+- User registration and login for authenticated access for both customers and venue managers.
+- Browse and search venues (available to all users).
+- Create, edit and delete venues, as well as see upcoming bookings on the venues (authenticated users - venue managers).
+- Book venues and view upcoming bookings (authenticated users - customers).
+- Profile management, including avatar updates (authenticated users - customers and venue managers).
+
+---
+
+## Target Audience
+
+Young to middle-aged adults (25–45) who live busy, possibly urban lives and crave rest, quiet, and intentional slow living. They value comfort, nature, and mindfulness.
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+To run the project locally, you’ll need:
+
+- **Node.js** (v16 or later)
+- **npm** (Node Package Manager, comes with Node.js)
+- A code editor like **Visual Studio Code**
+
+### Installation and Setup
+
+1. **Clone the Repository**
+
+```bash
+   git clone https://github.com/your-username/Fireside-Holidaze.git
+```
+
+2. **Install Dependencies**
+
+```bash
+   npm install
+```
+
+3. **Run the Development Server**
+
+```bash
+   npm run dev
+```
+
+Open the development server in your browser at the provided local host port link.
+
+4. **Build for Production**
+   To create an optimized production build:
+
+```bash
+   npm run build
+```
+
+5. **Preview the Build**
+   To preview the production build locally:
+
+```bash
+   npm run preview
+```
+
+---
+
+## Development Tools and Configuration
+
+### Tools Used
+
+- Vite: For fast and modern frontend tooling.
+- ESLint: To enforce consistent code quality.
+- Prettier: For automatic code formatting.
+- Husky: To enforce pre-commit hooks, ensuring quality at every step.
+- Lint-Staged: Runs linters and formatters on staged files.
+
+### Linting and Formatting
+
+To manually run linting and formatting:
+
+- **Lint the code:**
+
+```bash
+   npm run lint
+```
+
+- **Format the code:**
+
+```bash
+   npm run format
+```
+
+---
+
+## Commit Message Guidelines
+
+We follow the Conventional Commits (https://www.conventionalcommits.org/en/v1.0.0-beta.2/) standard to maintain a clear and consistent commit history. This ensures commits are easy to understand and align with best practices for version control.
+
+### Format
+
+Commit messages should follow this format:
+<type>: <short description>
+Use present tense and the imperative mood (e.g., "add," not "added" or "adds").
+Keep the description concise but meaningful.
+
+### Types
+
+- **`feat:`** Adding a new feature.  
+  _Example_: `feat: implement user registration form`
+
+- **`fix:`** Fixing a bug.  
+  _Example_: `fix: resolve broken API integration`
+
+- **`build:`** Changes related to the build system or external dependencies.  
+  _Example_: `build: configure ESLint and Prettier`
+
+- **`chore:`** Maintenance tasks that don't affect functionality.  
+  _Example_: `chore: update README.md`
+
+- **`style:`**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc).  
+  _Example_: `style: run prettier formatting on files`
+
+- **`docs:`** Updates to documentation.  
+  _Example_: `docs: add setup instructions to README`
+
+- **`refactor:`** Code restructuring without changing functionality.  
+  _Example_: `refactor: simplify user authentication logic`
+
+- **`test:`** Adding or updating tests.  
+  _Example_: `test: add unit tests for login functionality`
+
+---
+
+## License
+
+This project is for educational purposes only as part of the Noroff Frontend Development curriculum. It is not intended for commercial use.
+
+---
+
+## Future updates
+
+This README will be updated as the project evolves, including details about additional tools (e.g., Tailwind CSS), features, and design changes.
