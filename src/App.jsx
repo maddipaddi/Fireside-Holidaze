@@ -1,4 +1,5 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
 import "./index.css";
 import Home from "./pages/Home";
 import Listings from "./pages/Listings";
@@ -12,8 +13,8 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" index element={<Home/>}/>
-        <Route path="/Listings" index element={<Listings/>}/>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/Listings" element={<Listings/>}/>
         <Route path="/Login" element={<Login/>}/>
         <Route path="/Register" element={<Register/>}/>
       </Routes>
