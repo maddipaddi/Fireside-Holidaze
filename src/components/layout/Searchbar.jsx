@@ -117,14 +117,14 @@ const Searchbar = () => {
       </div>
 
       {/* Check-in / Check-out / Guests / Rooms */}
-      <div className="grid grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         {/* Date */}
-        <div className="col-span-2 bg-white p-3 rounded">
+        <div className="bg-white p-3 rounded w-full md:col-span-2">
           <label className="block text-sm font-semibold font-body text-copy mb-2">
             Date
           </label>
-          <div className="flex gap-2">
-            <div className="w-1/2">
+          <div className="flex flex-col md:flex-row gap-2">
+            <div className="w-full md:w-1/2">
               <label className="block text-xs font-body text-gray-500 mb-1">
                 Check in
               </label>
@@ -135,7 +135,7 @@ const Searchbar = () => {
                 className="w-full px-2 py-1 border rounded"
               />
             </div>
-            <div className="w-1/2">
+            <div className="w-full md:w-1/2">
               <label className="block text-xs font-body text-gray-500 mb-1">
                 Check out
               </label>
@@ -150,7 +150,7 @@ const Searchbar = () => {
         </div>
 
         {/* Guests */}
-        <div className="bg-white p-3 rounded text-center">
+        <div className="bg-white p-3 rounded text-center w-full md:col-span-1">
           <label className="block text-sm font-semibold font-body text-copy mb-2">
             Travelers
           </label>
@@ -172,7 +172,7 @@ const Searchbar = () => {
         </div>
 
         {/* Rooms */}
-        <div className="bg-white p-3 rounded text-center">
+        <div className="bg-white p-3 rounded text-center w-full md:col-span-1">
           <label className="block text-sm font-semibold font-body text-copy mb-2">
             Rooms
           </label>
