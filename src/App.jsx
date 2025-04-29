@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Venues from "./pages/Venues";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Searchbar from "./components/layout/Searchbar";
 
 function App() {
   return (

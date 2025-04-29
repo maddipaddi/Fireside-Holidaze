@@ -3,7 +3,7 @@ import Searchbar from "../components/layout/Searchbar";
 
 function Home() {
   return (
-    <div className="bg-[#e9e5cf] min-h-screen p-4">
+    <div className="bg-background min-h-screen p-4">
       <Searchbar />
     </div>
   );
