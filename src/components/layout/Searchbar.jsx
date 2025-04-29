@@ -78,7 +78,7 @@ const Searchbar = () => {
 
   return (
     <div
-      className="bg-copy dark:bg-primary p-6 rounded-lg shadow-lg max-w-2xl mx-auto mt-12"
+      className="bg-copy dark:bg-primary p-6 rounded-t-lg rounded-b-lg shadow-lg max-w-2xl mx-auto mt-12"
       ref={wrapperRef}
     >
       {/* Location */}
@@ -157,14 +157,16 @@ const Searchbar = () => {
           <div className="flex items-center justify-center gap-2">
             <button
               onClick={() => decrement(setGuests, guests)}
-              className="px-2 py-1 bg-gray-200 rounded"
+              disabled={guests <= 1}
+              className={`px-2 py-1 rounded ${guests <= 1 ? "bg-gray-100 text-gray-400 cursor-not-allowed" : "bg-gray-200"}`}
             >
               -
             </button>
             <span>{guests}</span>
             <button
-              onClick={() => increment(setGuests, guests)}
-              className="px-2 py-1 bg-gray-200 rounded"
+              onClick={() => increment(setGuests, guests, 12)}
+              disabled={guests >= 12}
+              className={`px-2 py-1 rounded ${guests >= 12 ? "bg-gray-100 text-gray-400 cursor-not-allowed" : "bg-gray-200"}`}
             >
               +
             </button>
@@ -179,14 +181,16 @@ const Searchbar = () => {
           <div className="flex items-center justify-center gap-2">
             <button
               onClick={() => decrement(setRooms, rooms)}
-              className="px-2 py-1 bg-gray-200 rounded"
+              disabled={rooms <= 1}
+              className={`px-2 py-1 rounded ${rooms <= 1 ? "bg-gray-100 text-gray-400 cursor-not-allowed" : "bg-gray-200"}`}
             >
               -
             </button>
             <span>{rooms}</span>
             <button
-              onClick={() => increment(setRooms, rooms)}
-              className="px-2 py-1 bg-gray-200 rounded"
+              onClick={() => increment(setRooms, rooms, 6)}
+              disabled={rooms >= 6}
+              className={`px-2 py-1 rounded ${rooms >= 6 ? "bg-gray-100 text-gray-400 cursor-not-allowed" : "bg-gray-200"}`}
             >
               +
             </button>
@@ -195,10 +199,10 @@ const Searchbar = () => {
       </div>
 
       {/* Search button */}
-      <div className="bg-primary dark:bg-background p-3 rounded-b-lg text-center">
+      <div className="bg-primary dark:bg-background p-4 text-center -mx-6 -mb-6 rounded-b-lg">
         <button
           onClick={handleSearch}
-          className="bg-background dark:bg-primary text:copy dark:text-background font-body font-bold px-8 py-2 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition"
+          className="bg-background dark:bg-primary text-copy dark:text-background font-body font-bold px-8 py-2 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition"
         >
           Search
         </button>
