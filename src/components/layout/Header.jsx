@@ -27,7 +27,7 @@ export default function Header() {
       <nav>
         <NavLink to="/">
           <img
-            src="/public/assets/Logo_lightmode.png"
+            src="/assets/Logo_lightmode.png"
             alt="Holidaze logo of a cabin"
           />
         </NavLink>
