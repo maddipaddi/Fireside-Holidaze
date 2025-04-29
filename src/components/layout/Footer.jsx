@@ -1,3 +1,9 @@
 export default function Footer() {
-  return <h1>This is inside the Footer component.</h1>;
+  return (
+    <footer>
+      <p>&copy; {new Date().getFullYear()} Holidaze</p>
+      <a href="/Terms">Terms and Conditions</a>
+      <a href="/Privacy">Privacy Policy</a>
+    </footer>
+  );
 }
