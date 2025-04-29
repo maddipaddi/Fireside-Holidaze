@@ -83,7 +83,7 @@ const Searchbar = () => {
     >
       {/* Location */}
       <div className="bg-white text:copy p-4 rounded mb-4 relative">
-        <label className="block text-sm font-semibold text-copy mb-1">
+        <label className="block text-sm font-semibold font-body text-copy mb-1">
           Location
         </label>
         <input
@@ -91,7 +91,7 @@ const Searchbar = () => {
           placeholder="Write your destination..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy"
+          className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy"
         />
         {isOpen && suggestions.length > 0 && (
           <ul className="absolute z-10 w-full bg-white border border-gray-300 rounded shadow max-h-60 overflow-auto mt-1">
@@ -104,8 +104,12 @@ const Searchbar = () => {
                   setIsOpen(false);
                 }}
               >
-                <p className="font-semibold text-gray-800">{venue.name}</p>
-                <p className="text-sm text-gray-600">{venue.description}</p>
+                <p className="font-semibold text-gray-800 font-body">
+                  {venue.name}
+                </p>
+                <p className="text-sm text-gray-600 font-body">
+                  {venue.description}
+                </p>
               </li>
             ))}
           </ul>
@@ -116,12 +120,12 @@ const Searchbar = () => {
       <div className="grid grid-cols-4 gap-4 mb-6">
         {/* Date */}
         <div className="col-span-2 bg-white p-3 rounded">
-          <label className="block text-sm font-semibold text-copy mb-2">
+          <label className="block text-sm font-semibold font-body text-copy mb-2">
             Date
           </label>
           <div className="flex gap-2">
             <div className="w-1/2">
-              <label className="block text-xs text-gray-500 mb-1">
+              <label className="block text-xs font-body text-gray-500 mb-1">
                 Check in
               </label>
               <input
@@ -132,7 +136,7 @@ const Searchbar = () => {
               />
             </div>
             <div className="w-1/2">
-              <label className="block text-xs text-gray-500 mb-1">
+              <label className="block text-xs font-body text-gray-500 mb-1">
                 Check out
               </label>
               <input
@@ -147,7 +151,7 @@ const Searchbar = () => {
 
         {/* Guests */}
         <div className="bg-white p-3 rounded text-center">
-          <label className="block text-sm font-semibold text-copy mb-2">
+          <label className="block text-sm font-semibold font-body text-copy mb-2">
             Travelers
           </label>
           <div className="flex items-center justify-center gap-2">
@@ -169,7 +173,7 @@ const Searchbar = () => {
 
         {/* Rooms */}
         <div className="bg-white p-3 rounded text-center">
-          <label className="block text-sm font-semibold text-copy mb-2">
+          <label className="block text-sm font-semibold font-body text-copy mb-2">
             Rooms
           </label>
           <div className="flex items-center justify-center gap-2">
@@ -194,7 +198,7 @@ const Searchbar = () => {
       <div className="bg-primary dark:bg-background p-3 rounded-b-lg text-center">
         <button
           onClick={handleSearch}
-          className="bg-background dark:bg-primary text:copy dark:text-background px-8 py-2 rounded shadow hover:bg-accent/50 hover:text-white transition"
+          className="bg-background dark:bg-primary text:copy dark:text-background font-body font-bold px-8 py-2 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition"
         >
           Search
         </button>
