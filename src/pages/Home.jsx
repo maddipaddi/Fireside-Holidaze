@@ -10,12 +10,16 @@ function Home() {
       </div>
 
       {/* Hero Section */}
-      <div className="py-20 flex items-center justify-center">
-        <div className="relative bg-copy dark:bg-background text-background dark:text-copy w-3/4 rounded-2xl p-8 flex flex-row items-center justify-between gap-8 shadow-lg overflow-visible">
+      <div className="py-20 flex items-center justify-center px-4">
+        <div className="relative bg-copy dark:bg-background text-background dark:text-copy w-full max-w-6xl rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-8 shadow-lg overflow-visible">
           {/* Text */}
-          <div className="flex flex-col items-start justify-center gap-4 w-1/2 ml-20 h-60">
-            <h1 className="font-heading text-3xl">Welcome to Holidaze!</h1>
-            <h2 className="font-body text-lg">Your forest retreat awaits</h2>
+          <div className="flex flex-col items-start justify-center gap-4 w-full md:w-1/2 h-auto">
+            <h1 className="font-heading text-3xl sm:text-4xl">
+              Welcome to Holidaze!
+            </h1>
+            <h2 className="font-body text-lg sm:text-xl">
+              Your forest retreat awaits
+            </h2>
             <button className="font-body bg-background dark:bg-primary px-6 py-3 rounded-2xl shadow-md hover:bg-accent hover:text-copy dark:hover:bg-copy dark:hover:text-copy transition">
               <a
                 href="/Venues"
@@ -25,12 +29,13 @@ function Home() {
               </a>
             </button>
           </div>
+
           {/* Image */}
-          <div className="w-1/2 flex justify-center">
+          <div className="w-full md:w-1/2 flex justify-center">
             <img
               src="/assets/zachary-kyra-derksen-unsplash.jpg"
               alt="Picture of a cozy cabin in the woods"
-              className="w-60 h-auto rounded-2xl -mb-28 shadow-lg object-cover"
+              className="w-60 sm:w-72 h-auto rounded-2xl md:-mb-28 shadow-lg object-cover"
             />
           </div>
         </div>
@@ -47,7 +52,7 @@ function Home() {
           Categories
         </h1>
       </div>
-      <div className="w-1/2 mx-auto flex justify-between items-center">
+      <div className="w-full max-w-5xl mx-auto flex flex-wrap justify-center gap-6 px-4">
         <CategoryItem
           label="Forest"
           imgSrc="/assets/cato-forest.png"
