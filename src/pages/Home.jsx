@@ -1,10 +1,10 @@
 import React from "react";
-import Searchbar from "../components/layout/Searchbar";
-import CategoryItem from "../components/layout/CategoryItem";
+import Searchbar from "../components/Searchbar";
+import CategoryItem from "../components/CategoryItem";
 
 function Home() {
   return (
-    <div className="bg-background dark:bg-darkbackground min-h-screen">
+    <div className="bg-background dark:bg-darkbackground min-h-screen pt-10 md:pt-20">
       <div className="pt-8">
         <Searchbar />
       </div>
