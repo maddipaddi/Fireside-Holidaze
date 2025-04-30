@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 
@@ -7,6 +7,8 @@ export default function Header() {
 
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const location = useLocation();
+  const isCategoryPage = location.pathname.startsWith("/Categories");
 
   function toggleMenu() {
     setMenuOpen((prev) => !prev);
@@ -30,60 +32,109 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="flex items-center justify-between p-4 bg-background dark:bg-copy">
+    <header className="flex items-center justify-between bg-background dark:bg-darkbackground fixed top-0 left-0 z-50 w-full">
       <NavLink to="/">
         <img
           src="/assets/Logo_lightmode.png"
           alt="Holidaze logo of a cabin"
-          className="block dark:hidden h-16 md:h-24 lg:h-32"
+          className="block dark:hidden h-20 md:h-24 ml-4 p-2"
         />
         <img
           src="/assets/Logo_darkmode.png"
           alt="Holidaze logo of a cabin"
-          className="hidden dark:block h-16 md:h-24 lg:h-32"
+          className="hidden dark:block h-20 md:h-24 ml-4 p-2"
         />
       </NavLink>
       <button
-        className="md:hidden cursor-pointer text-copy dark:text-background"
+        className="md:hidden cursor-pointer text-copy dark:text-background mr-4"
         onClick={toggleMenu}
         aria-label="Toggle menu"
       >
         {menuOpen ? <X size={32} /> : <Menu size={32} />}
       </button>
       <nav
-        className={`${menuOpen ? "flex" : "hidden"} fixed top-20 left-0 w-full z-50 items-center flex-col gap-4 p-8 t shadow-md md:static md:flex md:flex-row md:flex-grow md:justify-evenly md:w-auto md:gap-8 md:shadow-none md:text-l lg:text-xl bg-background dark:bg-copy text-copy dark:text-background`}
+        className={`${menuOpen ? "flex" : "hidden"} absolute top-full left-0 w-full flex-col items-center gap-4 px-4 pb-8 shadow-md md:static md:flex md:flex-row md:flex-grow md:justify-evenly md:w-auto md:p-0 md:gap-8 md:shadow-none md:text-l lg:text-xl bg-background dark:bg-copy text-copy dark:text-background`}
       >
-        <NavLink to="Venues" className="font-heading">
+        <NavLink
+          to="Venues"
+          className={({ isActive }) =>
+            `font-heading px-2 py-1 rounded ${
+              isActive
+                ? "bg-primary text-white"
+                : "hover:bg-primary hover:text-white dark:hover:bg-background dark:hover:text-copy"
+            }`
+          }
+        >
           All Venues
         </NavLink>
         <div ref={dropdownRef}>
           <button
             onClick={toggleCategories}
-            className="cursor-pointer font-heading"
+            className={`cursor-pointer font-heading px-2 py-1 rounded ${
+              isCategoryPage
+                ? "bg-primary text-white"
+                : "hover:bg-primary hover:text-white dark:hover:bg-background dark:hover:text-copy"
+            }`}
           >
             Categories
           </button>
           {isCategoriesOpen && (
-            <div className="flex gap-3">
-              <NavLink to="Categories" className="font-body">
+            <div className="ml-4 mt-2 flex flex-col bg-background dark:bg-copy gap-4 md:fixed md:px-6 md:py-4 md:m-0 md:rounded">
+              <NavLink
+                to="Categories"
+                className="font-heading font-extralight hover:font-normal"
+              >
                 Forest
               </NavLink>
-              <NavLink to="Categories" className="font-body">
+              <NavLink
+                to="Categories"
+                className="font-heading font-extralight hover:font-normal"
+              >
                 Sea
               </NavLink>
-              <NavLink to="Categories" className="font-body">
+              <NavLink
+                to="Categories"
+                className="font-heading font-extralight hover:font-normal"
+              >
                 Mountain
               </NavLink>
             </div>
           )}
         </div>
-        <NavLink to="About" className="font-heading">
+        <NavLink
+          to="About"
+          className={({ isActive }) =>
+            `font-heading px-2 py-1 rounded ${
+              isActive
+                ? "bg-primary text-white"
+                : "hover:bg-primary hover:text-white dark:hover:bg-background dark:hover:text-copy"
+            }`
+          }
+        >
           About us
         </NavLink>
-        <NavLink to="Register" className="font-heading">
+        <NavLink
+          to="Register"
+          className={({ isActive }) =>
+            `font-heading px-2 py-1 rounded ${
+              isActive
+                ? "bg-primary text-white"
+                : "hover:bg-primary hover:text-white dark:hover:bg-background dark:hover:text-copy"
+            }`
+          }
+        >
           Register
         </NavLink>
-        <NavLink to="Login" className="font-heading">
+        <NavLink
+          to="Login"
+          className={({ isActive }) =>
+            `font-heading px-2 py-1 rounded ${
+              isActive
+                ? "bg-primary text-white"
+                : "hover:bg-primary hover:text-white dark:hover:bg-background dark:hover:text-copy"
+            }`
+          }
+        >
           Log in
         </NavLink>
       </nav>
