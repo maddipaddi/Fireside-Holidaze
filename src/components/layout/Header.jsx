@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronUp } from "lucide-react";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -53,7 +53,7 @@ export default function Header() {
         {menuOpen ? <X size={32} /> : <Menu size={32} />}
       </button>
       <nav
-        className={`${menuOpen ? "flex" : "hidden"} absolute top-full left-0 w-full flex-col items-center gap-4 px-4 pb-8 shadow-md md:static md:flex md:flex-row md:flex-grow md:justify-evenly md:w-auto md:p-0 md:gap-8 md:shadow-none md:text-l lg:text-xl bg-background dark:bg-copy text-copy dark:text-background`}
+        className={`${menuOpen ? "flex" : "hidden"} absolute top-full left-0 w-full flex-col items-center gap-4 px-4 pb-8 shadow-md md:static md:flex md:flex-row md:flex-grow md:justify-evenly md:w-auto md:p-0 md:gap-8 md:shadow-none md:text-l lg:text-xl bg-background dark:bg-darkbackground text-copy dark:text-background`}
       >
         <NavLink
           to="Venues"
@@ -70,16 +70,21 @@ export default function Header() {
         <div ref={dropdownRef}>
           <button
             onClick={toggleCategories}
-            className={`cursor-pointer font-heading px-2 py-1 rounded ${
+            className={`flex items-center gap-1 cursor-pointer font-heading px-2 py-1 rounded ${
               isCategoryPage
                 ? "bg-primary text-white"
                 : "hover:bg-primary hover:text-white dark:hover:bg-background dark:hover:text-copy"
             }`}
           >
-            Categories
+            Categories{" "}
+            {isCategoriesOpen ? (
+              <ChevronUp size={20} />
+            ) : (
+              <ChevronDown size={20} />
+            )}
           </button>
           {isCategoriesOpen && (
-            <div className="ml-4 mt-2 flex flex-col bg-background dark:bg-copy gap-4 md:fixed md:px-6 md:py-4 md:m-0 md:rounded">
+            <div className="ml-4 mt-2 flex flex-col md:min-w-37 bg-background dark:bg-darkbackground gap-4 md:fixed md:px-6 md:py-4 md:m-0 md:rounded md:rounded-t-none md:border-r md:border-l md:border-b md:border-t0 md:bg-accent md:dark:bg-accent md:dark:text-copy">
               <NavLink
                 to="Categories"
                 className="font-heading font-extralight hover:font-normal"
