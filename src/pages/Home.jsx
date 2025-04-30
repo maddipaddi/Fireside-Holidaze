@@ -1,5 +1,6 @@
 import React from "react";
 import Searchbar from "../components/layout/Searchbar";
+import CategoryItem from "../components/layout/CategoryItem";
 
 function Home() {
   return (
@@ -7,9 +8,11 @@ function Home() {
       <div className="pt-8">
         <Searchbar />
       </div>
+
+      {/* Hero Section */}
       <div className="py-20 flex items-center justify-center">
         <div className="relative bg-copy dark:bg-background text-background dark:text-copy w-3/4 rounded-2xl p-8 flex flex-row items-center justify-between gap-8 shadow-lg overflow-visible">
-          {/* text */}
+          {/* Text */}
           <div className="flex flex-col items-start justify-center gap-4 w-1/2 ml-20 h-60">
             <h1 className="font-heading text-3xl">Welcome to Holidaze!</h1>
             <h2 className="font-body text-lg">Your forest retreat awaits</h2>
@@ -22,7 +25,6 @@ function Home() {
               </a>
             </button>
           </div>
-
           {/* Image */}
           <div className="w-1/2 flex justify-center">
             <img
@@ -32,6 +34,38 @@ function Home() {
             />
           </div>
         </div>
+      </div>
+
+      {/* Popular destinations placeholder */}
+      <div className="bg-primary w-full text-white font-3xl font-heading text-center py-8">
+        <p>Her kommer popular destinations inn</p>
+      </div>
+
+      {/* Categories */}
+      <div>
+        <h1 className="font-heading text-3xl text-center py-8 dark:text-background">
+          Categories
+        </h1>
+      </div>
+      <div className="w-1/2 mx-auto flex justify-between items-center">
+        <CategoryItem
+          label="Forest"
+          imgSrc="/assets/cato-forest.png"
+          href="/Categories"
+          pathId="circleTopForest"
+        />
+        <CategoryItem
+          label="Sea"
+          imgSrc="/assets/cato-sea.png"
+          href="/Categories"
+          pathId="circleTopSea"
+        />
+        <CategoryItem
+          label="Mountain"
+          imgSrc="/assets/cato-mount.png"
+          href="/Categories"
+          pathId="circleTopMountain"
+        />
       </div>
     </div>
   );
