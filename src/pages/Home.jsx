@@ -1,10 +1,72 @@
 import React from "react";
 import Searchbar from "../components/layout/Searchbar";
+import CategoryItem from "../components/layout/CategoryItem";
 
 function Home() {
   return (
-    <div className="bg-background dark:bg-darkbackground min-h-screen p-4">
-      <Searchbar />
+    <div className="bg-background dark:bg-darkbackground min-h-screen">
+      <div className="pt-8">
+        <Searchbar />
+      </div>
+
+      {/* Hero Section */}
+      <div className="py-20 flex items-center justify-center">
+        <div className="relative bg-copy dark:bg-background text-background dark:text-copy w-3/4 rounded-2xl p-8 flex flex-row items-center justify-between gap-8 shadow-lg overflow-visible">
+          {/* Text */}
+          <div className="flex flex-col items-start justify-center gap-4 w-1/2 ml-20 h-60">
+            <h1 className="font-heading text-3xl">Welcome to Holidaze!</h1>
+            <h2 className="font-body text-lg">Your forest retreat awaits</h2>
+            <button className="font-body bg-background dark:bg-primary px-6 py-3 rounded-2xl shadow-md hover:bg-accent hover:text-copy dark:hover:bg-copy dark:hover:text-copy transition">
+              <a
+                href="/Venues"
+                className="text-copy dark:text-background font-bold"
+              >
+                View all locations
+              </a>
+            </button>
+          </div>
+          {/* Image */}
+          <div className="w-1/2 flex justify-center">
+            <img
+              src="/assets/zachary-kyra-derksen-unsplash.jpg"
+              alt="Picture of a cozy cabin in the woods"
+              className="w-60 h-auto rounded-2xl -mb-28 shadow-lg object-cover"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Popular destinations placeholder */}
+      <div className="bg-primary w-full text-white font-3xl font-heading text-center py-8">
+        <p>Her kommer popular destinations inn</p>
+      </div>
+
+      {/* Categories */}
+      <div>
+        <h1 className="font-heading text-3xl text-center py-8 dark:text-background">
+          Categories
+        </h1>
+      </div>
+      <div className="w-1/2 mx-auto flex justify-between items-center">
+        <CategoryItem
+          label="Forest"
+          imgSrc="/assets/cato-forest.png"
+          href="/Categories"
+          pathId="circleTopForest"
+        />
+        <CategoryItem
+          label="Sea"
+          imgSrc="/assets/cato-sea.png"
+          href="/Categories"
+          pathId="circleTopSea"
+        />
+        <CategoryItem
+          label="Mountain"
+          imgSrc="/assets/cato-mount.png"
+          href="/Categories"
+          pathId="circleTopMountain"
+        />
+      </div>
     </div>
   );
 }
