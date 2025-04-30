@@ -1,6 +1,6 @@
 import React from "react";
-import Searchbar from "../components/layout/Searchbar";
-import CategoryItem from "../components/layout/CategoryItem";
+import Searchbar from "../components/Searchbar";
+import CategoryItem from "../components/CategoryItem";
 
 function Home() {
   return (
