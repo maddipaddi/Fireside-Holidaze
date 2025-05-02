@@ -4,7 +4,7 @@ import CategoryItem from "../components/CategoryItem";
 
 function Home() {
   return (
-    <div className="bg-background dark:bg-darkbackground min-h-screen pt-10 md:pt-20">
+    <div className="bg-background dark:bg-darkbackground">
       <div className="pt-8">
         <Searchbar />
       </div>
