@@ -8,13 +8,14 @@ export default function Register() {
     name: "",
     email: "",
     password: "",
+    venueManager: false,
   });
 
   function handleChange(event) {
-    const { name, value } = event.target;
+    const { name, type, value, checked } = event.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: type === "checkbox" ? checked : value,
     }));
   }
 
@@ -77,6 +78,15 @@ export default function Register() {
         value={formData.password}
         onChange={handleChange}
       />
+      <label>
+        <input
+          type="checkbox"
+          name="venueManager"
+          checked={formData.venueManager}
+          onChange={handleChange}
+        />
+        Register as a venue manager
+      </label>
       <button disabled={isLoading} className="cursor-pointer">
         {isLoading ? "Registering..." : "Register"}
       </button>
