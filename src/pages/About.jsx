@@ -115,7 +115,11 @@ export default function About() {
           </div>
         </form>
         {submitted && (
-          <div className="mt-4 p-4 bg-copy  text-white dark:bg-background dark:text-copy rounded shadow text-sm transition-all font-body">
+          <div
+            role="status"
+            aria-live="polite"
+            className="mt-4 p-4 bg-copy  text-white dark:bg-background dark:text-copy rounded shadow text-sm transition-all font-body"
+          >
             Your message has been sent! We will get back to you soon.
           </div>
         )}
