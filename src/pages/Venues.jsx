@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import VenueCards from "../components/VenueCards";
-import { ALL_USERS } from "../Constants.mjs";
+import { ALL_USERS } from "../utils/constants.mjs";
 
 function Venues() {
   const [venues, setVenues] = useState([]);
