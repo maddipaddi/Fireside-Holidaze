@@ -10,20 +10,20 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
-
+import Profile from "./pages/Profile";
 
 function App() {
-
   return (
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="/Venues" element={<Venues/>} />
+          <Route path="/Venues" element={<Venues />} />
           <Route path="/Categories" element={<Categories />} />
           <Route path="/About" element={<About />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
+          <Route path="/Profile" element={<Profile />} />
           <Route path="/Terms" element={<Terms />} />
           <Route path="/Privacy" element={<Privacy />} />
         </Route>
