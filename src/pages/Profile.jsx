@@ -61,10 +61,21 @@ export default function Profile() {
   }
 
   function addImageField() {
-    setFormData((prev) => ({
-      ...prev,
-      media: [...prev.media, { url: "", alt: "" }],
-    }));
+    setFormData((prev) => {
+      if (prev.media.length >= 4) return prev;
+      return {
+        ...prev,
+        media: [...prev.media, { url: "", alt: "" }],
+      };
+    });
+  }
+
+  function removeImage(index) {
+    setFormData((prev) => {
+      const media = [...prev.media];
+      media.splice(index, 1);
+      return { ...prev, media };
+    });
   }
 
   const cleanedFormData = {
@@ -157,25 +168,42 @@ export default function Profile() {
               Images
             </h3>
             {formData.media.map((mediaItem, index) => (
-              <div key={index}>
-                <div className="bg-white dark:bg-background p-4 rounded mb-4">
-                  <label
-                    htmlFor="url"
-                    className="block text-xs font-semibold font-body text-copy dark:text-copy mb-1"
-                  >
-                    Image URL
-                  </label>
-                  <input
-                    type="text"
-                    name="url"
-                    id="url"
-                    value={mediaItem.url}
-                    onChange={(e) => handleMediaChange(e, index, "url")}
-                    placeholder="Enter the image url here"
-                    className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
-                  />
-                </div>
-                <div className="bg-white dark:bg-background p-4 rounded mb-4">
+              <div key={index} className="flex gap-2">
+                {mediaItem.url ? (
+                  <div className="relative w-24 h-24 rounded overflow-hidden border">
+                    <img
+                      src={mediaItem.url}
+                      alt={mediaItem.alt || "Image preview"}
+                      className="object-cover w-full h-full"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => removeImage(index)}
+                      className="absolute top-0 right-0 bg-red-600 text-white text-xs rounded-bl px-1 cursor-pointer"
+                    >
+                      x
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex-grow bg-white dark:bg-background p-4 rounded mb-4">
+                    <label
+                      htmlFor="url"
+                      className="block text-xs font-semibold font-body text-copy dark:text-copy mb-1"
+                    >
+                      Image URL
+                    </label>
+                    <input
+                      type="text"
+                      name="url"
+                      id="url"
+                      value={mediaItem.url}
+                      onChange={(e) => handleMediaChange(e, index, "url")}
+                      placeholder="Enter the image url here"
+                      className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
+                    />
+                  </div>
+                )}
+                <div className="flex-grow bg-white dark:bg-background p-4 rounded mb-4">
                   <label
                     htmlFor="alt"
                     className="block text-xs font-semibold font-body text-copy dark:text-copy mb-1"
@@ -197,9 +225,10 @@ export default function Profile() {
             <button
               type="button"
               onClick={addImageField}
-              className="bg-background text-copy font-body font-bold px-8 py-2 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer"
+              disabled={formData.media.length >= 4}
+              className="bg-background text-copy font-body font-bold px-8 py-2 mt-3 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer flex place-self-center"
             >
-              Add another image
+              Add image
             </button>
           </section>
           <section className="md:col-span-1 xl:col-span-2">
