@@ -1,6 +1,8 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import { Menu, X, ChevronDown, ChevronUp } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { getCurrentUser, logout } from "../../utils/auth.mjs";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -9,6 +11,9 @@ export default function Header() {
   const dropdownRef = useRef(null);
   const location = useLocation();
   const isCategoryPage = location.pathname.startsWith("/Categories");
+
+  const user = getCurrentUser();
+  const navigate = useNavigate();
 
   function toggleMenu() {
     setMenuOpen((prev) => !prev);
@@ -118,30 +123,59 @@ export default function Header() {
         >
           About us
         </NavLink>
-        <NavLink
-          to="Register"
-          className={({ isActive }) =>
-            `font-heading px-2 py-1 rounded ${
-              isActive
-                ? "bg-primary text-white"
-                : "hover:bg-primary hover:text-white dark:hover:bg-background dark:hover:text-copy"
-            }`
-          }
-        >
-          Register
-        </NavLink>
-        <NavLink
-          to="Login"
-          className={({ isActive }) =>
-            `font-heading px-2 py-1 rounded ${
-              isActive
-                ? "bg-primary text-white"
-                : "hover:bg-primary hover:text-white dark:hover:bg-background dark:hover:text-copy"
-            }`
-          }
-        >
-          Log in
-        </NavLink>
+
+        {user ? (
+          <>
+            <button
+              onClick={() => {
+                logout();
+                navigate("/");
+              }}
+              className="cursor-pointer font-heading px-2 py-1 rounded hover:bg-primary hover:text-white dark:hover:bg-background dark:hover:text-copy"
+            >
+              Log out
+            </button>
+            <NavLink
+              to="Profile"
+              className={({ isActive }) =>
+                `group p-1 rounded-full ${isActive ? "bg-primary dark:bg-background" : " transition-colors duration-300 hover:bg-primary dark:hover:bg-background"}`
+              }
+            >
+              <img
+                src={user.avatar.url}
+                alt={user.avatar.alt}
+                className="w-10 rounded-full object-cover"
+              />
+            </NavLink>
+          </>
+        ) : (
+          <>
+            <NavLink
+              to="Register"
+              className={({ isActive }) =>
+                `font-heading px-2 py-1 rounded ${
+                  isActive
+                    ? "bg-primary text-white"
+                    : "hover:bg-primary hover:text-white dark:hover:bg-background dark:hover:text-copy"
+                }`
+              }
+            >
+              Register
+            </NavLink>
+            <NavLink
+              to="Login"
+              className={({ isActive }) =>
+                `font-heading px-2 py-1 rounded ${
+                  isActive
+                    ? "bg-primary text-white"
+                    : "hover:bg-primary hover:text-white dark:hover:bg-background dark:hover:text-copy"
+                }`
+              }
+            >
+              Log in
+            </NavLink>{" "}
+          </>
+        )}
       </nav>
     </header>
   );
