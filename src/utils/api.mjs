@@ -1,14 +1,21 @@
 export async function apiRequest(url, options = {}) {
+  const token = localStorage.getItem("accessToken");
+
   const defaultHeaders = {
     "Content-type": "application/json",
+    "X-Noroff-API-Key": import.meta.env.VITE_API_KEY,
   };
 
+  if (token) {
+    defaultHeaders["Authorization"] = `Bearer ${token}`;
+  }
+
   const finalHeaders = {
+    ...options,
     headers: {
       ...defaultHeaders,
       ...(options.headers || {}),
     },
-    ...options,
   };
 
   try {
