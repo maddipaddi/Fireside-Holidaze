@@ -135,7 +135,7 @@ export default function Profile() {
                 name="name"
                 id="name"
                 minLength={2}
-                maxLength={20}
+                maxLength={30}
                 required
                 value={formData.name}
                 onChange={handleChange}
@@ -150,10 +150,10 @@ export default function Profile() {
               >
                 Description
               </label>
-              <input
-                type="textarea"
+              <textarea
                 name="description"
                 id="description"
+                rows={5}
                 maxLength={200}
                 required
                 value={formData.description}
