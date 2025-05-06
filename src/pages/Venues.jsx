@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import VenueCards from "../components/VenueCards";
+import Searchbar from "../components/Searchbar";
 import { fetchAllVenues } from "../utils/fetchAllVenues.mjs";
 import { handleError } from "../utils/errorHandler.mjs";
 
@@ -30,8 +31,13 @@ function Venues() {
 
   return (
     <div>
-      <h1>Venues</h1>
-      <VenueCards venues={venues} />
+      <Searchbar />
+      <section className="mt-32">
+        <h1 className="text-3xl font-bold font-heading mb-4 text-center text-copy dark:text-background mb-20">
+          Venues
+        </h1>
+        <VenueCards venues={venues} />
+      </section>
     </div>
   );
 }
