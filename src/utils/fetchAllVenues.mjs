@@ -1,12 +1,12 @@
 import { apiRequest } from "./api.mjs";
-import { ALL_USERS } from "./constants.mjs";
+import { VENUES } from "./constants.mjs";
 
 export async function fetchAllVenues() {
   let currentPage = 1;
   const allVenues = [];
 
   while (true) {
-    const result = await apiRequest(`${ALL_USERS}?page=${currentPage}`);
+    const result = await apiRequest(`${VENUES}?page=${currentPage}`);
 
     if (result?.data?.length) {
       allVenues.push(...result.data);
