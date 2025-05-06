@@ -34,9 +34,10 @@ function Footer() {
         alt="Footer darkmode"
         className="w-full h-auto object-cover hidden dark:block"
       />
+      <div className="w-full h-20 bg-copy dark:bg-background"></div>
 
       <div className="absolute inset-0 flex items-center justify-center text-white dark:text-copy px-4 text-sm sm:text-base z-10 translate-y-4 sm:translate-y-8">
-        <div className="flex w-full max-w-sm justify-between items-center font-body gap-4">
+        <div className="flex flex-wrap sm:flex-nowrap w-full max-w-sm justify-center sm:justify-between items-center font-body gap-6 sm:gap-16 text-center whitespace-nowrap">
           <p>&copy; {new Date().getFullYear()} Holidaze</p>
           <a href="/terms" className="hover:underline dark:text-copy">
             Terms
