@@ -1,20 +1,27 @@
 import React, { useEffect, useState } from "react";
 import VenueCards from "../components/VenueCards";
-import { ALL_USERS } from "../utils/constants.mjs";
+import { fetchAllVenues } from "../utils/fetchAllVenues.mjs";
+import { handleError } from "../utils/errorHandler.mjs";
 
 function Venues() {
   const [venues, setVenues] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${ALL_USERS}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setVenues(data.data);
+    fetchAllVenues()
+      .then((allVenues) => {
+        const appSpecificPhrase = "only available through fireside holidaze";
+        const appSpecificVenues = allVenues.filter((venue) => {
+          const description = venue.description?.toLowerCase() || "";
+          return description.includes(appSpecificPhrase);
+        });
+
+        setVenues(appSpecificVenues);
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching venues:", error);
+        console.error("Error fetching venues:", error); // remove after development
+        handleError(error);
         setLoading(false);
       });
   }, []);
