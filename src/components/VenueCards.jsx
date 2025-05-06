@@ -1,6 +1,9 @@
 import { Star } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 function VenueCards({ venues }) {
+  const navigate = useNavigate();
+
   if (!venues || venues.length === 0) {
     return <p>No venues found</p>;
   }
@@ -29,7 +32,10 @@ function VenueCards({ venues }) {
             </div>
             <div className="flex justify-between">
               <p className="font-thin">${venue.price} one night</p>
-              <button className="bg-copy text-white dark:bg-primary text-copy dark:text-background font-body font-bold px-2 py-1 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer">
+              <button
+                className="bg-copy text-white dark:bg-primary text-copy dark:text-background font-body font-bold px-2 py-1 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer"
+                onClick={() => navigate(`/venue/${venue.id}`)}
+              >
                 Read more
               </button>
             </div>
