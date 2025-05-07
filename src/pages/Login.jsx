@@ -44,7 +44,6 @@ export default function Login() {
         accessToken: token,
       };
 
-      // 💾 Bruk backup hvis avatar mangler
       if (!fullUserData.avatar?.url) {
         const backupUrl = localStorage.getItem(`backupAvatarUrl-${name}`);
         const backupAlt = localStorage.getItem(`backupAvatarAlt-${name}`);
@@ -52,7 +51,7 @@ export default function Login() {
         if (backupUrl) {
           fullUserData.avatar = {
             url: backupUrl,
-            alt: backupAlt || "Profilbilde",
+            alt: backupAlt || "Profile picture",
           };
         }
       }

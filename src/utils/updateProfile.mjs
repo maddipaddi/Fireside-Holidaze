@@ -23,15 +23,15 @@ export async function updateAvatar(name, imageUrl, altText, token) {
     });
 
     if (!response.ok) {
-      console.warn("❌ Responsstatus:", response.status, response.statusText);
-      throw new Error("Kunne ikke oppdatere avatar");
+      console.warn("Response status:", response.status, response.statusText);
+      throw new Error("Failed to update avatar");
     }
 
     const result = await response.json();
-    console.log("✅ Oppdatert bruker:", result);
+    console.log("User updated:", result);
     return result.data;
   } catch (error) {
-    console.error("💥 Feil under oppdatering av avatar:", error);
+    console.error("Error while updating avatar:", error);
     throw error;
   }
 }

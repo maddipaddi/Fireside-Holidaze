@@ -11,7 +11,7 @@ export async function fetchUserProfile(name, token) {
   });
 
   if (!response.ok) {
-    throw new Error("Kunne ikke hente Holidaze-profil");
+    throw new Error("Can't fetch user profile");
   }
 
   const result = await response.json();
