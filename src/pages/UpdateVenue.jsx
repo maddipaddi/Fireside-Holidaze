@@ -1,11 +1,53 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useApiRequest } from "../hooks/useApiRequest.mjs";
 import { showSuccessMessage } from "../utils/successMessage.mjs";
 import { handleError } from "../utils/errorHandler.mjs";
-import { VENUES } from "../utils/constants.mjs";
+import { SINGLE_VENUE } from "../utils/constants.mjs";
+import { useParams } from "react-router-dom";
 
-export default function AddVenue() {
+export default function UpdateVenue() {
+  const { id } = useParams();
+  const { request, isLoading } = useApiRequest();
+
+  useEffect(() => {
+    async function fetchVenue() {
+      try {
+        const response = await request(`${SINGLE_VENUE}/${id}`);
+        const fetchedVenue = response.data;
+
+        setFormData({
+          name: fetchedVenue.name || "",
+          description: fetchedVenue.description || "",
+          media:
+            fetchedVenue.media.length > 0
+              ? fetchedVenue.media
+              : [{ url: "", alt: "" }],
+          price: fetchedVenue.price || 0,
+          maxGuests: fetchedVenue.maxGuests || 0,
+          rating: fetchedVenue.rating || 0,
+          meta: {
+            wifi: fetchedVenue.meta?.wifi || false,
+            parking: fetchedVenue.meta?.parking || false,
+            breakfast: fetchedVenue.meta?.breakfast || false,
+            pets: fetchedVenue.meta?.pets || false,
+          },
+          location: {
+            address: fetchedVenue.location?.address || "",
+            city: fetchedVenue.location?.city || "",
+            zip: fetchedVenue.location?.zip || "",
+            country: fetchedVenue.location?.country || "",
+            continent: fetchedVenue.location?.continent || "",
+          },
+        });
+      } catch (error) {
+        console.error("Error fetching venues:", error); // remove after development
+        handleError(error);
+      }
+    }
+    fetchVenue();
+  }, [id]);
+
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -87,32 +129,31 @@ export default function AddVenue() {
     rating: Number(formData.rating),
   };
 
-  const { request, isLoading } = useApiRequest();
-
   async function handleSubmit(event) {
     event.preventDefault();
 
     try {
-      const result = await request(`${VENUES}`, {
-        method: "POST",
+      const result = await request(`${SINGLE_VENUE}/${id}`, {
+        method: "PUT",
         body: JSON.stringify(cleanedFormData),
       });
 
-      showSuccessMessage("Success! You have added a venue.");
+      showSuccessMessage("Success! You have updated the venue.");
       console.log("Success:", result); // remove after development
       navigate("/Profile");
     } catch (error) {
       handleError(error);
     }
   }
+
   return (
-    <article className="mx-auto p-4">
-      <h2 className="text-3xl font-bold font-heading mb-4 text-center dark:text-white">
-        Add a venue
-      </h2>
+    <article>
+      <h1 className="text-3xl font-bold font-heading mb-4 text-center text-copy dark:text-background mt-12">
+        Edit venue
+      </h1>
       <form
         onSubmit={handleSubmit}
-        className="bg-copy dark:bg-primary p-4 md:py-8 md:px-16 rounded-lg shadow-lg mt-12 max-w-6xl mx-auto grid gap-10 md:grid-cols-2 xl:grid-cols-4"
+        className="bg-copy dark:bg-primary p-4 md:py-8 md:px-16 rounded-lg shadow-lg mx-auto mt-12 max-w-6xl mx-auto grid gap-10 md:grid-cols-2 xl:grid-cols-4"
       >
         <section className="md:col-span-1 xl:col-span-2">
           <h3 className="text-lg font-bold font-body text-white mb-2 text-center">
@@ -457,7 +498,7 @@ export default function AddVenue() {
             disabled={isLoading}
             className="bg-background dark:bg-primary text-copy dark:text-white font-body font-bold px-8 py-2 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer"
           >
-            {isLoading ? "Adding the venue..." : "Add venue"}
+            {isLoading ? "Editing the venue..." : "Edit venue"}
           </button>
         </div>
       </form>

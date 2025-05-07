@@ -3,6 +3,7 @@ import { updateAvatar } from "../utils/updateProfile.mjs";
 import { fetchUserProfile } from "../utils/fetchUserProfile.mjs";
 import AddVenue from "../components/AddVenue";
 import { UserContext } from "../components/UserContext";
+import ProfileVenues from "../components/ProfileVenues";
 
 export default function Profile() {
   const { user, setUser } = useContext(UserContext);
@@ -49,6 +50,7 @@ export default function Profile() {
   if (!user) return <div className="pt-16">Loading profile...</div>;
 
   return (
+    <>
     <div className="pt-20 flex flex-col items-center">
       <div className="relative w-full max-w-md flex flex-col items-center m-12">
         <img
@@ -96,8 +98,10 @@ export default function Profile() {
           </div>
         </div>
       </div>
-
+    <div className="pt-16 dark:text-white">
+      <ProfileVenues />
       <AddVenue />
     </div>
+    </>
   );
 }

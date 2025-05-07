@@ -11,6 +11,8 @@ import Register from "./pages/Register";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Profile from "./pages/Profile";
+import UpdateVenue from "./pages/UpdateVenue";
+import SingleVenue from "./pages/SingleVenues";
 
 function App() {
   return (
@@ -23,7 +25,9 @@ function App() {
           <Route path="/About" element={<About />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
+          <Route path="/venue/:id" element={<SingleVenue />} />
           <Route path="/Profile" element={<Profile />} />
+          <Route path="/venue/edit/:id" element={<UpdateVenue />} />
           <Route path="/Terms" element={<Terms />} />
           <Route path="/Privacy" element={<Privacy />} />
         </Route>
