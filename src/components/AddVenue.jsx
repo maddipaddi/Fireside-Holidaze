@@ -107,12 +107,12 @@ export default function AddVenue() {
   }
   return (
     <article className="mx-auto p-4">
-      <h2 className="text-3xl font-bold font-heading mb-4 text-center">
+      <h2 className="text-3xl font-bold font-heading mb-4 text-center dark:text-white">
         Add a venue
       </h2>
       <form
         onSubmit={handleSubmit}
-        className="bg-copy dark:bg-primary p-4 md:py-8 md:px-16 rounded-lg shadow-lg mx-auto mt-12 max-w-6xl mx-auto grid gap-10 md:grid-cols-2 xl:grid-cols-4"
+        className="bg-copy dark:bg-primary p-4 md:py-8 md:px-16 rounded-lg shadow-lg mt-12 max-w-6xl mx-auto grid gap-10 md:grid-cols-2 xl:grid-cols-4"
       >
         <section className="md:col-span-1 xl:col-span-2">
           <h3 className="text-lg font-bold font-body text-white mb-2 text-center">
