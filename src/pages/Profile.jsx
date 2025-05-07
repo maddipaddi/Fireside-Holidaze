@@ -9,6 +9,7 @@ export default function Profile() {
   const [newAvatar, setNewAvatar] = useState(user?.avatar?.url || "");
   const [altText, setAltText] = useState(user?.avatar?.alt || "");
   const [updateTime, setUpdateTime] = useState(Date.now());
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleUpdate = async () => {
     if (!user) return;
@@ -17,14 +18,11 @@ export default function Profile() {
     const username = user.name;
 
     try {
-      // 🔁 Oppdater avatar
       await updateAvatar(username, newAvatar, altText, token);
 
-      // 💾 Lagre backup i localStorage per bruker
       localStorage.setItem(`backupAvatarUrl-${username}`, newAvatar);
       localStorage.setItem(`backupAvatarAlt-${username}`, altText);
 
-      // 🔄 Hent ny profil fra API
       const refreshed = await fetchUserProfile(username, token);
 
       const fullUserData = {
@@ -36,48 +34,67 @@ export default function Profile() {
       localStorage.setItem("user", JSON.stringify(fullUserData));
       setUpdateTime(Date.now());
 
-      console.log("✅ Avatar oppdatert og bekreftet!");
+      setNewAvatar("");
+      setAltText("");
+      setSuccessMessage("Profile picture updated!");
+
+      setTimeout(() => {
+        setSuccessMessage("");
+      }, 3000);
     } catch (error) {
-      console.error("Feil ved oppdatering:", error);
+      console.error("Error updating avatar:", error);
     }
   };
 
-  if (!user) return <div className="pt-16">Laster profil...</div>;
+  if (!user) return <div className="pt-16">Loading profile...</div>;
 
   return (
-    <div className="pt-16 flex flex-col items-center dark:text-white">
-      <h1 className="text-3xl font-bold mb-4">Profile</h1>
-
-      <img
-        src={`${user.avatar?.url}?t=${updateTime}`}
-        alt={user.avatar?.alt || "Profilbilde"}
-        key={user.avatar?.url}
-        className="w-32 h-32 rounded-full object-cover border-4 border-gray-300 dark:border-gray-600 mb-4"
-      />
-
-      <div className="mb-6 w-full max-w-xs">
-        <label className="block text-sm mb-1">Ny bilde-URL</label>
-        <input
-          type="text"
-          value={newAvatar}
-          onChange={(e) => setNewAvatar(e.target.value)}
-          className="w-full p-2 border rounded text-black"
+    <div className="pt-20 flex flex-col items-center">
+      <div className="relative w-full max-w-md flex flex-col items-center m-12">
+        <img
+          src={`${user.avatar?.url}?t=${updateTime}`}
+          alt={user.avatar?.alt || "Profile picture"}
+          key={user.avatar?.url}
+          className="w-32 h-32 rounded-full object-cover border-4 border-white absolute -top-16 z-10"
         />
 
-        <label className="block text-sm mt-3 mb-1">Alternativ tekst</label>
-        <input
-          type="text"
-          value={altText}
-          onChange={(e) => setAltText(e.target.value)}
-          className="w-full p-2 border rounded text-black"
-        />
+        <div className="w-full bg-secondary p-6 rounded-t-lg rounded-b-lg shadow-lg mt-12">
+          <h1 className="text-2xl font-semibold text-center mb-6 font-body text-white">
+            Hi, {user.name}!
+          </h1>
 
-        <button
-          onClick={handleUpdate}
-          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-        >
-          Oppdater profilbilde
-        </button>
+          <div className="mb-6">
+            <label className="block text-sm font-semibold font-body text-white mb-1">
+              Change profile picture
+            </label>
+            <input
+              type="text"
+              value={newAvatar}
+              onChange={(e) => setNewAvatar(e.target.value)}
+              className="font-body w-full px-3 py-2 bg-white text-black border rounded focus:outline-none focus:ring focus:border-copy"
+              alt="Profile picture"
+              placeholder="Paste image URL here"
+            />
+          </div>
+
+          <div className="text-center -mx-6 -mb-6 bg-primary dark:bg-background p-4 rounded-b-lg">
+            <button
+              onClick={handleUpdate}
+              className="bg-background dark:bg-primary text-copy dark:text-background font-body font-bold px-8 py-2 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer w-full mb-2"
+            >
+              Update profile picture
+            </button>
+            <button className="bg-background dark:bg-primary text-copy dark:text-background font-body font-bold px-8 py-2 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer w-full">
+              Switch to venue manager
+            </button>
+
+            {successMessage && (
+              <p className="mt-4 text-sm text-copy font-body">
+                {successMessage}
+              </p>
+            )}
+          </div>
+        </div>
       </div>
 
       <AddVenue />

@@ -1,7 +1,7 @@
 import { PROFILE } from "./constants.mjs";
 
 export async function fetchUserProfile(name, token) {
-  const url = `${PROFILE}/${name}?_=${Date.now()}`; // cache-buster
+  const url = `${PROFILE}/${name}?_=${Date.now()}`;
 
   const response = await fetch(url, {
     headers: {

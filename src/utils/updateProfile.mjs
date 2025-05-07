@@ -15,11 +15,6 @@ export async function updateAvatar(name, imageUrl, altText, token) {
     },
   };
 
-  // 🔍 Debug-logg før forespørsel
-  console.log("🔧 Sending PUT to:", url);
-  console.log("🧾 Headers:", headers);
-  console.log("📦 Body:", body);
-
   try {
     const response = await fetch(url, {
       method: "PUT",
