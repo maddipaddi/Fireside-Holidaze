@@ -1,18 +1,17 @@
-import { NavLink, useLocation } from "react-router-dom";
-import { useState, useRef, useEffect } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { useState, useRef, useEffect, useContext } from "react";
 import { Menu, X, ChevronDown, ChevronUp } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { getCurrentUser, logout } from "../../utils/auth.mjs";
+import { logout } from "../../utils/auth.mjs";
+import { UserContext } from "../UserContext";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const dropdownRef = useRef(null);
   const location = useLocation();
   const isCategoryPage = location.pathname.startsWith("/Categories");
 
-  const user = getCurrentUser();
+  const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   function toggleMenu() {
@@ -129,6 +128,7 @@ export default function Header() {
             <button
               onClick={() => {
                 logout();
+                setUser(null);
                 navigate("/");
               }}
               className="cursor-pointer font-heading px-2 py-1 rounded hover:bg-primary hover:text-white dark:hover:bg-background dark:hover:text-copy"
@@ -138,13 +138,17 @@ export default function Header() {
             <NavLink
               to="Profile"
               className={({ isActive }) =>
-                `group p-1 rounded-full ${isActive ? "bg-primary dark:bg-background" : " transition-colors duration-300 hover:bg-primary dark:hover:bg-background"}`
+                `group p-1 rounded-full ${
+                  isActive
+                    ? "bg-primary dark:bg-background"
+                    : "transition-colors duration-300 hover:bg-primary dark:hover:bg-background"
+                }`
               }
             >
               <img
-                src={user.avatar.url}
-                alt={user.avatar.alt}
-                className="w-10 rounded-full object-cover"
+                src={user.avatar?.url || "/default-avatar.png"}
+                alt={user.avatar?.alt || "User avatar"}
+                className="w-10 h-10 rounded-full object-cover"
               />
             </NavLink>
           </>
@@ -173,7 +177,7 @@ export default function Header() {
               }
             >
               Log in
-            </NavLink>{" "}
+            </NavLink>
           </>
         )}
       </nav>
