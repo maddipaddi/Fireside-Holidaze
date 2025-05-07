@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useApiRequest } from "../hooks/useApiRequest.mjs";
 import { showSuccessMessage } from "../utils/successMessage.mjs";
 import { handleError } from "../utils/errorHandler.mjs";
+import { saveUserSession } from "../utils/auth.mjs";
+import { fetchUserProfile } from "../utils/fetchUserProfile.mjs";
+import { UserContext } from "../components/UserContext";
 
 export default function Login() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  const { setUser } = useContext(UserContext);
+  const { request, isLoading } = useApiRequest();
   const navigate = useNavigate();
 
   function handleChange(event) {
@@ -19,8 +25,6 @@ export default function Login() {
     }));
   }
 
-  const { request, isLoading } = useApiRequest();
-
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -30,12 +34,33 @@ export default function Login() {
         body: JSON.stringify(formData),
       });
 
-      localStorage.setItem("accessToken", result.data.accessToken);
-      localStorage.setItem("user", JSON.stringify(result.data));
+      const token = result.data.accessToken;
+      const name = result.data.name;
+
+      const fullProfile = await fetchUserProfile(name, token);
+
+      const fullUserData = {
+        ...fullProfile,
+        accessToken: token,
+      };
+
+      if (!fullUserData.avatar?.url) {
+        const backupUrl = localStorage.getItem(`backupAvatarUrl-${name}`);
+        const backupAlt = localStorage.getItem(`backupAvatarAlt-${name}`);
+
+        if (backupUrl) {
+          fullUserData.avatar = {
+            url: backupUrl,
+            alt: backupAlt || "Profile picture",
+          };
+        }
+      }
+
+      saveUserSession(fullUserData);
+      setUser(fullUserData);
 
       showSuccessMessage("Success! You have logged in.");
-      console.log("Success:", result); // remove after development
-      navigate("/");
+      navigate("/profile");
     } catch (error) {
       handleError(error);
     }
