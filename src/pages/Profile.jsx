@@ -50,8 +50,7 @@ export default function Profile() {
   if (!user) return <div className="pt-16">Loading profile...</div>;
 
   return (
-    <>
-    <div className="pt-20 flex flex-col items-center">
+    <div className="pt-20 flex flex-col items-center gap-10">
       <div className="relative w-full max-w-md flex flex-col items-center m-12">
         <img
           src={`${user.avatar?.url}?t=${updateTime}`}
@@ -98,10 +97,8 @@ export default function Profile() {
           </div>
         </div>
       </div>
-    <div className="pt-16 dark:text-white">
       <ProfileVenues />
       <AddVenue />
     </div>
-    </>
   );
 }

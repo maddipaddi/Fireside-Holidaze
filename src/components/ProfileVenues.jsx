@@ -25,8 +25,8 @@ export default function ProfileVenues() {
   if (loading) return <p>Loading venues...</p>;
 
   return (
-    <section className="mt-32">
-      <h1 className="text-3xl font-bold font-heading mb-4 text-center text-copy dark:text-background mb-20">
+    <section>
+      <h1 className="text-3xl font-bold font-heading mb-10 text-center text-copy dark:text-background">
         My venues
       </h1>
       <VenueCards venues={venues} isOwnerView={true} />
