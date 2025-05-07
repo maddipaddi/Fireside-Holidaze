@@ -1,6 +1,7 @@
 import React from "react";
 import Searchbar from "../components/Searchbar";
 import CategoryItem from "../components/CategoryItem";
+import PopularCarousel from "../components/Carousel";
 
 function Home() {
   return (
@@ -29,8 +30,6 @@ function Home() {
               </a>
             </button>
           </div>
-
-          {/* Image */}
           <div className="w-full md:w-1/2 flex justify-center">
             <img
               src="/assets/zachary-kyra-derksen-unsplash.jpg"
@@ -40,15 +39,9 @@ function Home() {
           </div>
         </div>
       </div>
-
-      {/* Popular destinations placeholder */}
-      <div className="bg-primary w-full text-white font-3xl font-heading text-center py-8">
-        <p>Her kommer popular destinations inn</p>
-      </div>
-
-      {/* Categories */}
+      <PopularCarousel />
       <div>
-        <h1 className="font-heading text-3xl text-center py-8 dark:text-background">
+        <h1 className="font-heading text-3xl font-bold text-center py-8 dark:text-background">
           Categories
         </h1>
       </div>
