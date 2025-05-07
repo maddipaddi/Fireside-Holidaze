@@ -14,7 +14,7 @@ export default function Profile() {
     if (!user) return;
 
     const token = localStorage.getItem("accessToken");
-    const username = user.name.toLowerCase();
+    const username = user.name;
 
     try {
       // 🔁 Oppdater avatar
