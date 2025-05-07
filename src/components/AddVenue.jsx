@@ -369,7 +369,7 @@ export default function AddVenue() {
               id="address"
               minLength={10}
               maxLength={50}
-              checked={formData.location.address}
+              value={formData.location.address}
               onChange={(e) => handleNestedChange(e, "location")}
               placeholder="Enter the venue address here"
               className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
@@ -387,7 +387,7 @@ export default function AddVenue() {
               name="city"
               id="city"
               maxLength={30}
-              checked={formData.location.city}
+              value={formData.location.city}
               onChange={(e) => handleNestedChange(e, "location")}
               placeholder="Enter the venue city here"
               className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
@@ -406,7 +406,7 @@ export default function AddVenue() {
               id="zip"
               minLength={4}
               maxLength={9}
-              checked={formData.location.zip}
+              value={formData.location.zip}
               onChange={(e) => handleNestedChange(e, "location")}
               placeholder="Enter the venue zip code here"
               className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
@@ -425,7 +425,7 @@ export default function AddVenue() {
               id="country"
               minLength={2}
               maxLength={30}
-              checked={formData.location.country}
+              value={formData.location.country}
               onChange={(e) => handleNestedChange(e, "location")}
               placeholder="Enter the venue country here"
               className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
@@ -444,7 +444,7 @@ export default function AddVenue() {
               id="continent"
               minLength={4}
               maxLength={14}
-              checked={formData.location.continent}
+              value={formData.location.continent}
               onChange={(e) => handleNestedChange(e, "location")}
               placeholder="Enter the venue continent here"
               className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
