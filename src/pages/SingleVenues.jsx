@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { SINGLE_VENUE } from "../utils/constants.mjs";
+import VenueCard from "../components/VenueCard";
+import { Star } from "lucide-react";
 
 function SingleVenue() {
   const { id } = useParams();
@@ -30,26 +32,21 @@ function SingleVenue() {
   if (!venue) return <p>Venue not found</p>;
 
   return (
-    <section>
-      <div className="pt-30 text-white">
+    <VenueCard
+      venue={venue}
+      renderFooter={(venue) => (
         <div>
-          {venue.media?.length > 0 && venue.media[0].url && (
-            <img
-              src={venue.media[0].url}
-              alt={venue.media[0].alt || "Venue image"}
-              style={{ width: "100%", maxWidth: "600px", borderRadius: "8px" }}
-            />
-          )}
+          <div className="flex justify-between gap-10">
+            <h2 className="text-base font-semibold">{venue.name}</h2>
+            <div className="flex gap-1 h-8 self-start">
+              <Star />
+              <p>{venue.rating}</p>
+            </div>
+          </div>
+          <p className="font-thin">${venue.price} one night</p>
         </div>
-        <div>
-          <h2>{venue.name}</h2>
-          <p>${venue.price}</p>
-        </div>
-        <div>
-          <p>{venue.description}</p>
-        </div>
-      </div>
-    </section>
+      )}
+    />
   );
 }
 
