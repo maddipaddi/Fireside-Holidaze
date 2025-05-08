@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { fetchAllVenues } from "../utils/fetchAllVenues.mjs";
+import { useVenues } from "../components/VenueContext.jsx";
+import VenueCard from "../components/VenueCard";
 
 const SearchResults = () => {
+  const { venues, loading, error } = useVenues();
   const [results, setResults] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -18,42 +19,44 @@ const SearchResults = () => {
   const rooms = Number(params.get("rooms")) || 1;
 
   useEffect(() => {
-    const fetchAndFilter = async () => {
-      try {
-        const allVenues = await fetchAllVenues();
+    if (!venues || venues.length === 0) return;
 
-        const firesideOnly = allVenues.filter((venue) =>
-          venue.description
-            ?.toLowerCase()
-            .includes("only available through fireside holidaze"),
-        );
+    const firesideOnly = venues.filter((venue) =>
+      venue.description
+        ?.toLowerCase()
+        .includes("only available through fireside holidaze"),
+    );
 
-        let filtered = firesideOnly.filter((venue) => {
-          const name = venue.name.toLowerCase();
-          const country = venue.location?.country?.toLowerCase() || "";
-          return name.includes(query) || country.includes(query);
-        });
+    let filtered = firesideOnly.filter((venue) => {
+      const name = venue.name?.toLowerCase() || "";
+      const country = venue.location?.country?.toLowerCase() || "";
+      return name.includes(query) || country.includes(query);
+    });
 
-        filtered = filtered.filter(
-          (venue) =>
-            venue.maxGuests >= guests && (venue.meta?.rooms ?? 1) >= rooms,
-        );
+    filtered = filtered.filter(
+      (venue) => venue.maxGuests >= guests && (venue.meta?.rooms ?? 1) >= rooms,
+    );
 
-        setResults(filtered);
-        const remaining = firesideOnly.filter((v) => !filtered.includes(v));
-        const shuffled = remaining.sort(() => 0.5 - Math.random());
-        setRecommendations(shuffled.slice(0, 3));
-      } catch (err) {
-        console.error("Search error:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
+    setResults(filtered);
 
-    fetchAndFilter();
-  }, [query, guests, rooms]);
+    const filteredIds = new Set(filtered.map((v) => v.id));
+    const remaining = firesideOnly.filter((v) => !filteredIds.has(v.id));
+
+    const shuffled = [...remaining];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    setRecommendations(shuffled.slice(0, 3));
+  }, [venues, query, guests, rooms]);
 
   if (loading) return <p className="text-center mt-10">Loading...</p>;
+  if (error)
+    return (
+      <p className="text-center text-red-600 mt-10">
+        Error loading venues: {error.message}
+      </p>
+    );
 
   return (
     <div className="p-6 max-w-6xl mx-auto">
@@ -77,42 +80,46 @@ const SearchResults = () => {
             Try a different search, or check out these suggestions:
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4 text-copy dark:text-copy">
             {recommendations.map((venue) => (
-              <div
+              <VenueCard
                 key={venue.id}
-                className="bg-white p-4 rounded shadow hover:shadow-lg transition cursor-pointer"
-                onClick={() => navigate(`/venue/${venue.id}`)}
-              >
-                <h3 className="font-bold text-md mb-2">{venue.name}</h3>
-                <img
-                  src={
-                    venue.media?.[0]?.url || "https://via.placeholder.com/300"
-                  }
-                  alt={venue.media?.[0]?.alt || venue.name}
-                  className="rounded w-full h-40 object-cover"
-                />
-                <p className="text-sm mt-2">{venue.description}</p>
-              </div>
+                venue={venue}
+                renderFooter={(v) => (
+                  <>
+                    <h3 className="text-lg font-bold mb-1">{v.name}</h3>
+                    <p className="text-sm">{v.description}</p>
+                    <button
+                      onClick={() => navigate(`/venue/${v.id}`)}
+                      className="text-sm underline mt-2 hover:text-accent"
+                    >
+                      Read more
+                    </button>
+                  </>
+                )}
+              />
             ))}
           </div>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {results.map((venue) => (
-            <div
+            <VenueCard
               key={venue.id}
-              className="bg-white p-4 rounded shadow hover:shadow-lg transition cursor-pointer"
-              onClick={() => navigate(`/venue/${venue.id}`)}
-            >
-              <h3 className="font-bold text-lg">{venue.name}</h3>
-              <img
-                src={venue.media?.[0]?.url || "https://via.placeholder.com/300"}
-                alt={venue.media?.[0]?.alt || venue.name}
-                className="w-full h-40 object-cover rounded mt-2"
-              />
-              <p className="text-sm mt-2">{venue.description}</p>
-            </div>
+              venue={venue}
+              renderFooter={(v) => (
+                <>
+                  <h3 className="text-lg font-bold mb-1">{v.name}</h3>
+                  <p className="text-sm">{v.description}</p>
+                  <button
+                    onClick={() => navigate(`/venue/${v.id}`)}
+                    className="text-sm underline mt-2 hover:text-accent"
+                  >
+                    Read more
+                  </button>
+                </>
+              )}
+            />
           ))}
         </div>
       )}
