@@ -87,10 +87,7 @@ export default function PopularCarousel() {
               />
               <div className="p-3 text-left flex-grow flex flex-col justify-between bg-primary text-white font-body border-copy">
                 <div>
-                  <h3 className="font-semibold text-base">
-                    {venue.location.city || "Unknown"},{" "}
-                    {venue.location.country || ""}
-                  </h3>
+                  <h3 className="font-semibold text-base">{venue.name}</h3>
                   <div className="flex items-center gap-1 text-sm mt-1">
                     <span>⭐</span>
                     <span>{venue.rating || "4.0"}</span>
