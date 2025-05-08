@@ -22,28 +22,22 @@ const SearchResults = () => {
       try {
         const allVenues = await fetchAllVenues();
 
-        // 1. Filtrer ut kun venues som er "only available through fireside holidaze"
         const firesideOnly = allVenues.filter((venue) =>
           venue.description
             ?.toLowerCase()
             .includes("only available through fireside holidaze"),
         );
 
-        // 2. Søkefilter på navn
         let filtered = firesideOnly.filter((venue) =>
           venue.name.toLowerCase().includes(query),
         );
 
-        // 3. Tillegg: filtrer på kapasitet (valgfritt)
         filtered = filtered.filter(
           (venue) =>
             venue.maxGuests >= guests && (venue.meta?.rooms ?? 1) >= rooms,
         );
 
-        // (Vi antar at dato ikke trenger sjekkes her, siden du ikke har booking-kalender)
         setResults(filtered);
-
-        // 4. Anbefalinger: tilfeldige fireside-only som ikke ble treff
         const remaining = firesideOnly.filter((v) => !filtered.includes(v));
         const shuffled = remaining.sort(() => 0.5 - Math.random());
         setRecommendations(shuffled.slice(0, 3));
