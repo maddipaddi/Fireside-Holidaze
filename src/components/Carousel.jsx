@@ -1,34 +1,21 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import { fetchAllVenues } from "../utils/fetchAllVenues.mjs";
-import { handleError } from "../utils/errorHandler.mjs";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useVenues } from "./VenueContext";
 
 export default function PopularCarousel() {
-  const [venues, setVenues] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { venues, loading, error } = useVenues();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchAllVenues()
-      .then((allVenues) => {
-        const phrase = "only available through fireside holidaze";
-        const filtered = allVenues
-          .filter((venue) => venue.description?.toLowerCase().includes(phrase))
-          .sort((a, b) => new Date(b.created) - new Date(a.created));
+  const phrase = "only available through fireside holidaze";
+  const filtered = (venues || [])
+    .filter((venue) => venue.description?.toLowerCase().includes(phrase))
+    .sort((a, b) => new Date(b.created) - new Date(a.created));
 
-        setVenues(filtered);
-      })
-      .catch((error) => {
-        console.error("Error fetching venues:", error);
-        handleError?.(error);
-      })
-      .finally(() => setLoading(false));
-  }, []);
+  const slides = filtered.length < 5 ? [...filtered, ...filtered] : filtered;
 
   if (loading) {
     return (
@@ -41,14 +28,13 @@ export default function PopularCarousel() {
     );
   }
 
-  if (venues.length === 0) {
+  if (error || filtered.length === 0) {
     return (
       <div className="w-full text-black text-center py-12">
         <p className="text-lg">No popular destinations available right now.</p>
       </div>
     );
   }
-  const slides = venues.length < 5 ? [...venues, ...venues] : venues;
 
   return (
     <div className="w-full max-w-screen-xl mx-auto text-black text-center py-12 px-4 relative">
@@ -71,8 +57,8 @@ export default function PopularCarousel() {
         }}
         className="relative"
       >
-        {slides.map((venue) => (
-          <SwiperSlide key={venue.id + Math.random()} className="h-auto">
+        {slides.map((venue, index) => (
+          <SwiperSlide key={`${venue.id}-${index}`} className="h-auto">
             <div
               onClick={() => navigate(`/venue/${venue.id}`)}
               className="bg-white rounded-xl shadow-md overflow-hidden h-full min-h-[320px] flex flex-col cursor-pointer hover:shadow-lg transition"

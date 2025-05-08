@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchAllVenues } from "../utils/fetchAllVenues.mjs";
+import { useVenues } from "../components/VenueContext";
 
 const Searchbar = () => {
   const [query, setQuery] = useState("");
@@ -14,46 +14,41 @@ const Searchbar = () => {
   const [guests, setGuests] = useState(1);
   const [rooms, setRooms] = useState(1);
 
+  const { venues } = useVenues();
   const navigate = useNavigate();
 
-  const fetchSuggestions = async (searchQuery) => {
+  const filterSuggestions = (searchQuery) => {
     if (!searchQuery.trim()) {
       setSuggestions([]);
       return;
     }
 
-    try {
-      const allVenues = await fetchAllVenues();
+    const search = searchQuery.toLowerCase();
 
-      const matchedVenues = allVenues.filter((venue) => {
-        const name = venue.name.toLowerCase();
-        const description = venue.description?.toLowerCase() || "";
-        const country = venue.location?.country?.toLowerCase() || "";
-        const search = searchQuery.toLowerCase();
-        const firesideOnly =
-          description.includes("fireside") &&
-          description.includes("only available");
+    const matchedVenues = venues.filter((venue) => {
+      const name = venue.name.toLowerCase();
+      const description = venue.description?.toLowerCase() || "";
+      const country = venue.location?.country?.toLowerCase() || "";
+      const firesideOnly =
+        description.includes("fireside") &&
+        description.includes("only available");
 
-        return (
-          firesideOnly && (name.includes(search) || country.includes(search))
-        );
-      });
+      return (
+        firesideOnly && (name.includes(search) || country.includes(search))
+      );
+    });
 
-      setSuggestions(matchedVenues);
-      setIsOpen(true);
-      setActiveIndex(-1);
-    } catch (error) {
-      console.error("Error fetching suggestions:", error);
-      setSuggestions([]);
-    }
+    setSuggestions(matchedVenues);
+    setIsOpen(true);
+    setActiveIndex(-1);
   };
 
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
-      fetchSuggestions(query);
+      filterSuggestions(query);
     }, 200);
     return () => clearTimeout(delayDebounce);
-  }, [query]);
+  }, [query, venues]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -133,7 +128,7 @@ const Searchbar = () => {
             {suggestions.length > 0 ? (
               suggestions.map((venue, index) => (
                 <li
-                  key={index}
+                  key={venue.id}
                   className={`px-4 py-2 cursor-pointer ${
                     activeIndex === index ? "bg-gray-200" : "hover:bg-gray-100"
                   }`}
@@ -160,7 +155,6 @@ const Searchbar = () => {
                 No matches found
               </li>
             )}
-
             {suggestions.length > 0 && (
               <li
                 className="px-4 py-2 bg-gray-50 hover:bg-gray-100 text-primary cursor-pointer font-medium text-sm"
@@ -177,6 +171,7 @@ const Searchbar = () => {
           </ul>
         )}
       </div>
+
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         <div className="bg-white p-3 rounded w-full md:col-span-2">
           <label className="block text-sm font-semibold font-body text-copy mb-2">
