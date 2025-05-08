@@ -28,12 +28,15 @@ const Searchbar = () => {
       const matchedVenues = allVenues.filter((venue) => {
         const name = venue.name.toLowerCase();
         const description = venue.description?.toLowerCase() || "";
+        const country = venue.location?.country?.toLowerCase() || "";
         const search = searchQuery.toLowerCase();
         const firesideOnly =
           description.includes("fireside") &&
           description.includes("only available");
 
-        return firesideOnly && name.includes(search);
+        return (
+          firesideOnly && (name.includes(search) || country.includes(search))
+        );
       });
 
       setSuggestions(matchedVenues);
@@ -68,8 +71,9 @@ const Searchbar = () => {
   };
 
   const handleSearch = () => {
+    const lowerQuery = query.toLowerCase();
     const selectedVenue = suggestions.find(
-      (venue) => venue.name.toLowerCase() === query.toLowerCase(),
+      (venue) => venue.name.toLowerCase() === lowerQuery,
     );
 
     if (selectedVenue) {
@@ -85,9 +89,10 @@ const Searchbar = () => {
     if (e.key === "Enter") {
       e.preventDefault();
       if (isOpen && activeIndex >= 0 && suggestions[activeIndex]) {
-        navigate(`/venue/${suggestions[activeIndex].id}`);
+        const selected = suggestions[activeIndex];
+        navigate(`/venue/${selected.id}`);
+        setQuery(selected.name);
         setIsOpen(false);
-        setQuery(suggestions[activeIndex].name);
       } else {
         handleSearch();
       }
@@ -139,11 +144,14 @@ const Searchbar = () => {
                     navigate(`/venue/${venue.id}`);
                   }}
                 >
-                  <p className="font-semibold text-gray-800 font-body">
+                  <p className="font-semibold text-primary font-body">
                     {venue.name}
                   </p>
                   <p className="text-sm text-gray-600 font-body">
                     {venue.description}
+                  </p>
+                  <p className="text-xs text-gray-500 italic font-body">
+                    {venue.location?.country}
                   </p>
                 </li>
               ))
@@ -155,7 +163,7 @@ const Searchbar = () => {
 
             {suggestions.length > 0 && (
               <li
-                className="px-4 py-2 bg-gray-50 hover:bg-gray-100 text-blue-600 cursor-pointer font-medium text-sm"
+                className="px-4 py-2 bg-gray-50 hover:bg-gray-100 text-primary cursor-pointer font-medium text-sm"
                 onClick={() => {
                   setIsOpen(false);
                   navigate(
@@ -169,7 +177,6 @@ const Searchbar = () => {
           </ul>
         )}
       </div>
-
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         <div className="bg-white p-3 rounded w-full md:col-span-2">
           <label className="block text-sm font-semibold font-body text-copy mb-2">

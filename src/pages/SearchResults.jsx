@@ -28,9 +28,11 @@ const SearchResults = () => {
             .includes("only available through fireside holidaze"),
         );
 
-        let filtered = firesideOnly.filter((venue) =>
-          venue.name.toLowerCase().includes(query),
-        );
+        let filtered = firesideOnly.filter((venue) => {
+          const name = venue.name.toLowerCase();
+          const country = venue.location?.country?.toLowerCase() || "";
+          return name.includes(query) || country.includes(query);
+        });
 
         filtered = filtered.filter(
           (venue) =>
