@@ -13,6 +13,7 @@ import Privacy from "./pages/Privacy";
 import Profile from "./pages/Profile";
 import UpdateVenue from "./pages/UpdateVenue";
 import SingleVenue from "./pages/SingleVenues";
+import SearchResults from "./pages/SearchResults";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/venue/edit/:id" element={<UpdateVenue />} />
           <Route path="/Terms" element={<Terms />} />
           <Route path="/Privacy" element={<Privacy />} />
+          <Route path="/search" element={<SearchResults />} />
         </Route>
       </Routes>
     </>

@@ -1,36 +1,25 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import VenueGrid from "../components/VenueGrid";
 import { Star } from "lucide-react";
 import Searchbar from "../components/Searchbar";
-import { fetchAllVenues } from "../utils/fetchAllVenues.mjs";
-import { handleError } from "../utils/errorHandler.mjs";
+import { useVenues } from "../components/VenueContext";
 
 function Venues() {
-  const [venues, setVenues] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { venues, loading, error } = useVenues(); // ⬅️ Bruk context
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchAllVenues()
-      .then((allVenues) => {
-        const appSpecificPhrase = "only available through fireside holidaze";
-        const appSpecificVenues = allVenues.filter((venue) => {
-          const description = venue.description?.toLowerCase() || "";
-          return description.includes(appSpecificPhrase);
-        });
+  const appSpecificPhrase = "only available through fireside holidaze";
+  const filteredVenues = (venues || []).filter((venue) =>
+    venue.description?.toLowerCase().includes(appSpecificPhrase),
+  );
 
-        setVenues(appSpecificVenues);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching venues:", error); // remove after development
-        handleError(error);
-        setLoading(false);
-      });
-  }, []);
-
-  if (loading) return <p>Loading venues...</p>;
+  if (loading) return <p className="text-center mt-10">Loading venues...</p>;
+  if (error)
+    return (
+      <p className="text-center text-red-600 mt-10">
+        Error loading venues: {error.message}
+      </p>
+    );
 
   return (
     <div>
@@ -40,7 +29,7 @@ function Venues() {
           Venues
         </h1>
         <VenueGrid
-          venues={venues}
+          venues={filteredVenues}
           renderFooter={(venue) => (
             <>
               <div className="flex justify-between">
