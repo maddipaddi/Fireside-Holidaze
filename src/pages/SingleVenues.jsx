@@ -13,6 +13,7 @@ import {
   MapPin,
   Earth,
 } from "lucide-react";
+import CostomCalendar from "../components/Calender";
 
 function SingleVenue() {
   const { id } = useParams();
@@ -78,7 +79,7 @@ function SingleVenue() {
           </div>
         )}
       />
-      <div className="bg-copy text-white dark:bg-primary max-w-md md:max-w-2xl lg:max-w-4xl mx-auto -mt-16 pt-16">
+      <div className="bg-copy text-white dark:bg-primary max-w-md md:max-w-2xl lg:max-w-4xl mx-auto -mt-16 pt-16 pb-70">
         <div className="flex flex-col items-center gap-4 px-4 py-6">
           {selectedImage && (
             <img
@@ -150,7 +151,7 @@ function SingleVenue() {
           </ul>
         </section>
         <div className="h-28">
-          <p className="text-center py-4">Calendar component here</p>
+          <CostomCalendar />
         </div>
       </div>
     </>
