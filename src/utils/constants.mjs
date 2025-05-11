@@ -7,3 +7,5 @@ export const PROFILE = `${BASE_URL}/profiles`;
 export const SINGLE_VENUE = `${VENUES}`;
 
 export const PROFILE_VENUES = `${BASE_URL}/profiles`;
+
+export const SINGLE_BOOKING = `${BASE_URL}/bookings`;
