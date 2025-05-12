@@ -1,19 +1,20 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import VenueGrid from "./VenueGrid";
 import { useNavigate } from "react-router-dom";
 import { apiRequest } from "../utils/api.mjs";
-import { PROFILE_VENUES } from "../utils/constants.mjs";
+import { PROFILE } from "../utils/constants.mjs";
+import { UserContext } from "./UserContext";
 
 export default function ProfileVenues() {
   const [venues, setVenues] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const user = JSON.parse(localStorage.getItem("user"));
-  const profileName = user.name;
+  const { user } = useContext(UserContext);
+  const profileName = user?.name;
 
   useEffect(() => {
-    apiRequest(`${PROFILE_VENUES}/${profileName}/venues`)
+    apiRequest(`${PROFILE}/${profileName}/venues`)
       .then((data) => {
         setVenues(data.data);
         setLoading(false);
