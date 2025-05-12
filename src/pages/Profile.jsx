@@ -33,6 +33,34 @@ export default function Profile() {
     }
   }
 
+  async function handleToggleVenueManager() {
+    try {
+      const newStatus = !user.venueManager;
+
+      const response = await updateProfile(user.name, {
+        venueManager: newStatus,
+      });
+
+      const updatedUser = {
+        ...response.data,
+        accessToken: user.accessToken,
+      };
+
+      setUser(updatedUser);
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+
+      setSuccessMessage(
+        newStatus
+          ? "You're now a venue manager!"
+          : "You've switched to customer.",
+      );
+
+      setTimeout(() => setSuccessMessage(""), 3000);
+    } catch (error) {
+      console.error("Failed to toggle venueManager:", error);
+    }
+  }
+
   return (
     <div className="pt-20 flex flex-col items-center gap-10">
       <div className="relative w-full max-w-md flex flex-col items-center m-12">
@@ -66,8 +94,13 @@ export default function Profile() {
             >
               Update profile picture
             </button>
-            <button className="bg-background dark:bg-primary text-copy dark:text-background font-body font-bold px-8 py-2 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer w-full">
-              Switch to venue manager
+            <button
+              onClick={handleToggleVenueManager}
+              className="bg-background dark:bg-primary text-copy dark:text-background font-body font-bold px-8 py-2 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer w-full"
+            >
+              {user.venueManager
+                ? "Switch to customer"
+                : "Switch to venue manager"}
             </button>
             {successMessage && (
               <p className="mt-4 text-sm text-copy font-body">
@@ -77,8 +110,12 @@ export default function Profile() {
           </div>
         </div>
       </div>
-      <ProfileVenues />
-      <AddVenue />
+      {user.venueManager && (
+        <>
+          <ProfileVenues />
+          <AddVenue />
+        </>
+      )}
     </div>
   );
 }
