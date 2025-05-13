@@ -1,35 +1,36 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useApiRequest } from "../hooks/useApiRequest.mjs";
 import { showSuccessMessage } from "../utils/successMessage.mjs";
 import { handleError } from "../utils/errorHandler.mjs";
 import { VENUES } from "../utils/constants.mjs";
 
+const INITIAL_FORM_DATA = {
+  name: "",
+  description: "",
+  media: [{ url: "", alt: "" }],
+  price: 0,
+  maxGuests: 0,
+  rating: 0,
+  meta: {
+    wifi: false,
+    parking: false,
+    breakfast: false,
+    pets: false,
+  },
+  location: {
+    address: "",
+    city: "",
+    zip: "",
+    country: "",
+    continent: "",
+    lat: 0,
+    lng: 0,
+  },
+};
+
 export default function AddVenue() {
-  const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    media: [{ url: "", alt: "" }],
-    price: 0,
-    maxGuests: 0,
-    rating: 0,
-    meta: {
-      wifi: false,
-      parking: false,
-      breakfast: false,
-      pets: false,
-    },
-    location: {
-      address: "",
-      city: "",
-      zip: "",
-      country: "",
-      continent: "",
-      lat: 0,
-      lng: 0,
-    },
-  });
-  const navigate = useNavigate();
+  const [formData, setFormData] = useState(INITIAL_FORM_DATA);
+  const { request, isLoading } = useApiRequest();
 
   function handleChange(event) {
     const { name, type, value, checked } = event.target;
@@ -79,18 +80,16 @@ export default function AddVenue() {
     });
   }
 
-  const cleanedFormData = {
-    ...formData,
-    media: formData.media.filter((item) => item.url.trim() !== ""),
-    price: Number(formData.price),
-    maxGuests: Number(formData.maxGuests),
-    rating: Number(formData.rating),
-  };
-
-  const { request, isLoading } = useApiRequest();
-
   async function handleSubmit(event) {
     event.preventDefault();
+
+    const cleanedFormData = {
+      ...formData,
+      media: formData.media.filter((item) => item.url.trim() !== ""),
+      price: Number(formData.price),
+      maxGuests: Number(formData.maxGuests),
+      rating: Number(formData.rating),
+    };
 
     try {
       const result = await request(`${VENUES}`, {
@@ -99,8 +98,14 @@ export default function AddVenue() {
       });
 
       showSuccessMessage("Success! You have added a venue.");
-      console.log("Success:", result); // remove after development
-      navigate("/Profile");
+      console.log("Success:", result);
+
+      setFormData(INITIAL_FORM_DATA);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1200);
     } catch (error) {
       handleError(error);
     }
