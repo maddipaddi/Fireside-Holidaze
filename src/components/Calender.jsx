@@ -1,35 +1,36 @@
-import React, { useState, useEffect } from "react";
-import { SINGLE_BOOKING } from "../utils/constants.mjs";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { VENUES } from "../utils/constants.mjs";
 import { apiRequest } from "../utils/api.mjs";
 
 const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-function CostomCalendar() {
+function CustomCalendar() {
   const today = new Date();
   const { id } = useParams();
+  const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const [currentDate, setCurrentDate] = useState(
     new Date(today.getFullYear(), today.getMonth(), 1),
   );
-  const [bookings, setBookings] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
 
   useEffect(() => {
-    async function fetchBookings() {
+    async function fetchVenueWithBookings() {
       try {
-        const data = await apiRequest(`${SINGLE_BOOKING}/${id}`);
-        setBookings(data.data);
+        const venue = await apiRequest(`${VENUES}/${id}?_bookings=true`);
+        setBookings(venue.data.bookings || []);
       } catch (error) {
-        console.error("Error fetching bookings:", error.message);
+        console.error("Error fetching venue bookings:", error);
       } finally {
         setLoading(false);
       }
     }
 
-    fetchBookings();
+    fetchVenueWithBookings();
   }, [id]);
 
   const prevMonth = () => setCurrentDate(new Date(year, month - 1, 1));
@@ -104,4 +105,4 @@ function CostomCalendar() {
   );
 }
 
-export default CostomCalendar;
+export default CustomCalendar;

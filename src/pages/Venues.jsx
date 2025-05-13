@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import VenueGrid from "../components/VenueGrid";
 import { Star } from "lucide-react";
 import Searchbar from "../components/Searchbar";
-import { useVenues } from "../components/VenueContext";
+import { useVenues } from "../components/context/VenueContext";
 
 function Venues() {
   const { venues, loading, error } = useVenues(); // ⬅️ Bruk context

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useVenues } from "../components/VenueContext";
+import { useVenues } from "../components/context/VenueContext";
 
 const Searchbar = () => {
   const [query, setQuery] = useState("");

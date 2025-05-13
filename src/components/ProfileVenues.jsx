@@ -3,7 +3,7 @@ import VenueGrid from "./VenueGrid";
 import { useNavigate } from "react-router-dom";
 import { apiRequest } from "../utils/api.mjs";
 import { PROFILE } from "../utils/constants.mjs";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./context/UserContext";
 import DeleteVenueButton from "./DeleteVenues";
 
 export default function ProfileVenues() {
