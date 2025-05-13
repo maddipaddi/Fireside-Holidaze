@@ -98,8 +98,6 @@ export default function AddVenue() {
       });
 
       showSuccessMessage("Success! You have added a venue.");
-      console.log("Success:", result);
-
       setFormData(INITIAL_FORM_DATA);
       window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -110,6 +108,7 @@ export default function AddVenue() {
       handleError(error);
     }
   }
+
   return (
     <article className="mx-auto p-4">
       <h2 className="text-3xl font-bold font-heading mb-4 text-center dark:text-white">
@@ -117,7 +116,7 @@ export default function AddVenue() {
       </h2>
       <form
         onSubmit={handleSubmit}
-        className="bg-copy dark:bg-primary p-4 md:py-8 md:px-16 rounded-lg shadow-lg mt-12 max-w-6xl mx-auto grid gap-10 md:grid-cols-2 xl:grid-cols-4"
+        className="w-full max-w-[12000px] mx-auto bg-copy dark:bg-primary p-4 md:py-8 md:px-16 rounded-lg shadow-lg mt-12 grid gap-10 md:grid-cols-2 xl:grid-cols-4"
       >
         <section className="md:col-span-1 xl:col-span-2">
           <h3 className="text-lg font-bold font-body text-white mb-2 text-center">
@@ -168,45 +167,49 @@ export default function AddVenue() {
             Images
           </h3>
           {formData.media.map((mediaItem, index) => (
-            <div key={index} className="flex gap-2">
-              {mediaItem.url ? (
-                <div className="relative w-24 h-24 rounded overflow-hidden border">
-                  <img
-                    src={mediaItem.url}
-                    alt={mediaItem.alt || "Image preview"}
-                    className="object-cover w-full h-full"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => removeImage(index)}
-                    className="absolute top-0 right-0 bg-red-600 text-white text-xs rounded-bl px-1 cursor-pointer"
-                  >
-                    x
-                  </button>
-                </div>
-              ) : (
-                <div className="flex-grow bg-white dark:bg-background p-4 rounded mb-4">
-                  <label
-                    htmlFor="url"
-                    className="block text-xs font-semibold font-body text-copy dark:text-copy mb-1"
-                  >
-                    Image URL
-                  </label>
-                  <input
-                    type="text"
-                    name="url"
-                    id="url"
-                    value={mediaItem.url}
-                    onChange={(e) => handleMediaChange(e, index, "url")}
-                    placeholder="Enter the image url here"
-                    className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
-                  />
-                </div>
-              )}
+            <div key={index} className="flex gap-2 items-start">
+              <div className="w-24 min-w-[6rem] h-24 relative rounded overflow-hidden border bg-white dark:bg-background flex items-center justify-center">
+                {mediaItem.url ? (
+                  <>
+                    <img
+                      src={mediaItem.url}
+                      alt={mediaItem.alt || "Image preview"}
+                      className="object-cover w-full h-full"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => removeImage(index)}
+                      className="absolute top-0 right-0 bg-red-600 text-white text-xs rounded-bl px-1 cursor-pointer"
+                    >
+                      x
+                    </button>
+                  </>
+                ) : (
+                  <span className="text-xs text-copy dark:text-copy p-1 text-center">
+                    Image preview
+                  </span>
+                )}
+              </div>
               <div className="flex-grow bg-white dark:bg-background p-4 rounded mb-4">
                 <label
-                  htmlFor="alt"
+                  htmlFor="url"
                   className="block text-xs font-semibold font-body text-copy dark:text-copy mb-1"
+                >
+                  Image URL
+                </label>
+                <input
+                  type="text"
+                  name="url"
+                  id="url"
+                  value={mediaItem.url}
+                  onChange={(e) => handleMediaChange(e, index, "url")}
+                  placeholder="Enter the image url here"
+                  className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
+                />
+
+                <label
+                  htmlFor="alt"
+                  className="block text-xs font-semibold font-body text-copy dark:text-copy mb-1 mt-2"
                 >
                   Image description
                 </label>
