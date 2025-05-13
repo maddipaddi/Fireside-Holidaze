@@ -4,7 +4,7 @@ import { useApiRequest } from "../hooks/useApiRequest.mjs";
 import { showSuccessMessage } from "../utils/successMessage.mjs";
 import { handleError } from "../utils/errorHandler.mjs";
 import { LOGIN } from "../utils/constants.mjs";
-import { UserContext } from "../components/UserContext";
+import { UserContext } from "../components/context/UserContext";
 
 export default function Login() {
   const [formData, setFormData] = useState({

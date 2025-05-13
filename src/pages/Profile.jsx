@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import AddVenue from "../components/AddVenue";
 import ProfileVenues from "../components/ProfileVenues";
-import { UserContext } from "../components/UserContext";
+import { UserContext } from "../components/context/UserContext";
 import { updateProfile } from "../utils/updateProfile.mjs";
 
 export default function Profile() {

@@ -4,7 +4,7 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { useVenues } from "./VenueContext";
+import { useVenues } from "./context/VenueContext";
 
 export default function PopularCarousel() {
   const { venues, loading, error } = useVenues();

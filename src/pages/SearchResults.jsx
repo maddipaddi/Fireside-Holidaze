@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useVenues } from "../components/VenueContext.jsx";
+import { useVenues } from "../components/context/VenueContext.jsx";
 import VenueCard from "../components/VenueCard";
 
 const SearchResults = () => {
