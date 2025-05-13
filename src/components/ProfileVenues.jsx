@@ -40,11 +40,11 @@ export default function ProfileVenues() {
             <div className="flex justify-center gap-8">
               <button
                 onClick={() => navigate(`/venue/edit/${venue.id}`)}
-                className="bg-copy text-white dark:bg-primary text-copy dark:text-background font-body font-bold px-6 py-1 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer"
+                className="bg-copy text-white dark:bg-primary dark:text-background font-body font-bold px-6 py-1 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer"
               >
                 Edit
               </button>
-              <button className="bg-copy text-white dark:bg-primary text-copy dark:text-background font-body font-bold px-6 py-1 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer">
+              <button className="bg-copy text-white dark:bg-primary dark:text-background font-body font-bold px-6 py-1 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer">
                 Delete
               </button>
             </div>
