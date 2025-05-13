@@ -21,18 +21,25 @@ export async function apiRequest(url, options = {}) {
   try {
     const response = await fetch(url, finalHeaders);
 
+    const contentType = response.headers.get("content-type");
+
     if (!response.ok) {
-      const errorData = await response.json();
-      let errorMessage = "An unknown error occurred, try again later";
-      if (errorData.errors && errorData.errors[0]?.message) {
-        errorMessage = errorData.errors[0].message;
-      } else if (errorData.message) {
-        errorMessage = errorData.message;
+      let errorMessage = "An unknown error occurred";
+      if (contentType && contentType.includes("application/json")) {
+        const errorData = await response.json();
+        errorMessage =
+          errorData.errors?.[0]?.message || errorData.message || errorMessage;
+      } else {
+        errorMessage = await response.text();
       }
       throw new Error(errorMessage);
     }
 
-    return await response.json();
+    if (contentType && contentType.includes("application/json")) {
+      return await response.json();
+    }
+
+    return null;
   } catch (error) {
     throw error;
   }
