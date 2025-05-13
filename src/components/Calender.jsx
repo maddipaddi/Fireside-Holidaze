@@ -50,10 +50,13 @@ function CustomCalendar() {
 
     for (let day = 1; day <= daysInMonth; day++) {
       const currentDay = new Date(year, month, day);
+      currentDay.setHours(0, 0, 0, 0); // Normalize time
 
       const isBooked = bookings.some((booking) => {
         const from = new Date(booking.dateFrom);
         const to = new Date(booking.dateTo);
+        from.setHours(0, 0, 0, 0);
+        to.setHours(0, 0, 0, 0);
         return currentDay >= from && currentDay <= to;
       });
 
