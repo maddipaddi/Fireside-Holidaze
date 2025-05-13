@@ -3,7 +3,8 @@ import VenueGrid from "./VenueGrid";
 import { useNavigate } from "react-router-dom";
 import { apiRequest } from "../utils/api.mjs";
 import { PROFILE } from "../utils/constants.mjs";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./context/UserContext";
+import DeleteVenueButton from "./DeleteVenues";
 
 export default function ProfileVenues() {
   const [venues, setVenues] = useState([]);
@@ -44,9 +45,12 @@ export default function ProfileVenues() {
               >
                 Edit
               </button>
-              <button className="bg-copy text-white dark:bg-primary dark:text-background font-body font-bold px-6 py-1 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer">
-                Delete
-              </button>
+              <DeleteVenueButton
+                venueId={venue.id}
+                onDeleted={(deletedId) =>
+                  setVenues((prev) => prev.filter((v) => v.id !== deletedId))
+                }
+              />
             </div>
           </div>
         )}

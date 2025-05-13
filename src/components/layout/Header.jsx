@@ -2,7 +2,7 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect, useContext } from "react";
 import { Menu, X, ChevronDown, ChevronUp } from "lucide-react";
 import { logout } from "../../utils/auth.mjs";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../context/UserContext";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
