@@ -54,20 +54,12 @@ function BookingVenue({ venue }) {
       venueId: venue.id,
     };
 
-    console.log("Token:", token);
-    console.log("Booking payload:", payload);
-
     try {
-      const response = await apiRequest(`${SINGLE_BOOKING}`, {
+      await apiRequest(`${SINGLE_BOOKING}`, {
         method: "POST",
         body: JSON.stringify(payload),
       });
 
-      console.log(response);
-
-      const data = response.data;
-
-      console.log("Booking successful:", data);
       setSuccess(true);
 
       setDateFrom("");
@@ -87,7 +79,6 @@ function BookingVenue({ venue }) {
       <h2 className="text-xl font-semibold mb-4 text-black">
         Book: {venue.name}
       </h2>
-
       <label className="block mb-2 text-black">
         From:
         <input
@@ -98,7 +89,6 @@ function BookingVenue({ venue }) {
           className="w-full mt-1 p-2 border rounded text-black"
         />
       </label>
-
       <label className="block mb-2 text-black">
         To:
         <input
@@ -109,7 +99,6 @@ function BookingVenue({ venue }) {
           className="w-full mt-1 p-2 border rounded text-black"
         />
       </label>
-
       <label className="block mb-2 text-black">
         Guests:
         <input
@@ -121,11 +110,9 @@ function BookingVenue({ venue }) {
           className="w-full mt-1 p-2 border rounded text-black"
         />
       </label>
-
       <p className="mt-4 text-lg font-medium text-black">
-        Total Price: {totalPrice} {venue.currency || "NOK"}
+        Total Price: ${totalPrice}
       </p>
-
       <button
         onClick={handleBooking}
         disabled={
@@ -140,7 +127,6 @@ function BookingVenue({ venue }) {
       >
         {loading ? "Booking..." : "Confirm Booking"}
       </button>
-
       {success && <p className="mt-4 text-green-600">Booking successful!</p>}
       {error && <p className="mt-4 text-red-600">{error}</p>}
     </div>
