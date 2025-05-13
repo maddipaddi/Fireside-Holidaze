@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { SINGLE_BOOKING } from "../utils/constants.mjs";
+import { SINGLE_BOOKING, SINGLE_VENUE } from "../utils/constants.mjs";
 import { apiRequest } from "../utils/api.mjs";
+import { useParams } from "react-router-dom";
 
 function BookingVenue({ venue }) {
   const [dateFrom, setDateFrom] = useState("");
@@ -10,8 +11,15 @@ function BookingVenue({ venue }) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [existingBookings, setExistingBookings] = useState([]);
 
   const today = new Date().toISOString().split("T")[0];
+  const { id } = useParams();
+
+  const normalizeDate = (dateString) => {
+    const date = new Date(dateString);
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  };
 
   const calculatePrice = (from, to) => {
     if (!from || !to) return 0;
@@ -27,12 +35,43 @@ function BookingVenue({ venue }) {
         setError("The end date cannot be before the start date.");
         setTotalPrice(0);
       } else {
-        setError("");
         const price = calculatePrice(dateFrom, dateTo);
         setTotalPrice(price);
+        setError("");
       }
     }
   }, [dateFrom, dateTo, venue.price]);
+
+  useEffect(() => {
+    const fetchBookings = async () => {
+      try {
+        const response = await apiRequest(
+          `${SINGLE_VENUE}/${id}?_bookings=true`,
+        );
+        setExistingBookings(response.bookings || []);
+      } catch (err) {
+        console.error("Failed to fetch existing bookings:", err);
+      }
+    };
+
+    if (venue?.id) {
+      fetchBookings();
+    }
+  }, [id, venue?.id]);
+
+  const isDateRangeAvailable = (from, to) => {
+    if (!from || !to) return false;
+
+    const newStart = normalizeDate(from);
+    const newEnd = normalizeDate(to);
+
+    return !existingBookings.some((booking) => {
+      const existingStart = normalizeDate(booking.dateFrom);
+      const existingEnd = normalizeDate(booking.dateTo);
+
+      return newStart < existingEnd && newEnd > existingStart;
+    });
+  };
 
   const handleBooking = async () => {
     setLoading(true);
@@ -43,6 +82,14 @@ function BookingVenue({ venue }) {
 
     if (!token) {
       setError("No access token found. Please log in.");
+      setLoading(false);
+      return;
+    }
+
+    if (!isDateRangeAvailable(dateFrom, dateTo)) {
+      setError(
+        "Selected dates are already booked. Please choose another range.",
+      );
       setLoading(false);
       return;
     }
@@ -60,8 +107,10 @@ function BookingVenue({ venue }) {
         body: JSON.stringify(payload),
       });
 
-      setSuccess(true);
+      // Update the existing bookings with the new one
+      setExistingBookings((prev) => [...prev, { dateFrom, dateTo }]);
 
+      setSuccess(true);
       setDateFrom("");
       setDateTo("");
       setGuests(1);
