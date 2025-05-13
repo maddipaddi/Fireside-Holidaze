@@ -1,35 +1,36 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useApiRequest } from "../hooks/useApiRequest.mjs";
 import { showSuccessMessage } from "../utils/successMessage.mjs";
 import { handleError } from "../utils/errorHandler.mjs";
 import { VENUES } from "../utils/constants.mjs";
 
+const INITIAL_FORM_DATA = {
+  name: "",
+  description: "",
+  media: [{ url: "", alt: "" }],
+  price: 0,
+  maxGuests: 0,
+  rating: 0,
+  meta: {
+    wifi: false,
+    parking: false,
+    breakfast: false,
+    pets: false,
+  },
+  location: {
+    address: "",
+    city: "",
+    zip: "",
+    country: "",
+    continent: "",
+    lat: 0,
+    lng: 0,
+  },
+};
+
 export default function AddVenue() {
-  const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    media: [{ url: "", alt: "" }],
-    price: 0,
-    maxGuests: 0,
-    rating: 0,
-    meta: {
-      wifi: false,
-      parking: false,
-      breakfast: false,
-      pets: false,
-    },
-    location: {
-      address: "",
-      city: "",
-      zip: "",
-      country: "",
-      continent: "",
-      lat: 0,
-      lng: 0,
-    },
-  });
-  const navigate = useNavigate();
+  const [formData, setFormData] = useState(INITIAL_FORM_DATA);
+  const { request, isLoading } = useApiRequest();
 
   function handleChange(event) {
     const { name, type, value, checked } = event.target;
@@ -79,18 +80,16 @@ export default function AddVenue() {
     });
   }
 
-  const cleanedFormData = {
-    ...formData,
-    media: formData.media.filter((item) => item.url.trim() !== ""),
-    price: Number(formData.price),
-    maxGuests: Number(formData.maxGuests),
-    rating: Number(formData.rating),
-  };
-
-  const { request, isLoading } = useApiRequest();
-
   async function handleSubmit(event) {
     event.preventDefault();
+
+    const cleanedFormData = {
+      ...formData,
+      media: formData.media.filter((item) => item.url.trim() !== ""),
+      price: Number(formData.price),
+      maxGuests: Number(formData.maxGuests),
+      rating: Number(formData.rating),
+    };
 
     try {
       const result = await request(`${VENUES}`, {
@@ -99,20 +98,25 @@ export default function AddVenue() {
       });
 
       showSuccessMessage("Success! You have added a venue.");
-      console.log("Success:", result); // remove after development
-      navigate("/Profile");
+      setFormData(INITIAL_FORM_DATA);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1200);
     } catch (error) {
       handleError(error);
     }
   }
+
   return (
-    <article className="mx-auto p-4">
+    <article className="mx-auto px-4 w-full max-w-6xl">
       <h2 className="text-3xl font-bold font-heading mb-4 text-center dark:text-white">
         Add a venue
       </h2>
       <form
         onSubmit={handleSubmit}
-        className="bg-copy dark:bg-primary p-4 md:py-8 md:px-16 rounded-lg shadow-lg mt-12 max-w-6xl mx-auto grid gap-10 md:grid-cols-2 xl:grid-cols-4"
+        className="relative w-full bg-copy dark:bg-primary p-4 md:p-8 xl:p-10 pb-36 rounded-lg shadow-lg mt-12 grid gap-10 md:grid-cols-2 xl:grid-cols-4 mb-10"
       >
         <section className="md:col-span-1 xl:col-span-2">
           <h3 className="text-lg font-bold font-body text-white mb-2 text-center">
@@ -163,45 +167,53 @@ export default function AddVenue() {
             Images
           </h3>
           {formData.media.map((mediaItem, index) => (
-            <div key={index} className="flex gap-2">
-              {mediaItem.url ? (
-                <div className="relative w-24 h-24 rounded overflow-hidden border">
-                  <img
-                    src={mediaItem.url}
-                    alt={mediaItem.alt || "Image preview"}
-                    className="object-cover w-full h-full"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => removeImage(index)}
-                    className="absolute top-0 right-0 bg-red-600 text-white text-xs rounded-bl px-1 cursor-pointer"
-                  >
-                    x
-                  </button>
-                </div>
-              ) : (
-                <div className="flex-grow bg-white dark:bg-background p-4 rounded mb-4">
-                  <label
-                    htmlFor="url"
-                    className="block text-xs font-semibold font-body text-copy dark:text-copy mb-1"
-                  >
-                    Image URL
-                  </label>
-                  <input
-                    type="text"
-                    name="url"
-                    id="url"
-                    value={mediaItem.url}
-                    onChange={(e) => handleMediaChange(e, index, "url")}
-                    placeholder="Enter the image url here"
-                    className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
-                  />
-                </div>
-              )}
-              <div className="flex-grow bg-white dark:bg-background p-4 rounded mb-4">
+            <div
+              key={index}
+              className="flex flex-col md:flex-row gap-4 bg-white dark:bg-background p-4 rounded mb-4"
+            >
+              <div className="w-full md:w-40 h-36 relative rounded overflow-hidden border flex-shrink-0 flex items-center justify-center">
+                {mediaItem.url ? (
+                  <>
+                    <img
+                      src={mediaItem.url}
+                      alt={mediaItem.alt || "Image preview"}
+                      className="object-cover w-full h-full"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => removeImage(index)}
+                      className="absolute top-0 right-0 bg-red-600 text-white text-s rounded-bl px-1 cursor-pointer"
+                    >
+                      x
+                    </button>
+                  </>
+                ) : (
+                  <span className="text-xs text-copy dark:text-copy p-1 text-center">
+                    Image preview
+                  </span>
+                )}
+              </div>
+
+              <div className="flex-grow">
+                <label
+                  htmlFor="url"
+                  className="block text-xs font-semibold font-body text-copy dark:text-copy mb-1"
+                >
+                  Image URL
+                </label>
+                <input
+                  type="text"
+                  name="url"
+                  id="url"
+                  value={mediaItem.url}
+                  onChange={(e) => handleMediaChange(e, index, "url")}
+                  placeholder="Enter the image url here"
+                  className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
+                />
+
                 <label
                   htmlFor="alt"
-                  className="block text-xs font-semibold font-body text-copy dark:text-copy mb-1"
+                  className="block text-xs font-semibold font-body text-copy dark:text-copy mb-1 mt-2"
                 >
                   Image description
                 </label>
@@ -226,6 +238,7 @@ export default function AddVenue() {
             Add image
           </button>
         </section>
+
         <section className="md:col-span-1 xl:col-span-2">
           <h3 className="text-lg font-bold font-body text-white mb-2 text-center">
             Details
@@ -352,7 +365,7 @@ export default function AddVenue() {
             </label>
           </div>
         </section>
-        <section className="md:col-span-2 xl:col-span-2 xl:col-start-2">
+        <section className="md:col-span-2 xl:col-span-2 xl:col-start-2 mb-4 sm:mb-12 md:mb-20">
           <h3 className="text-lg font-bold font-body text-white mb-2 text-center">
             Location
           </h3>
@@ -431,28 +444,30 @@ export default function AddVenue() {
               className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
             />
           </div>
-          <div className="bg-white dark:bg-background p-4 rounded mb-4">
-            <label
-              htmlFor="continent"
-              className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
-            >
-              Continent
-            </label>
-            <input
-              type="text"
-              name="continent"
-              id="continent"
-              minLength={4}
-              maxLength={14}
-              value={formData.location.continent}
-              onChange={(e) => handleNestedChange(e, "location")}
-              placeholder="Enter the venue continent here"
-              className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
-            />
+          <div className="md:col-span-2 xl:col-span-2 xl:col-start-2">
+            <div className="bg-white dark:bg-background p-4 rounded mb-4">
+              <label
+                htmlFor="continent"
+                className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
+              >
+                Continent
+              </label>
+              <input
+                type="text"
+                name="continent"
+                id="continent"
+                minLength={4}
+                maxLength={14}
+                value={formData.location.continent}
+                onChange={(e) => handleNestedChange(e, "location")}
+                placeholder="Enter the venue continent here"
+                className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
+              />
+            </div>
           </div>
         </section>
 
-        <div className="bg-primary dark:bg-background p-4 text-center -m-4 sm:-mx-16 sm:-mb-8 rounded-b-lg md:col-span-2 xl:col-span-4">
+        <div className="absolute bottom-0 left-0 w-full bg-primary dark:bg-background p-6 text-center rounded-b-lg">
           <button
             disabled={isLoading}
             className="bg-background dark:bg-primary text-copy dark:text-white font-body font-bold px-8 py-2 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer"
