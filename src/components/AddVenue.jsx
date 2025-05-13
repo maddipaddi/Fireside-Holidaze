@@ -110,13 +110,13 @@ export default function AddVenue() {
   }
 
   return (
-    <article className="mx-auto p-4">
+    <article className="mx-auto px-4 w-full max-w-6xl">
       <h2 className="text-3xl font-bold font-heading mb-4 text-center dark:text-white">
         Add a venue
       </h2>
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-screen-md mx-auto bg-copy dark:bg-primary p-4 md:px-16 rounded-lg shadow-lg mt-12 grid gap-10 md:grid-cols-2 xl:grid-cols-4"
+        className="relative w-full bg-copy dark:bg-primary p-4 md:p-8 xl:p-10 pb-36 rounded-lg shadow-lg mt-12 grid gap-10 md:grid-cols-2 xl:grid-cols-4 mb-10"
       >
         <section className="md:col-span-1 xl:col-span-2">
           <h3 className="text-lg font-bold font-body text-white mb-2 text-center">
@@ -169,9 +169,9 @@ export default function AddVenue() {
           {formData.media.map((mediaItem, index) => (
             <div
               key={index}
-              className="grid gap-2 bg-white dark:bg-background p-4 rounded mb-4"
+              className="flex flex-col md:flex-row gap-4 bg-white dark:bg-background p-4 rounded mb-4"
             >
-              <div className="w-full h-36 relative rounded overflow-hidden border flex items-center justify-center">
+              <div className="w-full md:w-40 h-36 relative rounded overflow-hidden border flex-shrink-0 flex items-center justify-center">
                 {mediaItem.url ? (
                   <>
                     <img
@@ -194,7 +194,7 @@ export default function AddVenue() {
                 )}
               </div>
 
-              <div>
+              <div className="flex-grow">
                 <label
                   htmlFor="url"
                   className="block text-xs font-semibold font-body text-copy dark:text-copy mb-1"
@@ -238,6 +238,7 @@ export default function AddVenue() {
             Add image
           </button>
         </section>
+
         <section className="md:col-span-1 xl:col-span-2">
           <h3 className="text-lg font-bold font-body text-white mb-2 text-center">
             Details
@@ -364,7 +365,7 @@ export default function AddVenue() {
             </label>
           </div>
         </section>
-        <section className="md:col-span-2 xl:col-span-2 xl:col-start-2">
+        <section className="md:col-span-2 xl:col-span-2 xl:col-start-2 mb-4 sm:mb-12 md:mb-20">
           <h3 className="text-lg font-bold font-body text-white mb-2 text-center">
             Location
           </h3>
@@ -443,28 +444,30 @@ export default function AddVenue() {
               className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
             />
           </div>
-          <div className="bg-white dark:bg-background p-4 rounded mb-4">
-            <label
-              htmlFor="continent"
-              className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
-            >
-              Continent
-            </label>
-            <input
-              type="text"
-              name="continent"
-              id="continent"
-              minLength={4}
-              maxLength={14}
-              value={formData.location.continent}
-              onChange={(e) => handleNestedChange(e, "location")}
-              placeholder="Enter the venue continent here"
-              className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
-            />
+          <div className="md:col-span-2 xl:col-span-2 xl:col-start-2">
+            <div className="bg-white dark:bg-background p-4 rounded mb-4">
+              <label
+                htmlFor="continent"
+                className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
+              >
+                Continent
+              </label>
+              <input
+                type="text"
+                name="continent"
+                id="continent"
+                minLength={4}
+                maxLength={14}
+                value={formData.location.continent}
+                onChange={(e) => handleNestedChange(e, "location")}
+                placeholder="Enter the venue continent here"
+                className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
+              />
+            </div>
           </div>
         </section>
 
-        <div className="bg-primary dark:bg-background p-4 text-center -m-4 md:-mx-16 sm:-mb-8 rounded-b-lg md:col-span-2 xl:col-span-4">
+        <div className="absolute bottom-0 left-0 w-full bg-primary dark:bg-background p-6 text-center rounded-b-lg">
           <button
             disabled={isLoading}
             className="bg-background dark:bg-primary text-copy dark:text-white font-body font-bold px-8 py-2 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer"
