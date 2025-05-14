@@ -78,10 +78,10 @@ function CustomCalendar() {
   if (loading) return <p>Loading calendar...</p>;
 
   return (
-    <div className="max-w-md mx-auto p-4 rounded-lg shadow dark:bg-background">
+    <div className="max-w-md mx-auto mb-5 p-4 rounded-lg shadow dark:bg-background">
       <div className="flex justify-between items-center mb-4">
         <button
-          className="bg-accent text-white px-4 py-3 rounded hover:dark:bg-secondary"
+          className="bg-accent text-white px-3 py-2 rounded hover:dark:bg-secondary"
           onClick={prevMonth}
         >
           &lt;
@@ -90,20 +90,29 @@ function CustomCalendar() {
           {currentDate.toLocaleString("default", { month: "long" })} {year}
         </h2>
         <button
-          className="bg-accent text-white px-4 py-3 rounded hover:dark:bg-secondary"
+          className="bg-accent text-white px-3 py-2 rounded hover:dark:bg-secondary"
           onClick={nextMonth}
         >
           &gt;
         </button>
       </div>
 
-      <div className="grid grid-cols-7 text-black text-center font-bold mb-2">
+      <div className="grid grid-cols-7 text-black text-center font-bold mb-2 gap-1 text-xs sm:text-sm">
         {daysOfWeek.map((day) => (
-          <div key={day}>{day}</div>
+          <div key={day} className="truncate">
+            {day}
+          </div>
         ))}
       </div>
 
       <div className="grid grid-cols-7 gap-1">{generateDays()}</div>
+      <div className="calendarAvailability mt-3 flex flex-wrap items-center gap-2 text-md sm:text-md">
+        <span className="text-black px-2 py-1 rounded">Color meaning:</span>
+        <span className="bg-red-500 text-white px-2 py-1 rounded">Booked</span>
+        <span className="text-black border px-2 py-1 rounded font-medium">
+          Available
+        </span>
+      </div>
     </div>
   );
 }
