@@ -124,7 +124,7 @@ function BookingVenue({ venue }) {
   };
 
   return (
-    <div className="p-4 bg-background shadow rounded-lg max-w-md mx-auto">
+    <div className="p-4 bg-background shadow rounded-lg max-w-md mx-auto mt-2">
       <h2 className="text-xl font-semibold mb-4 text-black">
         Book: {venue.name}
       </h2>

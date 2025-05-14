@@ -97,13 +97,22 @@ function CustomCalendar() {
         </button>
       </div>
 
-      <div className="grid grid-cols-7 text-black text-center font-bold mb-2">
+      <div className="grid grid-cols-7 text-black text-center font-bold mb-2 gap-1 text-xs sm:text-sm">
         {daysOfWeek.map((day) => (
-          <div key={day}>{day}</div>
+          <div key={day} className="truncate">
+            {day}
+          </div>
         ))}
       </div>
 
       <div className="grid grid-cols-7 gap-1">{generateDays()}</div>
+      <div className="calendarAvailability mt-3 flex flex-wrap items-center gap-2 text-md sm:text-md">
+        <span className="text-black px-2 py-1 rounded">Color meaning:</span>
+        <span className="bg-red-500 text-white px-2 py-1 rounded">Booked</span>
+        <span className="text-black border px-2 py-1 rounded font-medium">
+          Available
+        </span>
+      </div>
     </div>
   );
 }
