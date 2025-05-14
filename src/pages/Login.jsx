@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useApiRequest } from "../hooks/useApiRequest.mjs";
 import { showSuccessMessage } from "../utils/successMessage.mjs";
 import { handleError } from "../utils/errorHandler.mjs";
-import { LOGIN } from "../utils/constants.mjs";
+import { LOGIN, PROFILE } from "../utils/constants.mjs";
 import { UserContext } from "../components/context/UserContext";
+import { apiRequest } from "../utils/api.mjs";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -35,14 +36,19 @@ export default function Login() {
       });
 
       const token = result.data.accessToken;
-      const profile = result.data;
-
-      setUser({
-        ...profile,
-        accessToken: token,
-      });
-
       localStorage.setItem("accessToken", token);
+      const name = result.data.name;
+
+      const profileResponse = await apiRequest(`${PROFILE}/${name}`);
+      const fullProfile = profileResponse.data;
+
+      const fullUser = {
+        ...fullProfile,
+        accessToken: token,
+      };
+
+      setUser(fullUser);
+      localStorage.setItem("user", JSON.stringify(fullUser));
 
       showSuccessMessage("Success! You have logged in.");
       navigate("/profile");
