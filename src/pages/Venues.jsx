@@ -42,7 +42,7 @@ function Venues() {
               <div className="flex justify-between">
                 <p className="font-thin">${venue.price} one night</p>
                 <button
-                  className="bg-copy text-white dark:bg-primary text-copy dark:text-background font-body font-bold px-2 py-1 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer"
+                  className="bg-copy text-white dark:bg-primary dark:text-background font-body font-bold px-2 py-1 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer"
                   onClick={() => navigate(`/venue/${venue.id}`)}
                 >
                   Read more
