@@ -33,10 +33,15 @@ export default function AddVenue() {
 
   function handleChange(event) {
     const { name, type, value, checked } = event.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
+    setFormData((prev) => {
+      if (name in prev) {
+        return {
+          ...prev,
+          [name]: type === "checkbox" ? checked : value,
+        };
+      }
+      return prev;
+    });
   }
 
   function handleNestedChange(event, section) {
@@ -107,355 +112,366 @@ export default function AddVenue() {
   }
   return (
     <article className="mx-auto p-4">
-      <h2 className="text-3xl font-bold font-heading mb-4 text-center dark:text-white">
+      <h2 className="text-4xl font-bold font-heading mb-6 text-center dark:text-white">
         Add a venue
       </h2>
       <form
         onSubmit={handleSubmit}
         className="bg-copy dark:bg-primary p-4 md:py-8 md:px-16 rounded-lg shadow-lg mt-12 max-w-6xl mx-auto grid gap-10 md:grid-cols-2 xl:grid-cols-4"
       >
-        <section className="md:col-span-1 xl:col-span-2">
-          <h3 className="text-lg font-bold font-body text-white mb-2 text-center">
+        <section className="md:col-span-1 xl:col-span-2 flex flex-col h-full w-100">
+          <h3 className="text-xl font-bold font-body text-white mb-4 text-center">
             Basic info
           </h3>
-          <div className="bg-white dark:bg-background p-4 rounded mb-4">
-            <label
-              htmlFor="name"
-              className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
-            >
-              Venue name
-            </label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              minLength={2}
-              maxLength={30}
-              required
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Enter venue name here"
-              className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
-            />
-          </div>
-          <div className="bg-white dark:bg-background p-4 rounded mb-4">
-            <label
-              htmlFor="description"
-              className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
-            >
-              Description
-            </label>
-            <textarea
-              name="description"
-              id="description"
-              rows={5}
-              maxLength={200}
-              required
-              value={formData.description}
-              onChange={handleChange}
-              placeholder="Write a description of your venue"
-              className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
-            />
+          <div className="flex flex-col h-full rounded-2xl overflow-hidden bg-background dark:bg-background">
+            <div className="p-4 flex-1 flex flex-col justify-center">
+              <label
+                htmlFor="name"
+                className="block text-base font-semibold font-body text-copy dark:text-copy mb-2"
+              >
+                Venue name
+              </label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                minLength={2}
+                maxLength={30}
+                required
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Enter venue name here"
+                className="font-body text-base w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy bg-white dark:bg-white dark:text-copy"
+              />
+            </div>
+            <div className="p-4 flex-1 flex flex-col justify-center">
+              <label
+                htmlFor="description"
+                className="block text-base font-semibold font-body text-copy dark:text-copy mb-2"
+              >
+                Description
+              </label>
+              <textarea
+                name="description"
+                id="description"
+                rows={5}
+                maxLength={200}
+                required
+                value={formData.description}
+                onChange={handleChange}
+                placeholder="Write a description of your venue"
+                className="font-body text-base w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy bg-white dark:bg-white dark:text-copy"
+              />
+            </div>
           </div>
         </section>
-        <section className="md:col-span-1 xl:col-span-2">
-          <h3 className="text-lg font-bold font-body text-white mb-2 text-center">
+        <section className="md:col-span-1 xl:col-span-2 flex flex-col h-full">
+          <h3 className="text-xl font-bold font-body text-white mb-4 text-center">
             Images
           </h3>
-          {formData.media.map((mediaItem, index) => (
-            <div key={index} className="flex gap-2">
-              {mediaItem.url ? (
-                <div className="relative w-24 h-24 rounded overflow-hidden border">
-                  <img
-                    src={mediaItem.url}
-                    alt={mediaItem.alt || "Image preview"}
-                    className="object-cover w-full h-full"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => removeImage(index)}
-                    className="absolute top-0 right-0 bg-red-600 text-white text-xs rounded-bl px-1 cursor-pointer"
-                  >
-                    x
-                  </button>
-                </div>
-              ) : (
-                <div className="flex-grow bg-white dark:bg-background p-4 rounded mb-4">
+          <div className="flex flex-col h-full rounded-2xl overflow-hidden bg-background dark:bg-background p-4">
+            {formData.media.map((mediaItem, index) => (
+              <div
+                key={index}
+                className="flex flex-col items-center gap-2 mb-4 last:mb-0"
+              >
+                {mediaItem.url ? (
+                  <div className="relative w-28 h-28 rounded overflow-hidden border mb-2">
+                    <img
+                      src={mediaItem.url}
+                      alt={mediaItem.alt || "Image preview"}
+                      className="object-cover w-full h-full"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => removeImage(index)}
+                      className="absolute top-0 right-0 bg-red-600 text-white text-base rounded-bl px-2 cursor-pointer"
+                    >
+                      x
+                    </button>
+                  </div>
+                ) : (
+                  <div className="w-full max-w-xs mb-2">
+                    <label
+                      htmlFor="url"
+                      className="block text-base font-semibold font-body text-copy dark:text-copy mb-2"
+                    >
+                      Image URL
+                    </label>
+                    <input
+                      type="text"
+                      name="url"
+                      id="url"
+                      value={mediaItem.url}
+                      onChange={(e) => handleMediaChange(e, index, "url")}
+                      placeholder="Enter the image url here"
+                      className="font-body text-base w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy bg-white dark:bg-white dark:text-copy"
+                    />
+                  </div>
+                )}
+                <div className="w-full max-w-xs">
                   <label
-                    htmlFor="url"
-                    className="block text-xs font-semibold font-body text-copy dark:text-copy mb-1"
+                    htmlFor="alt"
+                    className="block text-base font-semibold font-body text-copy dark:text-copy mb-2"
                   >
-                    Image URL
+                    Image description
                   </label>
                   <input
                     type="text"
-                    name="url"
-                    id="url"
-                    value={mediaItem.url}
-                    onChange={(e) => handleMediaChange(e, index, "url")}
-                    placeholder="Enter the image url here"
-                    className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
+                    name="alt"
+                    id="alt"
+                    value={mediaItem.alt}
+                    onChange={(e) => handleMediaChange(e, index, "alt")}
+                    placeholder="Enter the image description here"
+                    className="font-body text-base w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy bg-white dark:bg-white dark:text-copy"
                   />
                 </div>
-              )}
-              <div className="flex-grow bg-white dark:bg-background p-4 rounded mb-4">
-                <label
-                  htmlFor="alt"
-                  className="block text-xs font-semibold font-body text-copy dark:text-copy mb-1"
-                >
-                  Image description
-                </label>
-                <input
-                  type="text"
-                  name="alt"
-                  id="alt"
-                  value={mediaItem.alt}
-                  onChange={(e) => handleMediaChange(e, index, "alt")}
-                  placeholder="Enter the image description here"
-                  className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
-                />
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
           <button
             type="button"
             onClick={addImageField}
             disabled={formData.media.length >= 4}
-            className="bg-background text-copy font-body font-bold px-8 py-2 mt-3 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer flex place-self-center"
+            className="bg-background text-copy font-body font-bold text-lg px-8 py-2 mt-4 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer flex place-self-center"
           >
             Add image
           </button>
         </section>
-        <section className="md:col-span-1 xl:col-span-2">
-          <h3 className="text-lg font-bold font-body text-white mb-2 text-center">
+        <section className="md:col-span-1 xl:col-span-2 flex flex-col h-full">
+          <h3 className="text-xl font-bold font-body text-white mb-4 text-center">
             Details
           </h3>
-          <div className="bg-white dark:bg-background p-4 rounded mb-4">
-            <label
-              htmlFor="price"
-              className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
-            >
-              Price
-            </label>
-            <input
-              type="number"
-              name="price"
-              id="price"
-              required
-              value={formData.price}
-              onChange={handleChange}
-              className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
-            />
-          </div>
-          <div className="bg-white dark:bg-background p-4 rounded mb-4">
-            <label
-              htmlFor="maxGuests"
-              className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
-            >
-              Maximum number of guests
-            </label>
-            <input
-              type="number"
-              name="maxGuests"
-              id="maxGuests"
-              required
-              value={formData.maxGuests}
-              onChange={handleChange}
-              className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
-            />
-          </div>
-          <div className="bg-white dark:bg-background p-4 rounded mb-4">
-            <label
-              htmlFor="rating"
-              className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
-            >
-              Venue rating
-            </label>
-            <input
-              type="number"
-              name="rating"
-              id="rating"
-              value={formData.rating}
-              onChange={handleChange}
-              className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
-            />
+          <div className="flex flex-col h-full rounded-2xl overflow-hidden bg-background dark:bg-background">
+            <div className="p-4 flex-1 flex flex-col justify-center">
+              <label
+                htmlFor="price"
+                className="block text-base font-semibold font-body text-copy dark:text-copy mb-2"
+              >
+                Price
+              </label>
+              <input
+                type="number"
+                name="price"
+                id="price"
+                required
+                value={formData.price}
+                onChange={handleChange}
+                className="font-body text-base w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy bg-white dark:bg-white dark:text-copy"
+              />
+            </div>
+            <div className="p-4 flex-1 flex flex-col justify-center">
+              <label
+                htmlFor="maxGuests"
+                className="block text-base font-semibold font-body text-copy dark:text-copy mb-2"
+              >
+                Maximum number of guests
+              </label>
+              <input
+                type="number"
+                name="maxGuests"
+                id="maxGuests"
+                required
+                value={formData.maxGuests}
+                onChange={handleChange}
+                className="font-body text-base w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy bg-white dark:bg-white dark:text-copy"
+              />
+            </div>
+            <div className="p-4 flex-1 flex flex-col justify-center">
+              <label
+                htmlFor="rating"
+                className="block text-base font-semibold font-body text-copy dark:text-copy mb-2"
+              >
+                Venue rating
+              </label>
+              <input
+                type="number"
+                name="rating"
+                id="rating"
+                value={formData.rating}
+                onChange={handleChange}
+                className="font-body text-base w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy bg-white dark:bg-white dark:text-copy"
+              />
+            </div>
           </div>
         </section>
-        <section className="md:col-span-1 xl:col-span-2">
-          <h3 className="text-lg font-bold font-body text-white mb-2 text-center">
+        <section className="md:col-span-1 xl:col-span-2 flex flex-col h-full">
+          <h3 className="text-xl font-bold font-body text-white mb-4 text-center">
             Facilities
           </h3>
-          <div className="bg-white dark:bg-background p-4 rounded mb-6 flex items-center gap-2">
-            <input
-              type="checkbox"
-              name="wifi"
-              id="wifi"
-              checked={formData.meta.wifi}
-              onChange={(e) => handleNestedChange(e, "meta")}
-              className="accent-copy"
-            />
-            <label
-              htmlFor="wifi"
-              className="text-m font-body text-copy dark:text-copy"
-            >
-              Wifi
-            </label>
-          </div>
-          <div className="bg-white dark:bg-background p-4 rounded mb-6 flex items-center gap-2">
-            <input
-              type="checkbox"
-              name="parking"
-              id="parking"
-              checked={formData.meta.parking}
-              onChange={(e) => handleNestedChange(e, "meta")}
-              className="accent-copy"
-            />
-            <label
-              htmlFor="parking"
-              className="text-m font-body text-copy dark:text-copy"
-            >
-              Parking
-            </label>
-          </div>
-
-          <div className="bg-white dark:bg-background p-4 rounded mb-6 flex items-center gap-2">
-            <input
-              type="checkbox"
-              name="breakfast"
-              id="breakfast"
-              checked={formData.meta.breakfast}
-              onChange={(e) => handleNestedChange(e, "meta")}
-              className="accent-copy"
-            />
-            <label
-              htmlFor="breakfast"
-              className="text-m font-body text-copy dark:text-copy"
-            >
-              Breakfast
-            </label>
-          </div>
-
-          <div className="bg-white dark:bg-background p-4 rounded mb-6 flex items-center gap-2">
-            <input
-              type="checkbox"
-              name="pets"
-              id="pets"
-              checked={formData.meta.pets}
-              onChange={(e) => handleNestedChange(e, "meta")}
-              className="accent-copy"
-            />
-            <label
-              htmlFor="pets"
-              className="text-m font-body text-copy dark:text-copy"
-            >
-              Pets
-            </label>
+          <div className="flex flex-col h-full rounded-2xl overflow-hidden bg-background dark:bg-background justify-center items-center ">
+            <div className="p-4 flex items-center gap-3 w-40">
+              <input
+                type="checkbox"
+                name="wifi"
+                id="wifi"
+                checked={formData.meta.wifi}
+                onChange={(e) => handleNestedChange(e, "meta")}
+                className="accent-copy h-10 w-5"
+              />
+              <label
+                htmlFor="wifi"
+                className="text-lg font-body text-copy dark:text-copy"
+              >
+                Wifi
+              </label>
+            </div>
+            <div className="p-4 flex items-center gap-3 w-40">
+              <input
+                type="checkbox"
+                name="parking"
+                id="parking"
+                checked={formData.meta.parking}
+                onChange={(e) => handleNestedChange(e, "meta")}
+                className="accent-copy h-10 w-5"
+              />
+              <label
+                htmlFor="parking"
+                className="text-lg font-body text-copy dark:text-copy"
+              >
+                Parking
+              </label>
+            </div>
+            <div className="p-4 flex items-center gap-3 w-40">
+              <input
+                type="checkbox"
+                name="breakfast"
+                id="breakfast"
+                checked={formData.meta.breakfast}
+                onChange={(e) => handleNestedChange(e, "meta")}
+                className="accent-copy h-10 w-5"
+              />
+              <label
+                htmlFor="breakfast"
+                className="text-lg font-body text-copy dark:text-copy"
+              >
+                Breakfast
+              </label>
+            </div>
+            <div className="p-4 flex items-center gap-3 w-40">
+              <input
+                type="checkbox"
+                name="pets"
+                id="pets"
+                checked={formData.meta.pets}
+                onChange={(e) => handleNestedChange(e, "meta")}
+                className="accent-copy h-10 w-5"
+              />
+              <label
+                htmlFor="pets"
+                className="text-lg font-body text-copy dark:text-copy"
+              >
+                Pets
+              </label>
+            </div>
           </div>
         </section>
-        <section className="md:col-span-2 xl:col-span-2 xl:col-start-2">
-          <h3 className="text-lg font-bold font-body text-white mb-2 text-center">
+        <section className="md:col-span-2 xl:col-span-2 xl:col-start-2 flex flex-col h-full">
+          <h3 className="text-xl font-bold font-body text-white mb-4 text-center">
             Location
           </h3>
-          <div className="bg-white dark:bg-background p-4 rounded mb-4">
-            <label
-              htmlFor="address"
-              className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
-            >
-              Address
-            </label>
-            <input
-              type="text"
-              name="address"
-              id="address"
-              minLength={10}
-              maxLength={50}
-              value={formData.location.address}
-              onChange={(e) => handleNestedChange(e, "location")}
-              placeholder="Enter the venue address here"
-              className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
-            />
-          </div>
-          <div className="bg-white dark:bg-background p-4 rounded mb-4">
-            <label
-              htmlFor="city"
-              className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
-            >
-              City
-            </label>
-            <input
-              type="text"
-              name="city"
-              id="city"
-              maxLength={30}
-              value={formData.location.city}
-              onChange={(e) => handleNestedChange(e, "location")}
-              placeholder="Enter the venue city here"
-              className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
-            />
-          </div>
-          <div className="bg-white dark:bg-background p-4 rounded mb-4">
-            <label
-              htmlFor="zip"
-              className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
-            >
-              Zip code
-            </label>
-            <input
-              type="text"
-              name="zip"
-              id="zip"
-              minLength={4}
-              maxLength={9}
-              value={formData.location.zip}
-              onChange={(e) => handleNestedChange(e, "location")}
-              placeholder="Enter the venue zip code here"
-              className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
-            />
-          </div>
-          <div className="bg-white dark:bg-background p-4 rounded mb-4">
-            <label
-              htmlFor="country"
-              className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
-            >
-              Country
-            </label>
-            <input
-              type="text"
-              name="country"
-              id="country"
-              minLength={2}
-              maxLength={30}
-              value={formData.location.country}
-              onChange={(e) => handleNestedChange(e, "location")}
-              placeholder="Enter the venue country here"
-              className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
-            />
-          </div>
-          <div className="bg-white dark:bg-background p-4 rounded mb-4">
-            <label
-              htmlFor="continent"
-              className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
-            >
-              Continent
-            </label>
-            <input
-              type="text"
-              name="continent"
-              id="continent"
-              minLength={4}
-              maxLength={14}
-              value={formData.location.continent}
-              onChange={(e) => handleNestedChange(e, "location")}
-              placeholder="Enter the venue continent here"
-              className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
-            />
+          <div className="flex flex-col h-full rounded-2xl overflow-hidden bg-background dark:bg-background">
+            <div className="p-4 flex-1 flex flex-col justify-center">
+              <label
+                htmlFor="address"
+                className="block text-base font-semibold font-body text-copy dark:text-copy mb-2"
+              >
+                Address
+              </label>
+              <input
+                type="text"
+                name="address"
+                id="address"
+                minLength={10}
+                maxLength={50}
+                value={formData.location.address}
+                onChange={(e) => handleNestedChange(e, "location")}
+                placeholder="Enter the venue address here"
+                className="font-body text-base w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy bg-white dark:bg-white dark:text-copy"
+              />
+            </div>
+            <div className="p-4 flex-1 flex flex-col justify-center">
+              <label
+                htmlFor="city"
+                className="block text-base font-semibold font-body text-copy dark:text-copy mb-2"
+              >
+                City
+              </label>
+              <input
+                type="text"
+                name="city"
+                id="city"
+                maxLength={30}
+                value={formData.location.city}
+                onChange={(e) => handleNestedChange(e, "location")}
+                placeholder="Enter the venue city here"
+                className="font-body text-base w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy bg-white dark:bg-white dark:text-copy"
+              />
+            </div>
+            <div className="p-4 flex-1 flex flex-col justify-center">
+              <label
+                htmlFor="zip"
+                className="block text-base font-semibold font-body text-copy dark:text-copy mb-2"
+              >
+                Zip code
+              </label>
+              <input
+                type="text"
+                name="zip"
+                id="zip"
+                minLength={4}
+                maxLength={9}
+                value={formData.location.zip}
+                onChange={(e) => handleNestedChange(e, "location")}
+                placeholder="Enter the venue zip code here"
+                className="font-body text-base w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy bg-white dark:bg-white dark:text-copy"
+              />
+            </div>
+            <div className="p-4 flex-1 flex flex-col justify-center">
+              <label
+                htmlFor="country"
+                className="block text-base font-semibold font-body text-copy dark:text-copy mb-2"
+              >
+                Country
+              </label>
+              <input
+                type="text"
+                name="country"
+                id="country"
+                minLength={2}
+                maxLength={30}
+                value={formData.location.country}
+                onChange={(e) => handleNestedChange(e, "location")}
+                placeholder="Enter the venue country here"
+                className="font-body text-base w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy bg-white dark:bg-white dark:text-copy"
+              />
+            </div>
+            <div className="p-4 flex-1 flex flex-col justify-center">
+              <label
+                htmlFor="continent"
+                className="block text-base font-semibold font-body text-copy dark:text-copy mb-2"
+              >
+                Continent
+              </label>
+              <input
+                type="text"
+                name="continent"
+                id="continent"
+                minLength={4}
+                maxLength={14}
+                value={formData.location.continent}
+                onChange={(e) => handleNestedChange(e, "location")}
+                placeholder="Enter the venue continent here"
+                className="font-body text-base w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy bg-white dark:bg-white dark:text-copy"
+              />
+            </div>
           </div>
         </section>
 
         <div className="bg-primary dark:bg-background p-4 text-center -m-4 sm:-mx-16 sm:-mb-8 rounded-b-lg md:col-span-2 xl:col-span-4">
           <button
             disabled={isLoading}
-            className="bg-background dark:bg-primary text-copy dark:text-white font-body font-bold px-8 py-2 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer"
+            className="bg-background dark:bg-primary text-copy dark:text-white font-body font-bold text-xl px-8 py-2 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer"
           >
             {isLoading ? "Adding the venue..." : "Add venue"}
           </button>
