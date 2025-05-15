@@ -140,7 +140,7 @@ export default function VenueManagerBookings() {
           {bookings.upcoming.length === 0 ? (
             <>
               <Tent className="mx-auto mb-2 h-6 w-6 text-primary dark:text-background" />
-              <p className="text-center text-copy dark:text-background">
+              <p className="text-center text-copy dark:text-background mb-26">
                 It's quiet for now. Your venue is ready — just waiting to be
                 discovered!
               </p>
@@ -166,7 +166,7 @@ export default function VenueManagerBookings() {
       )}
 
       <div
-        className="cursor-pointer flex justify-center items-center gap-2 mt-16 mb-6"
+        className="cursor-pointer flex justify-center items-center gap-2 mt-16"
         onClick={() => setShowPast((prev) => !prev)}
       >
         <h2 className="text-3xl font-bold font-heading text-copy dark:text-background">
@@ -183,8 +183,8 @@ export default function VenueManagerBookings() {
         <>
           {bookings.past.length === 0 ? (
             <>
-              <Map className="mx-auto mb-2 h-6 w-6 text-primary dark:text-background" />
-              <p className="text-center text-copy dark:text-background">
+              <Map className="mx-auto mb-2 h-6 w-6 text-primary dark:text-background mt-4" />
+              <p className="text-center text-copy dark:text-background mb-16">
                 No completed bookings yet. Your venue is waiting to make its
                 first memories.
               </p>

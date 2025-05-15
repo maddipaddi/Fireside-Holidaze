@@ -40,7 +40,7 @@ export default function ProfileVenues() {
 
   return (
     <section>
-      <h1 className="text-3xl font-bold font-heading mb-10 text-center text-copy dark:text-background">
+      <h1 className="text-3xl font-bold font-heading mb-4 text-center text-copy dark:text-background">
         My venues
       </h1>
       <VenueGrid
