@@ -13,7 +13,7 @@ import {
   MapPin,
   Earth,
   MapPinned,
-  MapOff,
+  Map,
 } from "lucide-react";
 import CostomCalendar from "../components/Calender";
 import BookingVenue from "../components/BookingCard";
@@ -33,7 +33,7 @@ function VenueDetails({ loading, venue }) {
   if (!venue) {
     return (
       <div className="text-center mt-10">
-        <MapOff className="mx-auto mb-2 h-6 w-6 text-red-600" />
+        <Map className="mx-auto mb-2 h-6 w-6 text-red-600" />
         <p className="text-red-600 font-body">
           Oops... we couldn' find that venue.
         </p>
