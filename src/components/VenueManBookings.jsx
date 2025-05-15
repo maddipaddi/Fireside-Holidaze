@@ -141,8 +141,8 @@ export default function VenueManagerBookings() {
             <>
               <Tent className="mx-auto mb-2 h-6 w-6 text-primary dark:text-background" />
               <p className="text-center text-copy dark:text-background">
-                Your calendar looks a little lonely. Time to plan your next
-                adventure?
+                It's quiet for now. Your venue is ready — just waiting to be
+                discovered!
               </p>
             </>
           ) : (
@@ -185,7 +185,8 @@ export default function VenueManagerBookings() {
             <>
               <Map className="mx-auto mb-2 h-6 w-6 text-primary dark:text-background" />
               <p className="text-center text-copy dark:text-background">
-                No memories yet — your adventures will show up here!
+                No completed bookings yet. Your venue is waiting to make its
+                first memories.
               </p>
             </>
           ) : (
