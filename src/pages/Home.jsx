@@ -48,19 +48,19 @@ function Home() {
         <CategoryItem
           label="Forest"
           imgSrc="/assets/cato-forest.png"
-          href="/categories/forest"
+          to="/categories/forest"
           pathId="circleTopForest"
         />
         <CategoryItem
           label="Sea"
           imgSrc="/assets/cato-sea.png"
-          href="/categories/sea"
+          to="/categories/sea"
           pathId="circleTopSea"
         />
         <CategoryItem
           label="Mountain"
           imgSrc="/assets/cato-mount.png"
-          href="/categories/mountain"
+          to="/categories/mountain"
           pathId="circleTopMountain"
         />
       </div>
