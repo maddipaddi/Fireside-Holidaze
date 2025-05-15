@@ -5,6 +5,7 @@ import { apiRequest } from "../utils/api.mjs";
 import { PROFILE } from "../utils/constants.mjs";
 import { UserContext } from "./context/UserContext";
 import DeleteVenueButton from "./DeleteVenues";
+import { Globe } from "lucide-react";
 
 export default function ProfileVenues() {
   const [venues, setVenues] = useState([]);
@@ -26,7 +27,16 @@ export default function ProfileVenues() {
       });
   }, []);
 
-  if (loading) return <p>Loading venues...</p>;
+  if (loading) {
+    return (
+      <div className="text-center mt-10">
+        <Globe className="mx-auto mb-2 h-6 w-6 animate-spin text-primary dark:text-background" />
+        <p className="text-copy font-body dark:text-background">
+          Gathering dreamy destinations for you...
+        </p>
+      </div>
+    );
+  }
 
   return (
     <section>
