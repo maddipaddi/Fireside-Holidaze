@@ -12,9 +12,40 @@ import {
   Building,
   MapPin,
   Earth,
+  MapPinned,
+  Map,
 } from "lucide-react";
 import CostomCalendar from "../components/Calender";
 import BookingVenue from "../components/BookingCard";
+
+function VenueDetails({ loading, venue }) {
+  if (loading) {
+    return (
+      <div className="text-center mt-10">
+        <MapPinned className="mx-auto mb-2 h-6 w-6 animate-bounce text-primary dark:text-background" />
+        <p className="text-copy font-body dark:text-background">
+          Finding your next escape...
+        </p>
+      </div>
+    );
+  }
+
+  if (!venue) {
+    return (
+      <div className="text-center mt-10">
+        <Map className="mx-auto mb-2 h-6 w-6 text-red-600" />
+        <p className="text-red-600 font-body">
+          Oops... we couldn' find that venue.
+        </p>
+        <p className="text-sm text-red-400 italic">
+          It might have been removed or never existed.
+        </p>
+      </div>
+    );
+  }
+
+  return null;
+}
 
 function SingleVenue() {
   const { id } = useParams();
@@ -47,19 +78,14 @@ function SingleVenue() {
     fetchVenue();
   }, [id]);
 
-  if (loading) return <p>Loading Venue...</p>;
-  if (!venue) return <p>Venue not found</p>;
+  if (loading || !venue) {
+    return <VenueDetails loading={loading} venue={venue} />;
+  }
 
   const facilityMap = {
     wifi: { label: "Wi-Fi", icon: <Wifi /> },
-    parking: {
-      label: "Parking",
-      icon: <Car />,
-    },
-    breakfast: {
-      label: "Breakfast included",
-      icon: <CookingPot />,
-    },
+    parking: { label: "Parking", icon: <Car /> },
+    breakfast: { label: "Breakfast included", icon: <CookingPot /> },
     pets: { label: "Pets allowed", icon: <Dog /> },
   };
 
@@ -105,6 +131,7 @@ function SingleVenue() {
             ))}
           </div>
         </div>
+
         <section className="max-w-xl mx-auto">
           <h3 className="text-center font-heading">About the cabin</h3>
           <p className="pt-4 pb-8 px-10">{venue.description}</p>
@@ -112,6 +139,7 @@ function SingleVenue() {
             Maximum guests: {venue.maxGuests}
           </p>
         </section>
+
         <section>
           <h3 className="text-center font-heading">Facilities</h3>
           <div className="grid grid-cols-2 gap-4 max-w-md mx-auto text-center pt-4 pb-8 px-6">
@@ -128,7 +156,8 @@ function SingleVenue() {
               ))}
           </div>
         </section>
-        <section className="bg-background dark:bg-background text-copy  rounded-lg shadow-md p-6 max-w-md mx-auto my-8">
+
+        <section className="bg-background dark:bg-background text-copy rounded-lg shadow-md p-6 max-w-md mx-auto my-8">
           <h3 className="text-xl font-heading mb-4 text-center">Location</h3>
           <ul className="space-y-2">
             <li className="flex items-center gap-2">
@@ -151,9 +180,11 @@ function SingleVenue() {
             </li>
           </ul>
         </section>
+
         <div className="h-28">
           <CostomCalendar />
         </div>
+
         <div className="pt-80">
           <BookingVenue venue={venue} />
         </div>

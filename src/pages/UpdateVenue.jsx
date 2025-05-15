@@ -153,7 +153,7 @@ export default function UpdateVenue() {
       </h1>
       <form
         onSubmit={handleSubmit}
-        className="bg-copy dark:bg-primary p-4 md:py-8 md:px-16 rounded-lg shadow-lg mx-auto mt-12 max-w-6xl mx-auto grid gap-10 md:grid-cols-2 xl:grid-cols-4"
+        className="bg-copy dark:bg-primary p-4 md:py-8 md:px-16 rounded-lg shadow-lg mx-auto mt-12 max-w-6xl grid gap-10 md:grid-cols-2 xl:grid-cols-4"
       >
         <section className="md:col-span-1 xl:col-span-2">
           <h3 className="text-lg font-bold font-body text-white mb-2 text-center">
