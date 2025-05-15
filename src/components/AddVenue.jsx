@@ -97,7 +97,7 @@ export default function AddVenue() {
     };
 
     try {
-      const result = await request(`${VENUES}`, {
+      await request(`${VENUES}`, {
         method: "POST",
         body: JSON.stringify(cleanedFormData),
       });
@@ -121,17 +121,17 @@ export default function AddVenue() {
       </h2>
       <form
         onSubmit={handleSubmit}
-        className="relative w-full bg-copy dark:bg-primary p-4 md:p-8 xl:p-10 pb-36 rounded-lg shadow-lg mt-12 grid gap-10 md:grid-cols-2 xl:grid-cols-4 mb-10"
+        className="relative w-full xl:w-300 bg-copy dark:bg-primary p-4 md:p-10 md:pb-40 xl:p-40 pb-36 rounded-lg shadow-lg mt-12 grid gap-20 md:grid-cols-2 xl:grid-cols-4"
       >
-        <section className="md:col-span-1 xl:col-span-2 flex flex-col h-full w-100">
-          <h3 className="text-xl font-bold font-body text-white mb-4 text-center">
+        <section className="col-span-1 xl:col-span-2 flex flex-col md:w-full w-full h-auto">
+          <h3 className="text-lg sm:text-xl font-bold font-body text-white mb-4 text-center">
             Basic info
           </h3>
-          <div className="flex flex-col h-full rounded-2xl overflow-hidden bg-background dark:bg-background">
-            <div className="p-4 flex-1 flex flex-col justify-center">
+          <div className="flex flex-col rounded-2xl overflow-hidden bg-background dark:bg-background">
+            <div className="p-3 sm:p-4 flex flex-col">
               <label
                 htmlFor="name"
-                className="block text-base font-semibold font-body text-copy dark:text-copy mb-2"
+                className="block text-sm sm:text-base font-semibold font-body text-copy dark:text-copy mb-2"
               >
                 Venue name
               </label>
@@ -145,31 +145,32 @@ export default function AddVenue() {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Enter venue name here"
-                className="font-body text-base w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy bg-white dark:bg-white dark:text-copy"
+                className="font-body text-sm sm:text-base w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy bg-white dark:bg-white dark:text-copy"
               />
             </div>
-            <div className="p-4 flex-1 flex flex-col justify-center">
+
+            <div className="p-3 sm:p-4 flex flex-col">
               <label
                 htmlFor="description"
-                className="block text-base font-semibold font-body text-copy dark:text-copy mb-2"
+                className="block text-sm sm:text-base font-semibold font-body text-copy dark:text-copy mb-2"
               >
                 Description
               </label>
               <textarea
                 name="description"
                 id="description"
-                rows={5}
+                rows={4}
                 maxLength={200}
                 required
                 value={formData.description}
                 onChange={handleChange}
                 placeholder="Write a description of your venue"
-                className="font-body text-base w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy bg-white dark:bg-white dark:text-copy"
+                className="font-body text-sm sm:text-base w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy bg-white dark:bg-white dark:text-copy"
               />
             </div>
           </div>
         </section>
-        <section className="md:col-span-1 xl:col-span-2 flex flex-col h-full">
+        <section className="md:col-span-1 xl:col-span-2 flex flex-col md:w-full h-full">
           <h3 className="text-xl font-bold font-body text-white mb-4 text-center">
             Images
           </h3>
@@ -242,7 +243,7 @@ export default function AddVenue() {
             Add image
           </button>
         </section>
-        <section className="md:col-span-1 xl:col-span-2 flex flex-col h-full">
+        <section className="md:col-span-1 xl:col-span-2 flex flex-col md:w-full h-full">
           <h3 className="text-xl font-bold font-body text-white mb-4 text-center">
             Details
           </h3>
@@ -299,7 +300,7 @@ export default function AddVenue() {
             </div>
           </div>
         </section>
-        <section className="md:col-span-1 xl:col-span-2 flex flex-col h-full">
+        <section className="md:col-span-1 xl:col-span-2 flex flex-col md:w-full h-full">
           <h3 className="text-xl font-bold font-body text-white mb-4 text-center">
             Facilities
           </h3>
@@ -370,7 +371,7 @@ export default function AddVenue() {
             </div>
           </div>
         </section>
-        <section className="md:col-span-2 xl:col-span-2 xl:col-start-2 flex flex-col h-full">
+        <section className="md:col-span-2 xl:col-span-2 xl:col-start-2 flex flex-col md:w-full h-full">
           <h3 className="text-xl font-bold font-body text-white mb-4 text-center">
             Location
           </h3>
@@ -467,7 +468,6 @@ export default function AddVenue() {
                 onChange={(e) => handleNestedChange(e, "location")}
                 placeholder="Enter the venue continent here"
                 className="font-body text-base w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy bg-white dark:bg-white dark:text-copy"
-
               />
             </div>
           </div>
