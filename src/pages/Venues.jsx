@@ -3,10 +3,10 @@ import VenueGrid from "../components/VenueGrid";
 import { Star } from "lucide-react";
 import Searchbar from "../components/Searchbar";
 import { useVenues } from "../components/context/VenueContext";
-import { Compass } from "lucide-react";
+import { Compass, PlugZap } from "lucide-react";
 
 function Venues() {
-  const { venues, loading, error } = useVenues(); // ⬅️ Bruk context
+  const { venues, loading, error } = useVenues();
   const navigate = useNavigate();
 
   const appSpecificPhrase = "only available through fireside holidaze";
@@ -23,9 +23,15 @@ function Venues() {
   </>;
   if (error)
     return (
-      <p className="text-center text-red-600 mt-10">
-        Error loading venues: {error.message}
-      </p>
+      <>
+        <PlugZap className="mx-auto mb-2 h-6 w-6 text-red-600" />
+        <p className="text-center text-red-600 font-body mt-2">
+          Couldn't connect to our cabins. Try refreshing the page!
+        </p>
+        <p className="text-center text-sm text-red-500 italic">
+          {error.message}
+        </p>
+      </>
     );
 
   return (
