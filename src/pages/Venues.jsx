@@ -3,6 +3,7 @@ import VenueGrid from "../components/VenueGrid";
 import { Star } from "lucide-react";
 import Searchbar from "../components/Searchbar";
 import { useVenues } from "../components/context/VenueContext";
+import { Compass } from "lucide-react";
 
 function Venues() {
   const { venues, loading, error } = useVenues(); // ⬅️ Bruk context
@@ -13,7 +14,13 @@ function Venues() {
     venue.description?.toLowerCase().includes(appSpecificPhrase),
   );
 
-  if (loading) return <p className="text-center mt-10">Loading venues...</p>;
+  if (loading) return;
+  <>
+    <Compass className="mx-auto mb-2 h-6 w-6 animate-spin text-primary" />
+    <p className="text-center mt-4 text-copy">
+      Scouting dreamy escapes for you...
+    </p>
+  </>;
   if (error)
     return (
       <p className="text-center text-red-600 mt-10">

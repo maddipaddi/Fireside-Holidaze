@@ -5,6 +5,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useVenues } from "./context/VenueContext";
+import { MapPinned, Globe } from "lucide-react";
 
 export default function PopularCarousel() {
   const { venues, loading, error } = useVenues();
@@ -21,9 +22,12 @@ export default function PopularCarousel() {
     return (
       <div className="w-full text-center py-12 flex flex-col items-center justify-center">
         <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4"></div>
-        <p className="text-lg text-copy font-body dark:text-background">
-          Loading popular destinations...
-        </p>
+        <>
+          <MapPinned className="mx-auto mb-2 h-6 w-6 animate-bounce text-primary" />
+          <p className="text-lg text-copy font-body text-center dark:text-background">
+            Loading popular destinations... 🌍
+          </p>
+        </>
       </div>
     );
   }
@@ -31,7 +35,13 @@ export default function PopularCarousel() {
   if (error || filtered.length === 0) {
     return (
       <div className="w-full text-black text-center py-12">
-        <p className="text-lg">No popular destinations available right now.</p>
+        <>
+          <Globe className="mx-auto mb-2 h-6 w-6 text-primary" />
+          <p className="text-lg text-copy font-body text-center dark:text-background">
+            No hotspots right now — but adventure is always just around the
+            corner!
+          </p>
+        </>
       </div>
     );
   }
