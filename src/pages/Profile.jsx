@@ -4,6 +4,7 @@ import ProfileVenues from "../components/ProfileVenues";
 import { UserContext } from "../components/context/UserContext";
 import { updateProfile } from "../utils/updateProfile.mjs";
 import VenueManagerBookings from "../components/VenueManBookings";
+import CustomerBookings from "../components/CustomerBookings";
 
 export default function Profile() {
   const { user, setUser } = useContext(UserContext);
@@ -111,6 +112,11 @@ export default function Profile() {
           </div>
         </div>
       </div>
+      {!user.venueManager && (
+        <>
+          <CustomerBookings />
+        </>
+      )}
       {user.venueManager && (
         <>
           <VenueManagerBookings />
