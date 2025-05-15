@@ -1,19 +1,21 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import VenueGrid from "./VenueGrid";
 import { useNavigate } from "react-router-dom";
 import { apiRequest } from "../utils/api.mjs";
-import { PROFILE_VENUES } from "../utils/constants.mjs";
+import { PROFILE } from "../utils/constants.mjs";
+import { UserContext } from "./context/UserContext";
+import DeleteVenueButton from "./DeleteVenues";
 
 export default function ProfileVenues() {
   const [venues, setVenues] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const user = JSON.parse(localStorage.getItem("user"));
-  const profileName = user.name;
+  const { user } = useContext(UserContext);
+  const profileName = user?.name;
 
   useEffect(() => {
-    apiRequest(`${PROFILE_VENUES}/${profileName}/venues`)
+    apiRequest(`${PROFILE}/${profileName}/venues`)
       .then((data) => {
         setVenues(data.data);
         setLoading(false);
@@ -39,13 +41,16 @@ export default function ProfileVenues() {
             <div className="flex justify-center gap-8">
               <button
                 onClick={() => navigate(`/venue/edit/${venue.id}`)}
-                className="bg-copy text-white dark:bg-primary text-copy dark:text-background font-body font-bold px-6 py-1 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer"
+                className="bg-copy text-white dark:bg-primary dark:text-background font-body font-bold px-6 py-1 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer"
               >
                 Edit
               </button>
-              <button className="bg-copy text-white dark:bg-primary text-copy dark:text-background font-body font-bold px-6 py-1 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer">
-                Delete
-              </button>
+              <DeleteVenueButton
+                venueId={venue.id}
+                onDeleted={(deletedId) =>
+                  setVenues((prev) => prev.filter((v) => v.id !== deletedId))
+                }
+              />
             </div>
           </div>
         )}

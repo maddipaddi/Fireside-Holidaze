@@ -1,35 +1,36 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useApiRequest } from "../hooks/useApiRequest.mjs";
 import { showSuccessMessage } from "../utils/successMessage.mjs";
 import { handleError } from "../utils/errorHandler.mjs";
 import { VENUES } from "../utils/constants.mjs";
 
+const INITIAL_FORM_DATA = {
+  name: "",
+  description: "",
+  media: [{ url: "", alt: "" }],
+  price: 0,
+  maxGuests: 0,
+  rating: 0,
+  meta: {
+    wifi: false,
+    parking: false,
+    breakfast: false,
+    pets: false,
+  },
+  location: {
+    address: "",
+    city: "",
+    zip: "",
+    country: "",
+    continent: "",
+    lat: 0,
+    lng: 0,
+  },
+};
+
 export default function AddVenue() {
-  const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    media: [{ url: "", alt: "" }],
-    price: 0,
-    maxGuests: 0,
-    rating: 0,
-    meta: {
-      wifi: false,
-      parking: false,
-      breakfast: false,
-      pets: false,
-    },
-    location: {
-      address: "",
-      city: "",
-      zip: "",
-      country: "",
-      continent: "",
-      lat: 0,
-      lng: 0,
-    },
-  });
-  const navigate = useNavigate();
+  const [formData, setFormData] = useState(INITIAL_FORM_DATA);
+  const { request, isLoading } = useApiRequest();
 
   function handleChange(event) {
     const { name, type, value, checked } = event.target;
@@ -84,18 +85,16 @@ export default function AddVenue() {
     });
   }
 
-  const cleanedFormData = {
-    ...formData,
-    media: formData.media.filter((item) => item.url.trim() !== ""),
-    price: Number(formData.price),
-    maxGuests: Number(formData.maxGuests),
-    rating: Number(formData.rating),
-  };
-
-  const { request, isLoading } = useApiRequest();
-
   async function handleSubmit(event) {
     event.preventDefault();
+
+    const cleanedFormData = {
+      ...formData,
+      media: formData.media.filter((item) => item.url.trim() !== ""),
+      price: Number(formData.price),
+      maxGuests: Number(formData.maxGuests),
+      rating: Number(formData.rating),
+    };
 
     try {
       const result = await request(`${VENUES}`, {
@@ -104,12 +103,17 @@ export default function AddVenue() {
       });
 
       showSuccessMessage("Success! You have added a venue.");
-      console.log("Success:", result); // remove after development
-      navigate("/Profile");
+      setFormData(INITIAL_FORM_DATA);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1200);
     } catch (error) {
       handleError(error);
     }
   }
+
   return (
     <article className="mx-auto p-4">
       <h2 className="text-4xl font-bold font-heading mb-6 text-center dark:text-white">
@@ -117,7 +121,7 @@ export default function AddVenue() {
       </h2>
       <form
         onSubmit={handleSubmit}
-        className="bg-copy dark:bg-primary p-4 md:py-8 md:px-16 rounded-lg shadow-lg mt-12 max-w-6xl mx-auto grid gap-10 md:grid-cols-2 xl:grid-cols-4"
+        className="relative w-full bg-copy dark:bg-primary p-4 md:p-8 xl:p-10 pb-36 rounded-lg shadow-lg mt-12 grid gap-10 md:grid-cols-2 xl:grid-cols-4 mb-10"
       >
         <section className="md:col-span-1 xl:col-span-2 flex flex-col h-full w-100">
           <h3 className="text-xl font-bold font-body text-white mb-4 text-center">
@@ -463,12 +467,13 @@ export default function AddVenue() {
                 onChange={(e) => handleNestedChange(e, "location")}
                 placeholder="Enter the venue continent here"
                 className="font-body text-base w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy bg-white dark:bg-white dark:text-copy"
+
               />
             </div>
           </div>
         </section>
 
-        <div className="bg-primary dark:bg-background p-4 text-center -m-4 sm:-mx-16 sm:-mb-8 rounded-b-lg md:col-span-2 xl:col-span-4">
+        <div className="absolute bottom-0 left-0 w-full bg-primary dark:bg-background p-6 text-center rounded-b-lg">
           <button
             disabled={isLoading}
             className="bg-background dark:bg-primary text-copy dark:text-white font-body font-bold text-xl px-8 py-2 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer"

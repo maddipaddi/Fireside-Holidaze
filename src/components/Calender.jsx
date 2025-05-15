@@ -1,35 +1,36 @@
-import React, { useState, useEffect } from "react";
-import { SINGLE_BOOKING } from "../utils/constants.mjs";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { VENUES } from "../utils/constants.mjs";
 import { apiRequest } from "../utils/api.mjs";
 
 const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-function CostomCalendar() {
+function CustomCalendar() {
   const today = new Date();
   const { id } = useParams();
+  const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const [currentDate, setCurrentDate] = useState(
     new Date(today.getFullYear(), today.getMonth(), 1),
   );
-  const [bookings, setBookings] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
 
   useEffect(() => {
-    async function fetchBookings() {
+    async function fetchVenueWithBookings() {
       try {
-        const data = await apiRequest(`${SINGLE_BOOKING}/${id}`);
-        setBookings(data.data);
+        const venue = await apiRequest(`${VENUES}/${id}?_bookings=true`);
+        setBookings(venue.data.bookings || []);
       } catch (error) {
-        console.error("Error fetching bookings:", error.message);
+        console.error("Error fetching venue bookings:", error);
       } finally {
         setLoading(false);
       }
     }
 
-    fetchBookings();
+    fetchVenueWithBookings();
   }, [id]);
 
   const prevMonth = () => setCurrentDate(new Date(year, month - 1, 1));
@@ -49,10 +50,13 @@ function CostomCalendar() {
 
     for (let day = 1; day <= daysInMonth; day++) {
       const currentDay = new Date(year, month, day);
+      currentDay.setHours(0, 0, 0, 0); // Normalize time
 
       const isBooked = bookings.some((booking) => {
         const from = new Date(booking.dateFrom);
         const to = new Date(booking.dateTo);
+        from.setHours(0, 0, 0, 0);
+        to.setHours(0, 0, 0, 0);
         return currentDay >= from && currentDay <= to;
       });
 
@@ -74,10 +78,10 @@ function CostomCalendar() {
   if (loading) return <p>Loading calendar...</p>;
 
   return (
-    <div className="max-w-md mx-auto p-4 rounded-lg shadow dark:bg-background">
+    <div className="max-w-md mx-auto p-4 rounded-lg shadow bg-background">
       <div className="flex justify-between items-center mb-4">
         <button
-          className="bg-accent text-white px-4 py-3 rounded hover:dark:bg-secondary"
+          className="bg-accent text-white px-4 py-3 rounded hover:bg-secondary hover:dark:bg-secondary"
           onClick={prevMonth}
         >
           &lt;
@@ -86,22 +90,31 @@ function CostomCalendar() {
           {currentDate.toLocaleString("default", { month: "long" })} {year}
         </h2>
         <button
-          className="bg-accent text-white px-4 py-3 rounded hover:dark:bg-secondary"
+          className="bg-accent text-white px-4 py-3 rounded hover:bg-secondary hover:dark:bg-secondary"
           onClick={nextMonth}
         >
           &gt;
         </button>
       </div>
 
-      <div className="grid grid-cols-7 text-black text-center font-bold mb-2">
+      <div className="grid grid-cols-7 text-black text-center font-bold mb-2 gap-1 text-xs sm:text-sm">
         {daysOfWeek.map((day) => (
-          <div key={day}>{day}</div>
+          <div key={day} className="truncate">
+            {day}
+          </div>
         ))}
       </div>
 
       <div className="grid grid-cols-7 gap-1">{generateDays()}</div>
+      <div className="calendarAvailability mt-3 flex flex-wrap items-center gap-2 text-md sm:text-md">
+        <span className="text-black px-2 py-1 rounded">Color meaning:</span>
+        <span className="bg-red-500 text-white px-2 py-1 rounded">Booked</span>
+        <span className="text-black border px-2 py-1 rounded font-medium">
+          Available
+        </span>
+      </div>
     </div>
   );
 }
 
-export default CostomCalendar;
+export default CustomCalendar;

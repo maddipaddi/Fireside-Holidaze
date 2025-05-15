@@ -14,6 +14,7 @@ import {
   Earth,
 } from "lucide-react";
 import CostomCalendar from "../components/Calender";
+import BookingVenue from "../components/BookingCard";
 
 function SingleVenue() {
   const { id } = useParams();
@@ -30,7 +31,7 @@ function SingleVenue() {
   useEffect(() => {
     async function fetchVenue() {
       try {
-        const response = await fetch(`${SINGLE_VENUE}/${id}`);
+        const response = await fetch(`${SINGLE_VENUE}/${id}?_bookings=true`);
         if (!response.ok) {
           throw new Error("Failed to fetch venue");
         }
@@ -152,6 +153,9 @@ function SingleVenue() {
         </section>
         <div className="h-28">
           <CostomCalendar />
+        </div>
+        <div className="pt-80">
+          <BookingVenue venue={venue} />
         </div>
       </div>
     </>

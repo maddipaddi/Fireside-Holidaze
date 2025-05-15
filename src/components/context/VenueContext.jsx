@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { fetchAllVenues } from "../utils/fetchAllVenues.mjs";
+import { fetchAllVenues } from "../../utils/fetchAllVenues.mjs";
 
 const VenueContext = createContext();
 

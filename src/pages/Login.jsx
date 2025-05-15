@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useApiRequest } from "../hooks/useApiRequest.mjs";
 import { showSuccessMessage } from "../utils/successMessage.mjs";
 import { handleError } from "../utils/errorHandler.mjs";
-import { saveUserSession } from "../utils/auth.mjs";
-import { fetchUserProfile } from "../utils/fetchUserProfile.mjs";
-import { UserContext } from "../components/UserContext";
+import { LOGIN, PROFILE } from "../utils/constants.mjs";
+import { UserContext } from "../components/context/UserContext";
+import { apiRequest } from "../utils/api.mjs";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -13,7 +13,6 @@ export default function Login() {
     password: "",
   });
 
-  const { setUser } = useContext(UserContext);
   const { request, isLoading } = useApiRequest();
   const navigate = useNavigate();
 
@@ -25,39 +24,31 @@ export default function Login() {
     }));
   }
 
+  const { setUser } = useContext(UserContext);
+
   async function handleSubmit(event) {
     event.preventDefault();
 
     try {
-      const result = await request("https://v2.api.noroff.dev/auth/login", {
+      const result = await request(`${LOGIN}`, {
         method: "POST",
         body: JSON.stringify(formData),
       });
 
       const token = result.data.accessToken;
+      localStorage.setItem("accessToken", token);
       const name = result.data.name;
 
-      const fullProfile = await fetchUserProfile(name, token);
+      const profileResponse = await apiRequest(`${PROFILE}/${name}`);
+      const fullProfile = profileResponse.data;
 
-      const fullUserData = {
+      const fullUser = {
         ...fullProfile,
         accessToken: token,
       };
 
-      if (!fullUserData.avatar?.url) {
-        const backupUrl = localStorage.getItem(`backupAvatarUrl-${name}`);
-        const backupAlt = localStorage.getItem(`backupAvatarAlt-${name}`);
-
-        if (backupUrl) {
-          fullUserData.avatar = {
-            url: backupUrl,
-            alt: backupAlt || "Profile picture",
-          };
-        }
-      }
-
-      saveUserSession(fullUserData);
-      setUser(fullUserData);
+      setUser(fullUser);
+      localStorage.setItem("user", JSON.stringify(fullUser));
 
       showSuccessMessage("Success! You have logged in.");
       navigate("/profile");
