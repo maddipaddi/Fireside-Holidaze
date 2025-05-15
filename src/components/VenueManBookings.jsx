@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { apiRequest } from "../utils/api.mjs";
 import { PROFILE } from "../utils/constants.mjs";
 import { UserContext } from "./context/UserContext";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Tent, Map } from "lucide-react";
 
 export default function VenueManagerBookings() {
   const { user } = useContext(UserContext);
@@ -138,7 +138,13 @@ export default function VenueManagerBookings() {
       {showUpcoming && (
         <>
           {bookings.upcoming.length === 0 ? (
-            <p className="text-center text-copy">No upcoming bookings yet.</p>
+            <>
+              <Tent className="mx-auto mb-2 h-6 w-6 text-primary dark:text-background" />
+              <p className="text-center text-copy dark:text-background">
+                Your calendar looks a little lonely. Time to plan your next
+                adventure?
+              </p>
+            </>
           ) : (
             <>
               {renderGroupedBookings(bookings.upcoming, showAllUpcoming)}
@@ -176,7 +182,12 @@ export default function VenueManagerBookings() {
       {showPast && (
         <>
           {bookings.past.length === 0 ? (
-            <p className="text-center text-copy">No past bookings.</p>
+            <>
+              <Map className="mx-auto mb-2 h-6 w-6 text-primary" />
+              <p className="text-center text-copy">
+                No memories yet — your adventures will show up here!
+              </p>
+            </>
           ) : (
             <>
               {renderGroupedBookings(bookings.past, showAllPast)}
