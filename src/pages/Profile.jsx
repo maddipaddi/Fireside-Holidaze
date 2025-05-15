@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import AddVenue from "../components/AddVenue";
 import ProfileVenues from "../components/ProfileVenues";
 import { UserContext } from "../components/context/UserContext";
@@ -8,10 +8,18 @@ import CustomerBookings from "../components/CustomerBookings";
 
 export default function Profile() {
   const { user, setUser } = useContext(UserContext);
-  const [newAvatarUrl, setNewAvatarUrl] = useState(user.avatar?.url || "");
+  const [newAvatarUrl, setNewAvatarUrl] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
+  useEffect(() => {
+    if (user && user.avatar?.url) {
+      setNewAvatarUrl(user.avatar.url);
+    }
+  }, [user]);
+
   async function handleUpdateAvatar() {
+    if (!user) return;
+
     try {
       const response = await updateProfile(user.name, {
         avatar: {
@@ -36,6 +44,8 @@ export default function Profile() {
   }
 
   async function handleToggleVenueManager() {
+    if (!user) return;
+
     try {
       const newStatus = !user.venueManager;
 
@@ -63,12 +73,19 @@ export default function Profile() {
     }
   }
 
+  // ✅ Show loading state if user is not available
+  if (!user) {
+    return (
+      <p className="pt-20 text-center text-lg font-body">Loading profile...</p>
+    );
+  }
+
   return (
     <div className="pt-20 flex flex-col items-center gap-10">
       <div className="relative w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl flex flex-col items-center m-4 px-4">
         <img
-          src={newAvatarUrl || user.avatar.url}
-          alt={user.avatar.alt}
+          src={newAvatarUrl || "/default-avatar.png"}
+          alt={user.avatar?.alt || "Profile image"}
           className="w-32 h-32 rounded-full object-cover border-4 border-white absolute -top-16 z-10"
         />
         <div className="w-full bg-secondary p-6 rounded-t-lg rounded-b-lg shadow-lg mt-12">
@@ -84,7 +101,6 @@ export default function Profile() {
               value={newAvatarUrl}
               onChange={(e) => setNewAvatarUrl(e.target.value)}
               className="font-body w-full px-3 py-2 bg-white text-black border rounded focus:outline-none focus:ring focus:border-copy"
-              alt="Profile picture"
               placeholder="Paste image URL here"
             />
           </div>
@@ -112,11 +128,8 @@ export default function Profile() {
           </div>
         </div>
       </div>
-      {!user.venueManager && (
-        <>
-          <CustomerBookings />
-        </>
-      )}
+
+      {!user.venueManager && <CustomerBookings />}
       {user.venueManager && (
         <>
           <VenueManagerBookings />
