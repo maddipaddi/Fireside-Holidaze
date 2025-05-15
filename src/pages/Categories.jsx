@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useVenues } from "../components/context/VenueContext";
 import VenueGrid from "../components/VenueGrid";
-import { Star } from "lucide-react";
+import { Star, SearchX, Globe } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export default function Categories() {
@@ -81,9 +81,19 @@ export default function Categories() {
         {type.charAt(0).toUpperCase() + type.slice(1)} escapes
       </h1>
       {loading ? (
-        <p>Loading venues...</p>
+        <>
+          <Globe className="mx-auto mb-2 h-6 w-6 animate-spin text-primary dark:text-background" />
+          <p className="text-center text-copy dark:text-background">
+            Gathering unique escapes just for you...
+          </p>
+        </>
       ) : filteredVenues.length === 0 ? (
-        <p>No venues found for this category.</p>
+        <>
+          <SearchX className="mx-auto mb-2 h-6 w-6 text-primary dark:text-background" />
+          <p className="text-center text-copy dark:text-background">
+            No venues found in this category — try something different!
+          </p>
+        </>
       ) : (
         <VenueGrid
           venues={filteredVenues}

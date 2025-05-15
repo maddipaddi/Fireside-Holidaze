@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { VENUES } from "../utils/constants.mjs";
 import { apiRequest } from "../utils/api.mjs";
+import { CalendarClock } from "lucide-react";
 
 const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -75,7 +76,11 @@ function CustomCalendar() {
     return days;
   };
 
-  if (loading) return <p>Loading calendar...</p>;
+  if (loading) return;
+  <>
+    <CalendarClock className="mx-auto mb-2 h-6 w-6 animate-spin text-primary" />
+    <p className="text-center text-copy">Loading available dates...</p>
+  </>;
 
   return (
     <div className="max-w-md mx-auto p-4 rounded-lg shadow bg-background">

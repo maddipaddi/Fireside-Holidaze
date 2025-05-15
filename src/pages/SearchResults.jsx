@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useVenues } from "../components/context/VenueContext.jsx";
 import VenueCard from "../components/VenueCard";
+import { SearchX } from "lucide-react";
 
 const SearchResults = () => {
   const { venues, loading, error } = useVenues();
@@ -75,10 +76,16 @@ const SearchResults = () => {
 
       {results.length === 0 ? (
         <div className="text-center mt-12 text-copy dark:text-white font-body">
-          <p className="text-lg font-semibold mb-2">No venues found.</p>
-          <p className="text-copy dark:text-white mb-6">
-            Try a different search, or check out these suggestions:
-          </p>
+          <>
+            <SearchX className="mx-auto mb-4 h-6 w-6 text-primary dark:text-background" />
+            <p className="text-lg font-semibold mb-2 dark:text-background">
+              Nothing found — yet.
+            </p>
+            <p className="text-copy dark:text-background mb-6">
+              Don't worry, the right place is out there. Try adjusting your
+              search or browse our suggestions below.
+            </p>
+          </>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4 text-copy dark:text-copy">
             {recommendations.map((venue) => (

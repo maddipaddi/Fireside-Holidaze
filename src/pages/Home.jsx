@@ -10,10 +10,8 @@ function Home() {
         <Searchbar />
       </div>
 
-      {/* Hero Section */}
       <div className="py-20 flex items-center justify-center px-4">
         <div className="relative bg-copy dark:bg-background text-background dark:text-copy w-full max-w-6xl rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-8 shadow-lg overflow-visible">
-          {/* Text */}
           <div className="flex flex-col items-start justify-center gap-4 w-full md:w-1/2 h-auto">
             <h1 className="font-heading text-3xl sm:text-4xl">
               Welcome to Holidaze!
