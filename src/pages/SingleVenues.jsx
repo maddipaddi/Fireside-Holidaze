@@ -22,8 +22,10 @@ function VenueDetails({ loading, venue }) {
   if (loading) {
     return (
       <div className="text-center mt-10">
-        <MapPinned className="mx-auto mb-2 h-6 w-6 animate-bounce text-primary" />
-        <p className="text-copy font-body">Finding your next escape...</p>
+        <MapPinned className="mx-auto mb-2 h-6 w-6 animate-bounce text-primary dark:text-background" />
+        <p className="text-copy font-body dark:text-background">
+          Finding your next escape...
+        </p>
       </div>
     );
   }

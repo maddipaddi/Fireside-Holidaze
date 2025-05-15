@@ -183,8 +183,8 @@ export default function VenueManagerBookings() {
         <>
           {bookings.past.length === 0 ? (
             <>
-              <Map className="mx-auto mb-2 h-6 w-6 text-primary" />
-              <p className="text-center text-copy">
+              <Map className="mx-auto mb-2 h-6 w-6 text-primary dark:text-background" />
+              <p className="text-center text-copy dark:text-background">
                 No memories yet — your adventures will show up here!
               </p>
             </>
