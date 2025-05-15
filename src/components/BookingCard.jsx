@@ -172,7 +172,7 @@ function BookingVenue({ venue }) {
           new Date(dateFrom) > new Date(dateTo) ||
           !!error
         }
-        className="mt-4 w-full bg-red-500 text-white p-2 rounded hover:bg-red-600 disabled:opacity-50"
+        className="mt-4 w-full bg-copy hover:bg-primary dark:bg-primary dark:hover:bg-copy text-white dark:text-white p-2 rounded hover:cursor-pointer transition duration-200 ease-in-out"
       >
         {loading ? "Booking..." : "Confirm Booking"}
       </button>
