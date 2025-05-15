@@ -90,19 +90,19 @@ export default function Header() {
           {isCategoriesOpen && (
             <div className="ml-4 mt-2 flex flex-col md:min-w-37 bg-background dark:bg-darkbackground gap-4 md:fixed md:px-6 md:py-4 md:m-0 md:rounded md:rounded-t-none md:border-r md:border-l md:border-b md:border-t0 md:bg-accent md:dark:bg-accent md:dark:text-copy">
               <NavLink
-                to="Categories"
+                to="/categories/forest"
                 className="font-heading font-extralight hover:font-normal"
               >
                 Forest
               </NavLink>
               <NavLink
-                to="Categories"
+                to="/categories/sea"
                 className="font-heading font-extralight hover:font-normal"
               >
                 Sea
               </NavLink>
               <NavLink
-                to="Categories"
+                to="/categories/mountain"
                 className="font-heading font-extralight hover:font-normal"
               >
                 Mountain
