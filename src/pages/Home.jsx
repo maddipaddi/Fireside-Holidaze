@@ -2,6 +2,7 @@ import React from "react";
 import Searchbar from "../components/Searchbar";
 import CategoryItem from "../components/CategoryItem";
 import PopularCarousel from "../components/Carousel";
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
@@ -20,12 +21,12 @@ function Home() {
               Your forest retreat awaits
             </h2>
             <button className="font-body bg-background dark:bg-primary px-6 py-3 rounded-2xl shadow-md hover:bg-accent hover:text-copy dark:hover:bg-copy dark:hover:text-copy transition">
-              <a
-                href="/Venues"
+              <Link
+                to="/venues"
                 className="text-copy dark:text-background font-bold"
               >
                 View all locations
-              </a>
+              </Link>
             </button>
           </div>
           <div className="w-full md:w-1/2 flex justify-center">
