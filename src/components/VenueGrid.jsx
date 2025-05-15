@@ -5,11 +5,11 @@ export default function VenueGrid({ venues, renderFooter }) {
   if (!venues || venues.length === 0) {
     return (
       <div className="text-center px-4">
-        <Home className="mx-auto mb-4 h-6 w-6 text-primary" />
-        <p className="text-l font-heading text-copy mb-2">
+        <Home className="mx-auto mb-4 h-6 w-6 text-primary dark:text-background " />
+        <p className="text-l font-heading text-copy  dark:text-background mb-2">
           You have't listed any cabins yet.
         </p>
-        <p className="text-m text-muted mb-6">
+        <p className="text-m text-muted mb-6 dark:text-background">
           Share your space and become a host with Fireside Holidaze.
         </p>
       </div>
