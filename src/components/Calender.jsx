@@ -81,7 +81,7 @@ function CustomCalendar() {
     <div className="max-w-md mx-auto p-4 rounded-lg shadow bg-background">
       <div className="flex justify-between items-center mb-4">
         <button
-          className="bg-accent text-white px-4 py-3 rounded hover:bg-secondary hover:dark:bg-secondary"
+          className="bg-copy hover:bg-primary dark:bg-primary dark:hover:bg-copy text-white dark:text-white hover:cursor-pointer transition duration-200 ease-in-out px-4 py-3 rounded"
           onClick={prevMonth}
         >
           &lt;
@@ -90,7 +90,7 @@ function CustomCalendar() {
           {currentDate.toLocaleString("default", { month: "long" })} {year}
         </h2>
         <button
-          className="bg-accent text-white px-4 py-3 rounded hover:bg-secondary hover:dark:bg-secondary"
+          className="bg-copy hover:bg-primary dark:bg-primary dark:hover:bg-copy text-white dark:text-white hover:cursor-pointer transition duration-200 ease-in-out px-4 py-3 rounded"
           onClick={nextMonth}
         >
           &gt;
