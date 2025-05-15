@@ -9,12 +9,70 @@ export default function Categories() {
   const { venues, loading } = useVenues();
   const navigate = useNavigate();
 
+  const categoryKeywords = {
+    forest: [
+      "forest",
+      "woods",
+      "woodland",
+      "pine",
+      "evergreen",
+      "moss",
+      "trees",
+      "glade",
+      "clearing",
+      "log cabin",
+      "hidden trail",
+      "deep woods",
+      "timber",
+    ],
+    sea: [
+      "sea",
+      "seaside",
+      "seashore",
+      "ocean",
+      "beach",
+      "coast",
+      "coastal",
+      "shore",
+      "harbor",
+      "bay",
+      "marina",
+      "saltwater",
+      "waves",
+      "tide",
+      "driftwood",
+      "island",
+      "beachfront",
+      "cove",
+      "sailing",
+      "fjord",
+    ],
+    mountain: [
+      "mountain",
+      "alpine",
+      "ridge",
+      "peak",
+      "summit",
+      "hilltop",
+      "highlands",
+      "cabin in the mountains",
+      "elevation",
+      "ski lodge",
+      "snowy slope",
+      "valley view",
+    ],
+  };
+
+  const keywords = categoryKeywords[type.toLowerCase()] || [];
+
   const filteredVenues = venues.filter((venue) => {
     const content = `${venue.name}${venue.description}`.toLowerCase();
-    return (
-      content.includes(type.toLowerCase()) &&
-      content.includes("only available through fireside holidaze")
+    const matchesCategory = keywords.some((word) => content.includes(word));
+    const firesideExclusive = content.includes(
+      "only available through fireside holidaze",
     );
+
+    return matchesCategory && firesideExclusive;
   });
 
   return (
