@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useApiRequest } from "../hooks/useApiRequest.mjs";
 import { showSuccessMessage } from "../utils/successMessage.mjs";
 import { handleError } from "../utils/errorHandler.mjs";
+import { UserContext } from "../components/context/UserContext";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -11,7 +12,10 @@ export default function Register() {
     password: "",
     venueManager: false,
   });
+
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
+  const { request, isLoading } = useApiRequest();
 
   function handleChange(event) {
     const { name, type, value, checked } = event.target;
@@ -20,8 +24,6 @@ export default function Register() {
       [name]: type === "checkbox" ? checked : value,
     }));
   }
-
-  const { request, isLoading } = useApiRequest();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -34,13 +36,28 @@ export default function Register() {
     }
 
     try {
-      const result = await request("https://v2.api.noroff.dev/auth/register", {
+      await request("https://v2.api.noroff.dev/auth/register", {
         method: "POST",
         body: JSON.stringify(formData),
       });
 
-      showSuccessMessage("Success! You have registered an account.");
-      console.log("Success:", result); // remove after development
+      const loginResponse = await request(
+        "https://v2.api.noroff.dev/auth/login",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email: email,
+            password: formData.password,
+          }),
+        },
+      );
+
+      const userData = loginResponse.data;
+
+      localStorage.setItem("user", JSON.stringify(userData));
+      setUser(userData);
+
+      showSuccessMessage("Success! You are now registered and logged in.");
       navigate("/");
     } catch (error) {
       handleError(error);
@@ -111,7 +128,6 @@ export default function Register() {
           className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
         />
       </div>
-
       <div className="bg-white dark:bg-background p-4 rounded mb-6 flex items-center gap-2">
         <input
           type="checkbox"
