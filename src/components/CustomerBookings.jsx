@@ -3,6 +3,7 @@ import { apiRequest } from "../utils/api.mjs";
 import { PROFILE } from "../utils/constants.mjs";
 import { UserContext } from "./context/UserContext";
 import { ChevronDown, Tent, Map } from "lucide-react";
+import { handleError } from "../utils/errorHandler.mjs";
 
 export default function CustomerBookings() {
   const { user } = useContext(UserContext);
@@ -33,7 +34,7 @@ export default function CustomerBookings() {
 
         setBookings({ upcoming, past });
       } catch (error) {
-        console.error("Error fetching venue bookings:", error);
+        handleError(error);
       } finally {
         setLoading(false);
       }

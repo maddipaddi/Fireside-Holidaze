@@ -5,11 +5,12 @@ import { UserContext } from "../components/context/UserContext";
 import { updateProfile } from "../utils/updateProfile.mjs";
 import VenueManagerBookings from "../components/VenueManBookings";
 import CustomerBookings from "../components/CustomerBookings";
+import { handleError } from "../utils/errorHandler.mjs";
+import { showSuccessMessage } from "../utils/successMessage.mjs";
 
 export default function Profile() {
   const { user, setUser } = useContext(UserContext);
   const [newAvatarUrl, setNewAvatarUrl] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
     if (user && user.avatar?.url) {
@@ -35,11 +36,9 @@ export default function Profile() {
 
       setUser(updatedUser);
       localStorage.setItem("user", JSON.stringify(updatedUser));
-      setSuccessMessage("Profile picture updated!");
-
-      setTimeout(() => setSuccessMessage(""), 3000);
+      showSuccessMessage("Profile picture updated!");
     } catch (error) {
-      console.error("Failed to update avatar:", error);
+      handleError(error);
     }
   }
 
@@ -61,19 +60,15 @@ export default function Profile() {
       setUser(updatedUser);
       localStorage.setItem("user", JSON.stringify(updatedUser));
 
-      setSuccessMessage(
+      showSuccessMessage(
         newStatus
           ? "You're now a venue manager!"
           : "You've switched to customer.",
       );
-
-      setTimeout(() => setSuccessMessage(""), 3000);
     } catch (error) {
-      console.error("Failed to toggle venueManager:", error);
+      handleError(error);
     }
   }
-
-  // ✅ Show loading state if user is not available
   if (!user) {
     return (
       <p className="pt-20 text-center text-lg font-body">Loading profile...</p>
@@ -120,11 +115,6 @@ export default function Profile() {
                 ? "Switch to customer"
                 : "Switch to venue manager"}
             </button>
-            {successMessage && (
-              <p className="mt-4 text-sm text-copy font-body">
-                {successMessage}
-              </p>
-            )}
           </div>
         </div>
       </div>
