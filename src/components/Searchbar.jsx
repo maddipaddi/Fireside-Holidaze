@@ -12,7 +12,6 @@ const Searchbar = () => {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [guests, setGuests] = useState(1);
-  const [rooms, setRooms] = useState(1);
 
   const { venues } = useVenues();
   const navigate = useNavigate();
@@ -75,7 +74,7 @@ const Searchbar = () => {
       navigate(`/venue/${selectedVenue.id}`);
     } else {
       navigate(
-        `/search?query=${encodeURIComponent(query)}&checkIn=${checkIn}&checkOut=${checkOut}&guests=${guests}&rooms=${rooms}`,
+        `/search?query=${encodeURIComponent(query)}&checkIn=${checkIn}&checkOut=${checkOut}&guests=${guests}`,
       );
     }
   };
@@ -161,7 +160,7 @@ const Searchbar = () => {
                 onClick={() => {
                   setIsOpen(false);
                   navigate(
-                    `/search?query=${encodeURIComponent(query)}&checkIn=${checkIn}&checkOut=${checkOut}&guests=${guests}&rooms=${rooms}`,
+                    `/search?query=${encodeURIComponent(query)}&checkIn=${checkIn}&checkOut=${checkOut}&guests=${guests}`,
                   );
                 }}
               >
@@ -173,7 +172,7 @@ const Searchbar = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-        <div className="bg-white p-3 rounded w-full md:col-span-2">
+        <div className="bg-white p-3 rounded w-full md:col-span-3">
           <label className="block text-sm font-semibold font-body text-copy mb-2">
             Date
           </label>
@@ -225,37 +224,6 @@ const Searchbar = () => {
               disabled={guests >= 12}
               className={`px-2 py-1 rounded ${
                 guests >= 12
-                  ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                  : "bg-gray-200"
-              }`}
-            >
-              +
-            </button>
-          </div>
-        </div>
-
-        <div className="bg-white p-3 rounded text-center w-full md:col-span-1">
-          <label className="block text-sm font-semibold font-body text-copy mb-2">
-            Rooms
-          </label>
-          <div className="flex items-center justify-center gap-2">
-            <button
-              onClick={() => decrement(setRooms, rooms)}
-              disabled={rooms <= 1}
-              className={`px-2 py-1 rounded ${
-                rooms <= 1
-                  ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                  : "bg-gray-200"
-              }`}
-            >
-              -
-            </button>
-            <span>{rooms}</span>
-            <button
-              onClick={() => increment(setRooms, rooms)}
-              disabled={rooms >= 6}
-              className={`px-2 py-1 rounded ${
-                rooms >= 6
                   ? "bg-gray-100 text-gray-400 cursor-not-allowed"
                   : "bg-gray-200"
               }`}

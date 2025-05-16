@@ -6,7 +6,9 @@ export async function fetchAllVenues() {
   const allVenues = [];
 
   while (true) {
-    const result = await apiRequest(`${VENUES}?page=${currentPage}`);
+    const result = await apiRequest(
+      `${VENUES}?_bookings=true&page=${currentPage}`,
+    );
 
     if (result?.data?.length) {
       allVenues.push(...result.data);

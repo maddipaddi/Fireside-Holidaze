@@ -15,7 +15,7 @@ import {
   MapPinned,
   Map,
 } from "lucide-react";
-import CostomCalendar from "../components/Calender";
+import CustomCalendar from "../components/Calender";
 import BookingVenue from "../components/BookingCard";
 
 function VenueDetails({ loading, venue }) {
@@ -52,6 +52,8 @@ function SingleVenue() {
   const [venue, setVenue] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
 
   useEffect(() => {
     if (venue?.media?.length) {
@@ -182,11 +184,22 @@ function SingleVenue() {
         </section>
 
         <div className="h-28">
-          <CostomCalendar />
+          <CustomCalendar
+            dateFrom={dateFrom}
+            dateTo={dateTo}
+            setDateFrom={setDateFrom}
+            setDateTo={setDateTo}
+          />
         </div>
 
         <div className="pt-80">
-          <BookingVenue venue={venue} />
+          <BookingVenue
+            venue={venue}
+            dateFrom={dateFrom}
+            dateTo={dateTo}
+            setDateFrom={setDateFrom}
+            setDateTo={setDateTo}
+          />
         </div>
       </div>
     </>
