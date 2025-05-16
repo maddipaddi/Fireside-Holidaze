@@ -4,6 +4,18 @@ import VenueGrid from "../components/VenueGrid";
 import { Star, SearchX, Globe } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Categories page component that displays a filtered list of venues based on the selected category type.
+ *
+ * Uses keywords to match venues to categories such as "forest", "sea", or "mountain".
+ * Only venues marked as "only available through fireside holidaze" are shown.
+ *
+ * Handles loading state and empty results, and allows navigation to individual venue details.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered Categories page.
+ */
+
 export default function Categories() {
   const { type } = useParams();
   const { venues, loading } = useVenues();

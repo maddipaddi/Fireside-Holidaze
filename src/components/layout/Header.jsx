@@ -4,6 +4,25 @@ import { Menu, X, ChevronDown, ChevronUp } from "lucide-react";
 import { logout } from "../../utils/auth.mjs";
 import { UserContext } from "../context/UserContext";
 
+/**
+ * Header component for the Holidaze application.
+ *
+ * Renders the main navigation bar, including logo, navigation links,
+ * categories dropdown, user authentication actions, and responsive menu.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered header component.
+ *
+ * @example
+ * <Header />
+ *
+ * @remarks
+ * - Uses React Router's NavLink for navigation.
+ * - Displays user avatar and logout button if authenticated.
+ * - Responsive design: collapses menu on mobile.
+ * - Handles outside click to close categories dropdown.
+ */
+
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);

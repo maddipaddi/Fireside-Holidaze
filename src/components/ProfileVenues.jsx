@@ -7,6 +7,17 @@ import { UserContext } from "./context/UserContext";
 import DeleteVenueButton from "./DeleteVenues";
 import { Globe } from "lucide-react";
 
+/**
+ * ProfileVenues component displays a list of venues associated with the current user profile.
+ *
+ * - Fetches the user's venues from the API on mount.
+ * - Shows a loading spinner while fetching data.
+ * - Renders a grid of venues with options to edit or delete each venue.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered ProfileVenues component.
+ */
+
 export default function ProfileVenues() {
   const [venues, setVenues] = useState([]);
   const [loading, setLoading] = useState(true);

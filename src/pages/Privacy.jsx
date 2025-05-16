@@ -1,3 +1,33 @@
+/**
+ * Privacy Component – Displays the Holidaze privacy policy in expandable sections.
+ *
+ * This functional React component renders a styled privacy policy using a static array of
+ * policy sections. Each section is collapsible and contains a heading and detailed explanation.
+ * It is intended to be displayed on a dedicated route such as `/privacy`.
+ *
+ * @component
+ *
+ * @returns {JSX.Element} A section element containing the full privacy policy.
+ *
+ * @example
+ * // Usage in a page or route component
+ * import Privacy from './Privacy';
+ *
+ * function App() {
+ *   return (
+ *     <main>
+ *       <Privacy />
+ *     </main>
+ *   );
+ * }
+ *
+ * @remarks
+ * - Tailwind CSS is used for styling.
+ * - Dark mode compatible via Tailwind's `dark:` utilities.
+ * - No props or state required.
+ * - Uses semantic and accessible HTML with <details> and <summary>.
+ */
+
 export default function Privacy() {
   const policies = [
     {

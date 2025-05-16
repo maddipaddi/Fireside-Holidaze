@@ -3,6 +3,20 @@ import { SINGLE_BOOKING, SINGLE_VENUE } from "../utils/constants.mjs";
 import { apiRequest } from "../utils/api.mjs";
 import { useParams } from "react-router-dom";
 
+/**
+ * BookingVenue component allows users to book a venue by selecting dates and the number of guests.
+ *
+ * @component
+ * @param {Object} props
+ * @param {Object} props.venue - The venue object containing details such as name, price, maxGuests, and id.
+ * @param {string} props.dateFrom - The start date of the booking (ISO string).
+ * @param {string} props.dateTo - The end date of the booking (ISO string).
+ * @param {Function} props.setDateFrom - Function to update the start date.
+ * @param {Function} props.setDateTo - Function to update the end date.
+ *
+ * @returns {JSX.Element} The rendered booking card UI for the venue.
+ */
+
 function BookingVenue({ venue, dateFrom, dateTo, setDateFrom, setDateTo }) {
   const [guests, setGuests] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);

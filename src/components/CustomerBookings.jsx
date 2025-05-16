@@ -5,6 +5,18 @@ import { UserContext } from "./context/UserContext";
 import { ChevronDown, Tent, Map } from "lucide-react";
 import { handleError } from "../utils/errorHandler.mjs";
 
+/**
+ * CustomerBookings component displays a user's upcoming and past venue bookings,
+ * grouped by month. Allows toggling visibility of upcoming and past bookings,
+ * and supports expanding/collapsing to show all or a limited number of bookings.
+ *
+ * Fetches bookings data for the logged-in user, sorts them into upcoming and past,
+ * and renders them with venue details and images. Handles loading and error states.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered CustomerBookings section.
+ */
+
 export default function CustomerBookings() {
   const { user } = useContext(UserContext);
   const [bookings, setBookings] = useState({ upcoming: [], past: [] });
