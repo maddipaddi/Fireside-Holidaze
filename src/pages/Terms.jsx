@@ -40,7 +40,7 @@ export default function Terms() {
       id: "changes",
       title: "7. Changes to Terms",
       content:
-        "We may update these terms from time to time. If we make significant changes, we’ll notify users via email or through the platform.",
+        "We may update these terms from time to time. If we make significant changes, we'll notify users via email or through the platform.",
     },
   ];
 
