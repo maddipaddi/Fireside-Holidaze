@@ -6,8 +6,9 @@ import { CalendarClock } from "lucide-react";
 
 const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-function CustomCalendar() {
+function CustomCalendar({ dateFrom, dateTo, setDateFrom, setDateTo }) {
   const today = new Date();
+  today.setHours(0, 0, 0, 0);
   const { id } = useParams();
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -37,6 +38,18 @@ function CustomCalendar() {
   const prevMonth = () => setCurrentDate(new Date(year, month - 1, 1));
   const nextMonth = () => setCurrentDate(new Date(year, month + 1, 1));
 
+  const handleDayClick = (dateStr) => {
+    if (!dateFrom || (dateFrom && dateTo)) {
+      setDateFrom(dateStr);
+      setDateTo("");
+    } else if (new Date(dateStr) > new Date(dateFrom)) {
+      setDateTo(dateStr);
+    } else {
+      setDateFrom(dateStr);
+      setDateTo("");
+    }
+  };
+
   const generateDays = () => {
     const days = [];
 
@@ -51,7 +64,17 @@ function CustomCalendar() {
 
     for (let day = 1; day <= daysInMonth; day++) {
       const currentDay = new Date(year, month, day);
-      currentDay.setHours(0, 0, 0, 0); // Normalize time
+      currentDay.setHours(0, 0, 0, 0);
+
+      const currentDayISO = currentDay.toISOString().split("T")[0];
+      const isSelected =
+        dateFrom &&
+        dateTo &&
+        new Date(currentDayISO) >= new Date(dateFrom) &&
+        new Date(currentDayISO) <= new Date(dateTo);
+      const isOnlyStartSelected =
+        dateFrom && !dateTo && currentDayISO === dateFrom;
+      const isPast = currentDay < today;
 
       const isBooked = bookings.some((booking) => {
         const from = new Date(booking.dateFrom);
@@ -64,8 +87,15 @@ function CustomCalendar() {
       days.push(
         <div
           key={day}
-          className={`p-2 text-center border ${
-            isBooked ? "bg-red-500 text-white" : "border-black text-black"
+          onClick={() => !isBooked && handleDayClick(currentDayISO)}
+          className={`p-2 text-center border cursor-pointer ${
+            isPast
+              ? "text-gray-400 cursor-not-allowed"
+              : isBooked
+                ? "bg-red-500 text-white"
+                : isSelected || isOnlyStartSelected
+                  ? "bg-primary text-white"
+                  : "border-black text-black"
           }`}
         >
           {day}
@@ -76,11 +106,14 @@ function CustomCalendar() {
     return days;
   };
 
-  if (loading) return;
-  <>
-    <CalendarClock className="mx-auto mb-2 h-6 w-6 animate-spin text-primary" />
-    <p className="text-center text-copy">Loading available dates...</p>
-  </>;
+  if (loading) {
+    return (
+      <>
+        <CalendarClock className="mx-auto mb-2 h-6 w-6 animate-spin text-primary" />
+        <p className="text-center text-copy">Loading available dates...</p>
+      </>
+    );
+  }
 
   return (
     <div className="max-w-md mx-auto p-4 rounded-lg shadow bg-background">
@@ -116,6 +149,9 @@ function CustomCalendar() {
         <span className="bg-red-500 text-white px-2 py-1 rounded">Booked</span>
         <span className="text-black border px-2 py-1 rounded font-medium">
           Available
+        </span>
+        <span className="bg-primary text-white border px-2 py-1 rounded font-medium">
+          Selected
         </span>
       </div>
     </div>
