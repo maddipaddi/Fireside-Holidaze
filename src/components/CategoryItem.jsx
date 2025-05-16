@@ -1,7 +1,8 @@
 // components/CategoryItem.jsx
 import React from "react";
+import { Link } from "react-router-dom";
 
-function CategoryItem({ label, imgSrc, href, pathId }) {
+function CategoryItem({ label, imgSrc, to, pathId }) {
   return (
     <div className="relative w-52 h-52">
       <svg
@@ -21,13 +22,15 @@ function CategoryItem({ label, imgSrc, href, pathId }) {
           </textPath>
         </text>
       </svg>
-      <a href={href}>
+
+      <Link to={to}>
         <img
           src={imgSrc}
           alt={`Icon showing category ${label}`}
+          loading="lazy"
           className="w-full h-full rounded-full object-cover"
         />
-      </a>
+      </Link>
     </div>
   );
 }
