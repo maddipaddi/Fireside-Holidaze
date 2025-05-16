@@ -12,7 +12,6 @@ const Searchbar = () => {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [guests, setGuests] = useState(1);
-  const [rooms, setRooms] = useState(1);
 
   const { venues } = useVenues();
   const navigate = useNavigate();
@@ -75,7 +74,7 @@ const Searchbar = () => {
       navigate(`/venue/${selectedVenue.id}`);
     } else {
       navigate(
-        `/search?query=${encodeURIComponent(query)}&checkIn=${checkIn}&checkOut=${checkOut}&guests=${guests}&rooms=${rooms}`,
+        `/search?query=${encodeURIComponent(query)}&checkIn=${checkIn}&checkOut=${checkOut}&guests=${guests}`,
       );
     }
   };
@@ -161,7 +160,7 @@ const Searchbar = () => {
                 onClick={() => {
                   setIsOpen(false);
                   navigate(
-                    `/search?query=${encodeURIComponent(query)}&checkIn=${checkIn}&checkOut=${checkOut}&guests=${guests}&rooms=${rooms}`,
+                    `/search?query=${encodeURIComponent(query)}&checkIn=${checkIn}&checkOut=${checkOut}&guests=${guests}`,
                   );
                 }}
               >

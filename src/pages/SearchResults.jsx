@@ -17,7 +17,19 @@ const SearchResults = () => {
   const checkIn = params.get("checkIn") || "";
   const checkOut = params.get("checkOut") || "";
   const guests = Number(params.get("guests")) || 1;
-  const rooms = Number(params.get("rooms")) || 1;
+
+  const isAvailable = (venue, checkIn, checkOut) => {
+    if (!checkIn || !checkOut || !Array.isArray(venue.bookings)) return true;
+
+    const start = new Date(checkIn);
+    const end = new Date(checkOut);
+
+    return !venue.bookings.some((booking) => {
+      const bStart = new Date(booking.dateFrom);
+      const bEnd = new Date(booking.dateTo);
+      return start <= bEnd && end >= bStart; // overlaps
+    });
+  };
 
   useEffect(() => {
     if (!venues || venues.length === 0) return;
@@ -28,15 +40,17 @@ const SearchResults = () => {
         .includes("only available through fireside holidaze"),
     );
 
-    let filtered = firesideOnly.filter((venue) => {
-      const name = venue.name?.toLowerCase() || "";
-      const country = venue.location?.country?.toLowerCase() || "";
-      return name.includes(query) || country.includes(query);
-    });
-
-    filtered = filtered.filter(
-      (venue) => venue.maxGuests >= guests && (venue.meta?.rooms ?? 1) >= rooms,
-    );
+    let filtered = firesideOnly
+      .filter((venue) => {
+        const name = venue.name?.toLowerCase() || "";
+        const country = venue.location?.country?.toLowerCase() || "";
+        return name.includes(query) || country.includes(query);
+      })
+      .filter((venue) => venue.maxGuests >= guests)
+      .map((venue) => ({
+        ...venue,
+        isAvailable: isAvailable(venue, checkIn, checkOut),
+      }));
 
     setResults(filtered);
 
@@ -49,7 +63,7 @@ const SearchResults = () => {
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
     setRecommendations(shuffled.slice(0, 3));
-  }, [venues, query, guests, rooms]);
+  }, [venues, query, guests]);
 
   if (loading) return <p className="text-center mt-10">Loading...</p>;
   if (error)
@@ -118,6 +132,11 @@ const SearchResults = () => {
                 <>
                   <h3 className="text-lg font-bold mb-1">{v.name}</h3>
                   <p className="text-sm">{v.description}</p>
+                  {!v.isAvailable && (
+                    <p className="bg-darkbackground text-center rounded py-2 mt-2 italic font-medium">
+                      Not available for selected dates
+                    </p>
+                  )}
                   <button
                     onClick={() => navigate(`/venue/${v.id}`)}
                     className="text-sm underline mt-2 hover:text-accent"
