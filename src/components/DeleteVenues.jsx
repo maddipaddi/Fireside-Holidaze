@@ -1,23 +1,31 @@
 import { useState } from "react";
 import { apiRequest } from "../utils/api.mjs";
 import { VENUES } from "../utils/constants.mjs";
+import { handleError } from "../utils/errorHandler.mjs";
+import { showConfirmDialog } from "../utils/showConfirmDialog.mjs";
+import { showSuccessMessage } from "../utils/successMessage.mjs";
 
 export default function DeleteVenueButton({ venueId, onDeleted }) {
   const [deleting, setDeleting] = useState(false);
 
   async function handleDelete() {
-    const confirmed = confirm("Are you sure you want to delete this venue?");
+    const confirmed = await showConfirmDialog(
+      "Do you really want to delete this venue?",
+    );
     if (!confirmed) return;
 
     try {
       setDeleting(true);
+
       await apiRequest(`${VENUES}/${venueId}`, {
         method: "DELETE",
       });
+
+      showSuccessMessage("Venue deleted successfully.");
       onDeleted(venueId);
     } catch (error) {
       console.error("Error deleting venue:", error);
-      alert("Something went wrong while deleting the venue.");
+      handleError(error);
     } finally {
       setDeleting(false);
     }
