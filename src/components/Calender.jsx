@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { VENUES } from "../utils/constants.mjs";
 import { apiRequest } from "../utils/api.mjs";
@@ -20,6 +20,8 @@ function CustomCalendar({ dateFrom, dateTo, setDateFrom, setDateTo }) {
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
 
+  const calendarRef = useRef(null);
+
   useEffect(() => {
     async function fetchVenueWithBookings() {
       try {
@@ -35,14 +37,51 @@ function CustomCalendar({ dateFrom, dateTo, setDateFrom, setDateTo }) {
     fetchVenueWithBookings();
   }, [id]);
 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (calendarRef.current && !calendarRef.current.contains(event.target)) {
+        if (dateFrom || dateTo) {
+          setDateFrom("");
+          setDateTo("");
+        }
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dateFrom, dateTo, setDateFrom, setDateTo]);
+
   const prevMonth = () => setCurrentDate(new Date(year, month - 1, 1));
   const nextMonth = () => setCurrentDate(new Date(year, month + 1, 1));
+
+  const isOverlapping = (start1, end1, start2, end2) => {
+    return start1 <= end2 && start2 <= end1;
+  };
 
   const handleDayClick = (dateStr) => {
     if (!dateFrom || (dateFrom && dateTo)) {
       setDateFrom(dateStr);
       setDateTo("");
     } else if (new Date(dateStr) > new Date(dateFrom)) {
+      const newFrom = new Date(dateFrom);
+      const newTo = new Date(dateStr);
+
+      const hasOverlap = bookings.some(({ dateFrom: bFrom, dateTo: bTo }) => {
+        const bookingFrom = new Date(bFrom);
+        const bookingTo = new Date(bTo);
+        bookingFrom.setHours(0, 0, 0, 0);
+        bookingTo.setHours(0, 0, 0, 0);
+        return isOverlapping(newFrom, newTo, bookingFrom, bookingTo);
+      });
+
+      if (hasOverlap) {
+        alert("Selected date range overlaps with an existing booking.");
+        return;
+      }
+
       setDateTo(dateStr);
     } else {
       setDateFrom(dateStr);
@@ -116,7 +155,10 @@ function CustomCalendar({ dateFrom, dateTo, setDateFrom, setDateTo }) {
   }
 
   return (
-    <div className="max-w-md mx-auto p-4 rounded-lg shadow bg-background">
+    <div
+      ref={calendarRef}
+      className="max-w-md mx-auto p-4 rounded-lg shadow bg-background"
+    >
       <div className="flex justify-between items-center mb-4">
         <button
           className="bg-copy hover:bg-primary dark:bg-primary dark:hover:bg-copy text-white dark:text-white hover:cursor-pointer transition duration-200 ease-in-out px-4 py-3 rounded"
