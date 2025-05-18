@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import { SINGLE_BOOKING, SINGLE_VENUE } from "../utils/constants.mjs";
+import { SINGLE_BOOKING } from "../utils/constants.mjs";
 import { apiRequest } from "../utils/api.mjs";
-import { useParams } from "react-router-dom";
 
 function BookingVenue({ venue, dateFrom, dateTo, setDateFrom, setDateTo }) {
   const [guests, setGuests] = useState(1);
@@ -9,8 +8,6 @@ function BookingVenue({ venue, dateFrom, dateTo, setDateFrom, setDateTo }) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
-
-  const { id } = useParams();
 
   useEffect(() => {
     if (dateFrom && dateTo) {
