@@ -4,6 +4,7 @@ import { useApiRequest } from "../hooks/useApiRequest.mjs";
 import { showSuccessMessage } from "../utils/successMessage.mjs";
 import { handleError } from "../utils/errorHandler.mjs";
 import { UserContext } from "../components/context/UserContext";
+import { PROFILE } from "../utils/constants.mjs";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -52,10 +53,20 @@ export default function Register() {
         },
       );
 
-      const userData = loginResponse.data;
+      const token = loginResponse.data.accessToken;
+      localStorage.setItem("accessToken", token);
+      const name = loginResponse.data.name;
 
-      localStorage.setItem("user", JSON.stringify(userData));
-      setUser(userData);
+      const profileResponse = await request(`${PROFILE}/${name}`);
+      const fullProfile = profileResponse.data;
+
+      const fullUser = {
+        ...fullProfile,
+        accessToken: token,
+      };
+
+      setUser(fullUser);
+      localStorage.setItem("user", JSON.stringify(fullUser));
 
       showSuccessMessage("Success! You are now registered and logged in.");
       navigate("/");
