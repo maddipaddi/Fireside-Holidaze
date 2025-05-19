@@ -51,7 +51,7 @@ export default function Login() {
       localStorage.setItem("user", JSON.stringify(fullUser));
 
       showSuccessMessage("Success! You have logged in.");
-      navigate("/profile");
+      navigate("/");
     } catch (error) {
       handleError(error);
     }
