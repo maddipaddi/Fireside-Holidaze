@@ -4,6 +4,19 @@ import { useVenues } from "../components/context/VenueContext.jsx";
 import VenueCard from "../components/VenueCard";
 import { SearchX } from "lucide-react";
 
+/**
+ * Displays search results for venues based on user query, dates, and guest count.
+ * Filters venues to only those available through Fireside Holidaze, applies search and availability logic,
+ * and shows either matching results or recommended venues if none are found.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered search results page, including loading/error states, results, and recommendations.
+ *
+ * @example
+ * // Renders search results for the current query parameters in the URL
+ * <SearchResults />
+ */
+
 const SearchResults = () => {
   const { venues, loading, error } = useVenues();
   const [results, setResults] = useState([]);

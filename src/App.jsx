@@ -15,6 +15,31 @@ import UpdateVenue from "./pages/UpdateVenue";
 import SingleVenue from "./pages/SingleVenues";
 import SearchResults from "./pages/SearchResults";
 
+/**
+ * The main application component that defines the routing structure for the app using React Router.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered application with nested routes.
+ *
+ * @example
+ * <App />
+ *
+ * Routes:
+ * - "/" (Layout)
+ *   - index: <Home />
+ *   - "/Venues": <Venues />
+ *   - "/categories/:type": <Categories />
+ *   - "/About": <About />
+ *   - "/Login": <Login />
+ *   - "/Register": <Register />
+ *   - "/venue/:id": <SingleVenue />
+ *   - "/Profile": <Profile />
+ *   - "/venue/edit/:id": <UpdateVenue />
+ *   - "/Terms": <Terms />
+ *   - "/Privacy": <Privacy />
+ *   - "/search": <SearchResults />
+ */
+
 function App() {
   return (
     <>

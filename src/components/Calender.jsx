@@ -6,6 +6,26 @@ import { CalendarClock } from "lucide-react";
 
 const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
+/**
+ * CustomCalendar component displays a monthly calendar UI for selecting a date range,
+ * highlighting booked and available dates, and allowing navigation between months.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {string} props.dateFrom - The selected start date in ISO format (YYYY-MM-DD).
+ * @param {string} props.dateTo - The selected end date in ISO format (YYYY-MM-DD).
+ * @param {function} props.setDateFrom - Function to update the start date.
+ * @param {function} props.setDateTo - Function to update the end date.
+ *
+ * @example
+ * <CustomCalendar
+ *   dateFrom={dateFrom}
+ *   dateTo={dateTo}
+ *   setDateFrom={setDateFrom}
+ *   setDateTo={setDateTo}
+ * />
+ */
+
 function CustomCalendar({ dateFrom, dateTo, setDateFrom, setDateTo }) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);

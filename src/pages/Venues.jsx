@@ -5,6 +5,17 @@ import Searchbar from "../components/Searchbar";
 import { useVenues } from "../components/context/VenueContext";
 import { Compass, PlugZap } from "lucide-react";
 
+/**
+ * Venues page component.
+ *
+ * Fetches and displays a filtered list of venues whose descriptions include a specific app phrase.
+ * Handles loading and error states, and renders a search bar and a grid of venues.
+ * Each venue card displays its name, rating, price, and a button to navigate to the venue's detail page.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered Venues page.
+ */
+
 function Venues() {
   const { venues, loading, error } = useVenues();
   const navigate = useNavigate();

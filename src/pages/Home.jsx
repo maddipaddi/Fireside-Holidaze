@@ -4,6 +4,21 @@ import CategoryItem from "../components/CategoryItem";
 import PopularCarousel from "../components/Carousel";
 import { Link } from "react-router-dom";
 
+/**
+ * Home page component for the Holidaze application.
+ *
+ * Renders the main landing page, including:
+ * - A search bar for venue searching.
+ * - A welcome section with a call-to-action button and an image.
+ * - A carousel of popular venues.
+ * - A categories section with selectable category items.
+ *
+ * Uses Tailwind CSS for styling and responsive layout.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered Home page.
+ */
+
 function Home() {
   return (
     <div className="bg-background dark:bg-darkbackground">

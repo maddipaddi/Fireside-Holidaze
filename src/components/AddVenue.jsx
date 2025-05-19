@@ -28,6 +28,38 @@ const INITIAL_FORM_DATA = {
   },
 };
 
+/**
+ * AddVenue component renders a form for adding a new venue with details such as
+ * name, description, images, price, guest capacity, rating, facilities, and location.
+ *
+ * @component
+ *
+ * @returns {JSX.Element} The rendered AddVenue form component.
+ *
+ * @example
+ * // Usage in a parent component
+ * <AddVenue />
+ *
+ * @function handleChange
+ * Handles changes to top-level form fields and updates the form data state.
+ *
+ * @function handleNestedChange
+ * Handles changes to nested form fields (e.g., meta, location) and updates the form data state.
+ *
+ * @function handleMediaChange
+ * Handles changes to media (image) fields and updates the media array in the form data state.
+ *
+ * @function addImageField
+ * Adds a new image field to the media array, up to a maximum of 4 images.
+ *
+ * @function removeImage
+ * Removes an image from the media array by index.
+ *
+ * @function handleSubmit
+ * Handles form submission, cleans and formats form data, sends a POST request to add the venue,
+ * shows a success message, resets the form, and reloads the page.
+ */
+
 export default function AddVenue() {
   const [formData, setFormData] = useState(INITIAL_FORM_DATA);
   const { request, isLoading } = useApiRequest();

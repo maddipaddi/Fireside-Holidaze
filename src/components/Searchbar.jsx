@@ -2,6 +2,20 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useVenues } from "../components/context/VenueContext";
 
+/**
+ * Searchbar component for searching venues with autocomplete suggestions.
+ *
+ * Features:
+ * - Autocomplete suggestions filtered by venue name and country, limited to venues with "fireside only available" in their description.
+ * - Keyboard navigation (arrow keys, enter, escape) for suggestions.
+ * - Date pickers for check-in and check-out.
+ * - Guest count selector (1-12).
+ * - Navigates to venue details or search results based on user input.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered search bar UI.
+ */
+
 const Searchbar = () => {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);

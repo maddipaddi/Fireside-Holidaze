@@ -6,6 +6,20 @@ import { handleError } from "../utils/errorHandler.mjs";
 import { UserContext } from "../components/context/UserContext";
 import { PROFILE, REGISTER, LOGIN } from "../utils/constants.mjs";
 
+/**
+ * Register component renders a registration form for new users.
+ *
+ * Features:
+ * - Collects user name, email, password, and venue manager status.
+ * - Validates that the email ends with "@noroff.no" or "@stud.noroff.no".
+ * - Submits registration data to the Noroff API.
+ * - Displays loading state and success/error messages.
+ * - Navigates to the home page upon successful registration.
+ *
+ * @component
+ * @returns {JSX.Element} The registration form UI.
+ */
+
 export default function Register() {
   const [formData, setFormData] = useState({
     name: "",
