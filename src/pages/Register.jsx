@@ -4,7 +4,7 @@ import { useApiRequest } from "../hooks/useApiRequest.mjs";
 import { showSuccessMessage } from "../utils/successMessage.mjs";
 import { handleError } from "../utils/errorHandler.mjs";
 import { UserContext } from "../components/context/UserContext";
-import { PROFILE } from "../utils/constants.mjs";
+import { PROFILE, REGISTER, LOGIN } from "../utils/constants.mjs";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -37,21 +37,18 @@ export default function Register() {
     }
 
     try {
-      await request("https://v2.api.noroff.dev/auth/register", {
+      await request(`${REGISTER}`, {
         method: "POST",
         body: JSON.stringify(formData),
       });
 
-      const loginResponse = await request(
-        "https://v2.api.noroff.dev/auth/login",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            email: email,
-            password: formData.password,
-          }),
-        },
-      );
+      const loginResponse = await request(`${LOGIN}`, {
+        method: "POST",
+        body: JSON.stringify({
+          email: email,
+          password: formData.password,
+        }),
+      });
 
       const token = loginResponse.data.accessToken;
       localStorage.setItem("accessToken", token);
