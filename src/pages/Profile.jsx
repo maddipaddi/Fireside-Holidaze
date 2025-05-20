@@ -106,7 +106,7 @@ export default function Profile() {
   }
 
   return (
-    <div className="pt-20 flex flex-col items-center gap-10">
+    <div className="mt-26 flex flex-col items-center gap-10">
       <div className="relative w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl flex flex-col items-center m-4 px-4">
         <img
           src={newAvatarUrl || "/default-avatar.png"}

@@ -82,7 +82,7 @@ export default function Login() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-copy dark:bg-primary p-6 rounded-lg shadow-lg max-w-2xl mx-auto mt-12"
+      className="bg-copy dark:bg-primary p-6 rounded-lg shadow-lg max-w-xs md:max-w-2xl mx-auto mt-18"
     >
       <div className="bg-white dark:bg-background p-4 rounded mb-4">
         <label
@@ -119,7 +119,7 @@ export default function Login() {
           required
           value={formData.password}
           onChange={handleChange}
-          placeholder="Type in your password here"
+          placeholder="password123"
           className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
         />
       </div>

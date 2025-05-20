@@ -88,7 +88,7 @@ export default function Categories() {
   });
 
   return (
-    <section className="mt-8">
+    <section className="mt-12">
       <h1 className="text-3xl font-bold font-heading mb-4 text-center text-copy dark:text-background">
         {type.charAt(0).toUpperCase() + type.slice(1)} escapes
       </h1>
