@@ -21,11 +21,14 @@ export function handleError(error) {
     </svg>
   `;
 
+  const title = error?.title || "Something went wrong";
+  const message = error?.message || "An unexpected error occurred.";
+
   box.innerHTML = `
     <button class="absolute top-2 right-3 text-xl font-bold hover:opacity-70" aria-label="Close message">&times;</button>
     ${icon}
-    <h2 class="text-xl font-bold mb-2">Something went wrong</h2>
-    <p>${error.message || "An unexpected error occurred."}</p>
+    <h2 class="text-xl font-bold mb-2">${title}</h2>
+    <p>${message}</p>
   `;
 
   box.querySelector("button").addEventListener("click", () => wrapper.remove());
