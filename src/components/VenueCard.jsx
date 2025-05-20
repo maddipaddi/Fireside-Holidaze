@@ -1,3 +1,17 @@
+/**
+ * Renders a card component displaying venue information with an image and a customizable footer.
+ *
+ * @component
+ * @param {Object} props
+ * @param {Object} props.venue - The venue object containing details to display.
+ * @param {Array} [props.venue.media] - Optional array of media objects for the venue.
+ * @param {string} [props.venue.media[].url] - URL of the venue's image.
+ * @param {string} [props.venue.media[].alt] - Alternative text for the venue's image.
+ * @param {string} props.venue.name - Name of the venue, used as fallback alt text.
+ * @param {function} [props.renderFooter] - Optional render function for the card's footer, receives the venue object as an argument.
+ * @returns {JSX.Element} The rendered VenueCard component.
+ */
+
 export default function VenueCard({ venue, renderFooter }) {
   return (
     <div className="mt-10">

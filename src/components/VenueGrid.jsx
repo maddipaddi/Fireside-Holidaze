@@ -1,6 +1,16 @@
 import VenueCard from "./VenueCard";
 import { Home } from "lucide-react";
 
+/**
+ * Renders a grid of venue cards or a message if no venues are available.
+ *
+ * @component
+ * @param {Object} props
+ * @param {Array<Object>} props.venues - Array of venue objects to display.
+ * @param {function} [props.renderFooter] - Optional function to render a custom footer for each venue card.
+ * @returns {JSX.Element} The rendered VenueGrid component.
+ */
+
 export default function VenueGrid({ venues, renderFooter }) {
   if (!venues || venues.length === 0) {
     return (

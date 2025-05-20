@@ -5,6 +5,18 @@ import { handleError } from "../utils/errorHandler.mjs";
 import { showConfirmDialog } from "../utils/showConfirmDialog.mjs";
 import { showSuccessMessage } from "../utils/successMessage.mjs";
 
+/**
+ * DeleteVenueButton component renders a button to delete a venue.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {string|number} props.venueId - The unique identifier of the venue to delete.
+ * @param {function} props.onDeleted - Callback function called after successful deletion, receives the deleted venueId.
+ *
+ * @example
+ * <DeleteVenueButton venueId="123" onDeleted={handleVenueDeleted} />
+ */
+
 export default function DeleteVenueButton({ venueId, onDeleted }) {
   const [deleting, setDeleting] = useState(false);
 

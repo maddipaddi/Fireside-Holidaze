@@ -7,6 +7,28 @@ import { LOGIN, PROFILE } from "../utils/constants.mjs";
 import { UserContext } from "../components/context/UserContext";
 import { apiRequest } from "../utils/api.mjs";
 
+/**
+ * Login component renders a login form for user authentication.
+ * Handles form state, submission, and user context updates upon successful login.
+ *
+ * @component
+ *
+ * @returns {JSX.Element} The rendered login form component.
+ *
+ * @example
+ * // Usage in a route
+ * <Route path="/login" element={<Login />} />
+ *
+ * @function
+ *
+ * @description
+ * - Manages form state for email and password.
+ * - Submits credentials to the login API endpoint.
+ * - Stores access token and user profile in localStorage and context.
+ * - Navigates to the profile page on successful login.
+ * - Displays loading state and handles errors.
+ */
+
 export default function Login() {
   const [formData, setFormData] = useState({
     email: "",
@@ -51,7 +73,7 @@ export default function Login() {
       localStorage.setItem("user", JSON.stringify(fullUser));
 
       showSuccessMessage("Success! You have logged in.");
-      navigate("/profile");
+      navigate("/");
     } catch (error) {
       handleError(error);
     }

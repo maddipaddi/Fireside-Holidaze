@@ -1,3 +1,16 @@
+/**
+ * Makes an API request with default headers and error handling.
+ *
+ * @async
+ * @param {string} url - The endpoint URL to send the request to.
+ * @param {Object} [options={}] - Additional fetch options (e.g., method, headers, body).
+ * @param {string} [options.method] - HTTP method (GET, POST, etc.).
+ * @param {Object} [options.headers] - Additional headers to include in the request.
+ * @param {any} [options.body] - Request body for POST/PUT requests.
+ * @returns {Promise<any|null>} The parsed JSON response, or null if the response is not JSON.
+ * @throws {Error} Throws an error if the response is not ok, with a message from the API if available.
+ */
+
 export async function apiRequest(url, options = {}) {
   const token = localStorage.getItem("accessToken");
 

@@ -18,6 +18,30 @@ import {
 import CustomCalendar from "../components/Calender";
 import BookingVenue from "../components/BookingCard";
 
+/**
+ * Displays detailed information about a single venue, including images, description, facilities, location,
+ * and booking options. Fetches venue data based on the `id` route parameter and manages image selection,
+ * date selection, and booking state.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered SingleVenue page.
+ *
+ * @example
+ * // Used in a route like /venues/:id
+ * <SingleVenue />
+ *
+ * @dependencies
+ * - React (useState, useEffect)
+ * - useParams from react-router-dom
+ * - VenueCard, VenueDetails, BookingVenue, CustomCalendar components
+ * - Icon components: Wifi, Car, CookingPot, Dog, Star, MapPin, Building, Flag, Earth
+ *
+ * @remarks
+ * - Expects a global constant SINGLE_VENUE for the API endpoint.
+ * - Handles loading and error states.
+ * - Renders a gallery, venue details, facilities, location, calendar, and booking form.
+ */
+
 function VenueDetails({ loading, venue }) {
   if (loading) {
     return (

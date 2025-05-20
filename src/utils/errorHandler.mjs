@@ -1,3 +1,11 @@
+/**
+ * Displays a styled popup error message on the page and logs the error to the console.
+ * Removes any existing error popup before showing a new one.
+ * The popup automatically disappears after 4 seconds or can be closed manually.
+ *
+ * @param {Error|string} error - The error object or message to display.
+ */
+
 export function handleError(error) {
   console.error("Error:", error);
 

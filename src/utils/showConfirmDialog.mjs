@@ -1,3 +1,12 @@
+/**
+ * Displays a modal confirmation dialog with a custom message.
+ * Returns a Promise that resolves to `true` if the user confirms (clicks "Yes, delete"),
+ * or `false` if the user cancels (clicks "Cancel" or closes the dialog).
+ *
+ * @param {string} message - The message to display in the confirmation dialog.
+ * @returns {Promise<boolean>} Promise that resolves to the user's choice.
+ */
+
 export function showConfirmDialog(message) {
   return new Promise((resolve) => {
     const existing = document.getElementById("popup-confirm");

@@ -1,3 +1,11 @@
+/**
+ * Displays a temporary success message popup in the center of the screen.
+ * Removes any existing popup before showing a new one.
+ * The popup includes a close button and will automatically disappear after 3 seconds.
+ *
+ * @param {string} message - The success message to display in the popup.
+ */
+
 export function showSuccessMessage(message) {
   const existing = document.getElementById("popup-success");
   if (existing) existing.remove();

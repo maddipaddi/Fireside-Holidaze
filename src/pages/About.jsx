@@ -1,5 +1,15 @@
 import { useState } from "react";
 
+/**
+ * About page component for Holidaze.
+ *
+ * Renders information about the Holidaze platform and a contact form for users to get in touch.
+ * Handles form state, submission, and displays a confirmation message upon successful submission.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered About page with platform information and a contact form.
+ */
+
 export default function About() {
   const [formData, setFormData] = useState({
     name: "",

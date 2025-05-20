@@ -1,6 +1,20 @@
 import { useState, useEffect } from "react";
 import { LuSun, LuMoon } from "react-icons/lu";
 
+/**
+ * Footer component that displays the website's footer section.
+ *
+ * Features:
+ * - Dynamically switches between light and dark themes based on user preference or system settings.
+ * - Persists theme selection in localStorage.
+ * - Renders different footer images and background colors for light and dark modes.
+ * - Provides buttons to toggle between light and dark themes.
+ * - Displays copyright, terms, and privacy policy links.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered footer component.
+ */
+
 function Footer() {
   const [theme, setTheme] = useState(() => {
     const stored = localStorage.getItem("theme");

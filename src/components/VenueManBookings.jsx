@@ -5,6 +5,22 @@ import { UserContext } from "./context/UserContext";
 import { ChevronDown, Tent, Map } from "lucide-react";
 import { handleError } from "../utils/errorHandler.mjs";
 
+/**
+ * VenueManagerBookings component displays a venue manager's upcoming and past bookings,
+ * grouped by month, with options to expand/collapse each section and show more or fewer bookings.
+ *
+ * - Fetches all bookings for venues managed by the current user.
+ * - Groups bookings into "upcoming" and "past" based on the current date.
+ * - Allows toggling visibility of each section and expanding to show all bookings.
+ * - Bookings are grouped by month and displayed with venue and customer details.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered VenueManagerBookings section.
+ *
+ * @example
+ * <VenueManagerBookings />
+ */
+
 export default function VenueManagerBookings() {
   const { user } = useContext(UserContext);
   const [bookings, setBookings] = useState({ upcoming: [], past: [] });

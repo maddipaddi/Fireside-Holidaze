@@ -7,6 +7,23 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useVenues } from "./context/VenueContext";
 import { MapPinned, Globe } from "lucide-react";
 
+/**
+ * PopularCarousel component displays a carousel of popular venues filtered by a specific phrase in their description.
+ *
+ * - Fetches venues using the `useVenues` hook.
+ * - Filters venues whose description includes "only available through fireside holidaze".
+ * - Sorts filtered venues by creation date (newest first).
+ * - Duplicates slides if fewer than 5 venues are available to ensure a full carousel.
+ * - Shows a loading spinner and message while data is loading.
+ * - Displays an error or empty state if no venues are found or an error occurs.
+ * - Uses Swiper for carousel functionality with custom navigation buttons.
+ * - Each slide displays venue image, name, rating, and price.
+ * - Clicking a slide navigates to the venue's detail page.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered carousel of popular venues.
+ */
+
 export default function PopularCarousel() {
   const { venues, loading, error } = useVenues();
   const navigate = useNavigate();

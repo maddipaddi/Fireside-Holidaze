@@ -6,6 +6,39 @@ import { handleError } from "../utils/errorHandler.mjs";
 import { SINGLE_VENUE } from "../utils/constants.mjs";
 import { useParams } from "react-router-dom";
 
+/**
+ * UpdateVenue component allows users to edit and update an existing venue.
+ *
+ * Fetches venue data by ID, populates a form, and submits updates via API.
+ * Handles nested form fields, image management, and displays feedback on success or error.
+ *
+ * @component
+ *
+ * @returns {JSX.Element} The UpdateVenue form UI.
+ *
+ * @example
+ * // Usage in a route
+ * <Route path="/venues/:id/edit" element={<UpdateVenue />} />
+ *
+ * @dependencies
+ * - React (useState, useEffect)
+ * - react-router-dom (useParams, useNavigate)
+ * - useApiRequest (custom hook for API requests)
+ * - showSuccessMessage, handleError (notification utilities)
+ *
+ * @state
+ * - formData: Object containing all venue fields (name, description, media, price, maxGuests, rating, meta, location)
+ * - isLoading: Boolean indicating if the API request is in progress
+ *
+ * @functions
+ * - handleChange: Handles changes for top-level form fields
+ * - handleNestedChange: Handles changes for nested fields (meta, location)
+ * - handleMediaChange: Handles changes for media (images) fields
+ * - addImageField: Adds a new image input field (max 4)
+ * - removeImage: Removes an image input field
+ * - handleSubmit: Submits the updated venue data to the API
+ */
+
 export default function UpdateVenue() {
   const { id } = useParams();
   const { request, isLoading } = useApiRequest();

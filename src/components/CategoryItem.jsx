@@ -1,6 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+/**
+ * Renders a circular category item with a curved label and an image.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {string} props.label - The label to display along the SVG path.
+ * @param {string} props.imgSrc - The source URL for the category image.
+ * @param {string} props.to - The route path to navigate to when the image is clicked.
+ * @param {string} props.pathId - The unique ID for the SVG path used by the textPath.
+ * @returns {JSX.Element} The rendered category item component.
+ */
+
 function CategoryItem({ label, imgSrc, to, pathId }) {
   return (
     <div className="relative w-52 h-52">
