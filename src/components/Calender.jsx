@@ -1,10 +1,17 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { VENUES } from "../utils/constants.mjs";
 import { apiRequest } from "../utils/api.mjs";
 import { CalendarClock } from "lucide-react";
 
 const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+function formatDateToLocalISO(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
 
 function CustomCalendar({ dateFrom, dateTo, setDateFrom, setDateTo }) {
   const today = new Date();
@@ -20,8 +27,6 @@ function CustomCalendar({ dateFrom, dateTo, setDateFrom, setDateTo }) {
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
 
-  const calendarRef = useRef(null);
-
   useEffect(() => {
     async function fetchVenueWithBookings() {
       try {
@@ -36,23 +41,6 @@ function CustomCalendar({ dateFrom, dateTo, setDateFrom, setDateTo }) {
 
     fetchVenueWithBookings();
   }, [id]);
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (calendarRef.current && !calendarRef.current.contains(event.target)) {
-        if (dateFrom || dateTo) {
-          setDateFrom("");
-          setDateTo("");
-        }
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [dateFrom, dateTo, setDateFrom, setDateTo]);
 
   const prevMonth = () => setCurrentDate(new Date(year, month - 1, 1));
   const nextMonth = () => setCurrentDate(new Date(year, month + 1, 1));
@@ -105,14 +93,14 @@ function CustomCalendar({ dateFrom, dateTo, setDateFrom, setDateTo }) {
       const currentDay = new Date(year, month, day);
       currentDay.setHours(0, 0, 0, 0);
 
-      const currentDayISO = currentDay.toISOString().split("T")[0];
+      const currentDayStr = formatDateToLocalISO(currentDay);
       const isSelected =
         dateFrom &&
         dateTo &&
-        new Date(currentDayISO) >= new Date(dateFrom) &&
-        new Date(currentDayISO) <= new Date(dateTo);
+        new Date(currentDayStr) >= new Date(dateFrom) &&
+        new Date(currentDayStr) <= new Date(dateTo);
       const isOnlyStartSelected =
-        dateFrom && !dateTo && currentDayISO === dateFrom;
+        dateFrom && !dateTo && currentDayStr === dateFrom;
       const isPast = currentDay < today;
 
       const isBooked = bookings.some((booking) => {
@@ -126,7 +114,7 @@ function CustomCalendar({ dateFrom, dateTo, setDateFrom, setDateTo }) {
       days.push(
         <div
           key={day}
-          onClick={() => !isBooked && handleDayClick(currentDayISO)}
+          onClick={() => !isBooked && handleDayClick(currentDayStr)}
           className={`p-2 text-center border cursor-pointer ${
             isPast
               ? "text-gray-400 cursor-not-allowed"
@@ -155,10 +143,7 @@ function CustomCalendar({ dateFrom, dateTo, setDateFrom, setDateTo }) {
   }
 
   return (
-    <div
-      ref={calendarRef}
-      className="max-w-md mx-auto p-4 rounded-lg shadow bg-background"
-    >
+    <div className="max-w-md mx-auto p-4 rounded-lg shadow bg-background">
       <div className="flex justify-between items-center mb-4">
         <button
           className="bg-copy hover:bg-primary dark:bg-primary dark:hover:bg-copy text-white dark:text-white hover:cursor-pointer transition duration-200 ease-in-out px-4 py-3 rounded"
