@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { VENUES } from "../utils/constants.mjs";
 import { apiRequest } from "../utils/api.mjs";
 import { CalendarClock } from "lucide-react";
+import { handleError } from "../utils/errorHandler.mjs";
 
 const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -66,7 +67,10 @@ function CustomCalendar({ dateFrom, dateTo, setDateFrom, setDateTo }) {
       });
 
       if (hasOverlap) {
-        alert("Selected date range overlaps with an existing booking.");
+        handleError({
+          title: "Booking Conflict",
+          message: "Selected date range overlaps with an existing booking.",
+        });
         return;
       }
 
