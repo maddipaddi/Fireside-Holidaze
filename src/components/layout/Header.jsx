@@ -65,7 +65,6 @@ export default function Header() {
   }, [menuOpen]);
 
   useEffect(() => {
-    // Automatically close the menu and dropdown whenever the route changes
     setMenuOpen(false);
     setIsCategoriesOpen(false);
   }, [location.pathname]);

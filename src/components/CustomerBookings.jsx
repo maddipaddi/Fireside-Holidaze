@@ -5,6 +5,7 @@ import { UserContext } from "./context/UserContext";
 import { ChevronDown, Tent, Map } from "lucide-react";
 import { handleError } from "../utils/errorHandler.mjs";
 import CancelBookingButton from "./DeleteBookings";
+import EditBookingModal from "./EditBooking";
 
 /**
  * CustomerBookings component displays a user's upcoming and past venue bookings,
@@ -26,6 +27,8 @@ export default function CustomerBookings() {
   const [showPast, setShowPast] = useState(true);
   const [showAllUpcoming, setShowAllUpcoming] = useState(false);
   const [showAllPast, setShowAllPast] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [bookingToEdit, setBookingToEdit] = useState(null);
 
   useEffect(() => {
     async function fetchBookings() {
@@ -110,8 +113,14 @@ export default function CustomerBookings() {
                   </p>
                 </div>
                 {isUpcoming && (
-                  <div className="flex justify-center gap-6 mt-4">
-                    <button className="bg-copy text-white dark:bg-primary dark:text-background font-body font-bold px-6 py-1 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer">
+                  <div className="flex justify-center gap-4 m-4">
+                    <button
+                      onClick={() => {
+                        setBookingToEdit(booking);
+                        setIsEditModalOpen(true);
+                      }}
+                      className="bg-copy text-white dark:bg-primary dark:text-background font-body font-bold px-4 py-1 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer"
+                    >
                       Change
                     </button>
                     <CancelBookingButton
@@ -131,6 +140,20 @@ export default function CustomerBookings() {
             );
           })}
         </ul>
+        {isEditModalOpen && bookingToEdit && (
+          <EditBookingModal
+            booking={bookingToEdit}
+            onClose={() => setIsEditModalOpen(false)}
+            onUpdate={(updatedBooking) => {
+              setBookings((prev) => ({
+                ...prev,
+                upcoming: prev.upcoming.map((b) =>
+                  b.id === updatedBooking.id ? { ...b, ...updatedBooking } : b,
+                ),
+              }));
+            }}
+          />
+        )}
       </div>
     ));
   };

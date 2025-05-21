@@ -26,10 +26,17 @@ const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
  * />
  */
 
-function CustomCalendar({ dateFrom, dateTo, setDateFrom, setDateTo }) {
+function CustomCalendar({
+  venueId,
+  dateFrom,
+  dateTo,
+  setDateFrom,
+  setDateTo,
+  bookingIdToIgnore,
+}) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const { id } = useParams();
+  const id = venueId;
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -97,6 +104,7 @@ function CustomCalendar({ dateFrom, dateTo, setDateFrom, setDateTo }) {
       const isPast = currentDay < today;
 
       const isBooked = bookings.some((booking) => {
+        if (booking.id === bookingIdToIgnore) return false;
         const from = new Date(booking.dateFrom);
         const to = new Date(booking.dateTo);
         from.setHours(0, 0, 0, 0);
