@@ -190,7 +190,7 @@ export default function AddVenue() {
               name="description"
               id="description"
               rows={5}
-              maxLength={200}
+              maxLength={500}
               required
               value={formData.description}
               onChange={handleChange}
