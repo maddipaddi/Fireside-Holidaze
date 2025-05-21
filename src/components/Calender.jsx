@@ -3,28 +3,16 @@ import { useParams } from "react-router-dom";
 import { VENUES } from "../utils/constants.mjs";
 import { apiRequest } from "../utils/api.mjs";
 import { CalendarClock } from "lucide-react";
+import { handleError } from "../utils/errorHandler.mjs";
 
 const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-/**
- * CustomCalendar component displays a monthly calendar UI for selecting a date range,
- * highlighting booked and available dates, and allowing navigation between months.
- *
- * @component
- * @param {Object} props - Component props.
- * @param {string} props.dateFrom - The selected start date in ISO format (YYYY-MM-DD).
- * @param {string} props.dateTo - The selected end date in ISO format (YYYY-MM-DD).
- * @param {function} props.setDateFrom - Function to update the start date.
- * @param {function} props.setDateTo - Function to update the end date.
- *
- * @example
- * <CustomCalendar
- *   dateFrom={dateFrom}
- *   dateTo={dateTo}
- *   setDateFrom={setDateFrom}
- *   setDateTo={setDateTo}
- * />
- */
+function formatDateToLocalISO(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
 
 function CustomCalendar({
   venueId,
@@ -65,11 +53,34 @@ function CustomCalendar({
   const prevMonth = () => setCurrentDate(new Date(year, month - 1, 1));
   const nextMonth = () => setCurrentDate(new Date(year, month + 1, 1));
 
+  const isOverlapping = (start1, end1, start2, end2) => {
+    return start1 <= end2 && start2 <= end1;
+  };
+
   const handleDayClick = (dateStr) => {
     if (!dateFrom || (dateFrom && dateTo)) {
       setDateFrom(dateStr);
       setDateTo("");
     } else if (new Date(dateStr) > new Date(dateFrom)) {
+      const newFrom = new Date(dateFrom);
+      const newTo = new Date(dateStr);
+
+      const hasOverlap = bookings.some(({ dateFrom: bFrom, dateTo: bTo }) => {
+        const bookingFrom = new Date(bFrom);
+        const bookingTo = new Date(bTo);
+        bookingFrom.setHours(0, 0, 0, 0);
+        bookingTo.setHours(0, 0, 0, 0);
+        return isOverlapping(newFrom, newTo, bookingFrom, bookingTo);
+      });
+
+      if (hasOverlap) {
+        handleError({
+          title: "Booking Conflict",
+          message: "Selected date range overlaps with an existing booking.",
+        });
+        return;
+      }
+
       setDateTo(dateStr);
     } else {
       setDateFrom(dateStr);
@@ -93,14 +104,14 @@ function CustomCalendar({
       const currentDay = new Date(year, month, day);
       currentDay.setHours(0, 0, 0, 0);
 
-      const currentDayISO = currentDay.toISOString().split("T")[0];
+      const currentDayStr = formatDateToLocalISO(currentDay);
       const isSelected =
         dateFrom &&
         dateTo &&
-        new Date(currentDayISO) >= new Date(dateFrom) &&
-        new Date(currentDayISO) <= new Date(dateTo);
+        new Date(currentDayStr) >= new Date(dateFrom) &&
+        new Date(currentDayStr) <= new Date(dateTo);
       const isOnlyStartSelected =
-        dateFrom && !dateTo && currentDayISO === dateFrom;
+        dateFrom && !dateTo && currentDayStr === dateFrom;
       const isPast = currentDay < today;
 
       const isBooked = bookings.some((booking) => {
@@ -115,7 +126,7 @@ function CustomCalendar({
       days.push(
         <div
           key={day}
-          onClick={() => !isBooked && handleDayClick(currentDayISO)}
+          onClick={() => !isBooked && handleDayClick(currentDayStr)}
           className={`p-2 text-center border cursor-pointer ${
             isPast
               ? "text-gray-400 cursor-not-allowed"
