@@ -6,12 +6,45 @@ import { handleError } from "../utils/errorHandler.mjs";
 
 const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
+/**
+ * Formats a JavaScript Date object into a local ISO date string (YYYY-MM-DD).
+ *
+ * @param {Date} date - The date to format.
+ * @returns {string} The formatted date string in YYYY-MM-DD format.
+ */
+
 function formatDateToLocalISO(date) {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
 }
+
+/**
+ * CustomCalendar component displays a calendar UI for selecting date ranges,
+ * highlighting booked and available dates for a specific venue.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {string|number} props.venueId - The ID of the venue to fetch bookings for.
+ * @param {string} props.dateFrom - The currently selected start date (ISO string).
+ * @param {string} props.dateTo - The currently selected end date (ISO string).
+ * @param {function} props.setDateFrom - Function to update the start date.
+ * @param {function} props.setDateTo - Function to update the end date.
+ * @param {string|number} [props.bookingIdToIgnore] - Optional booking ID to ignore when checking for overlaps (useful for editing existing bookings).
+ *
+ * @returns {JSX.Element} The rendered calendar component.
+ *
+ * @example
+ * <CustomCalendar
+ *   venueId="123"
+ *   dateFrom={dateFrom}
+ *   dateTo={dateTo}
+ *   setDateFrom={setDateFrom}
+ *   setDateTo={setDateTo}
+ *   bookingIdToIgnore="456"
+ * />
+ */
 
 function CustomCalendar({
   venueId,
