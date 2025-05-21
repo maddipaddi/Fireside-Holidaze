@@ -7,8 +7,6 @@
  */
 
 export function handleError(error) {
-  console.error("Error:", error);
-
   const existing = document.getElementById("popup-error");
   if (existing) existing.remove();
 
