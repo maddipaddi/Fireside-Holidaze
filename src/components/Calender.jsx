@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { VENUES } from "../utils/constants.mjs";
 import { apiRequest } from "../utils/api.mjs";
 import { CalendarClock } from "lucide-react";
@@ -78,6 +77,7 @@ function CustomCalendar({
           title: "Booking Conflict",
           message: "Selected date range overlaps with an existing booking.",
         });
+        setDateFrom("");
         return;
       }
 
