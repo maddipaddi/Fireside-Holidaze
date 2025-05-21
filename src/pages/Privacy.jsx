@@ -82,7 +82,6 @@ export default function Privacy() {
         explains what information we collect, how we use it, and your rights
         regarding your personal data.
       </p>
-      ,,,
       <div className="space-y-4">
         {policies.map((item) => (
           <details

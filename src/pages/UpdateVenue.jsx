@@ -223,7 +223,7 @@ export default function UpdateVenue() {
               name="description"
               id="description"
               rows={5}
-              maxLength={200}
+              maxLength={500}
               required
               value={formData.description}
               onChange={handleChange}
@@ -531,7 +531,7 @@ export default function UpdateVenue() {
             disabled={isLoading}
             className="bg-background dark:bg-primary text-copy dark:text-white font-body font-bold px-8 py-2 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer"
           >
-            {isLoading ? "Editing the venue..." : "Edit venue"}
+            {isLoading ? "Updating the venue..." : "Update venue"}
           </button>
         </div>
       </form>

@@ -121,7 +121,7 @@ const Searchbar = () => {
 
   return (
     <div
-      className="bg-copy dark:bg-primary p-6 rounded-lg shadow-lg max-w-2xl mx-auto mt-12"
+      className="bg-copy dark:bg-primary p-8 rounded-lg shadow-lg max-w-xs md:max-w-2xl mx-auto mt-12"
       ref={wrapperRef}
     >
       <div className="bg-white text:copy p-4 rounded mb-4 relative">
@@ -248,7 +248,7 @@ const Searchbar = () => {
         </div>
       </div>
 
-      <div className="bg-primary dark:bg-background p-4 text-center -mx-6 -mb-6 rounded-b-lg">
+      <div className="bg-primary dark:bg-background p-4 text-center -mx-8 -mb-8 rounded-b-lg">
         <button
           onClick={handleSearch}
           className="bg-background dark:bg-primary text-copy dark:text-background font-body font-bold px-8 py-2 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer"

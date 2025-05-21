@@ -4,6 +4,8 @@ import { PROFILE } from "../utils/constants.mjs";
 import { UserContext } from "./context/UserContext";
 import { ChevronDown, Tent, Map } from "lucide-react";
 import { handleError } from "../utils/errorHandler.mjs";
+import CancelBookingButton from "./DeleteBookings";
+import EditBookingModal from "./EditBooking";
 
 /**
  * CustomerBookings component displays a user's upcoming and past venue bookings,
@@ -25,6 +27,8 @@ export default function CustomerBookings() {
   const [showPast, setShowPast] = useState(true);
   const [showAllUpcoming, setShowAllUpcoming] = useState(false);
   const [showAllPast, setShowAllPast] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [bookingToEdit, setBookingToEdit] = useState(null);
 
   useEffect(() => {
     async function fetchBookings() {
@@ -70,7 +74,7 @@ export default function CustomerBookings() {
     return groups;
   };
 
-  const renderGroupedBookings = (bookingsArray, showAll) => {
+  const renderGroupedBookings = (bookingsArray, showAll, isUpcoming) => {
     const data = showAll ? bookingsArray : bookingsArray.slice(0, 3);
     const grouped = groupByMonth(data);
 
@@ -108,10 +112,48 @@ export default function CustomerBookings() {
                     {new Date(booking.dateTo).toLocaleDateString()}
                   </p>
                 </div>
+                {isUpcoming && (
+                  <div className="flex justify-center gap-4 m-4">
+                    <button
+                      onClick={() => {
+                        setBookingToEdit(booking);
+                        setIsEditModalOpen(true);
+                      }}
+                      className="bg-copy text-white dark:bg-primary dark:text-background font-body font-bold px-4 py-1 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer"
+                    >
+                      Change
+                    </button>
+                    <CancelBookingButton
+                      bookingId={booking.id}
+                      onDeleted={(deletedId) =>
+                        setBookings((prev) => ({
+                          upcoming: prev.upcoming.filter(
+                            (b) => b.id !== deletedId,
+                          ),
+                          past: prev.past,
+                        }))
+                      }
+                    />
+                  </div>
+                )}
               </li>
             );
           })}
         </ul>
+        {isEditModalOpen && bookingToEdit && (
+          <EditBookingModal
+            booking={bookingToEdit}
+            onClose={() => setIsEditModalOpen(false)}
+            onUpdate={(updatedBooking) => {
+              setBookings((prev) => ({
+                ...prev,
+                upcoming: prev.upcoming.map((b) =>
+                  b.id === updatedBooking.id ? { ...b, ...updatedBooking } : b,
+                ),
+              }));
+            }}
+          />
+        )}
       </div>
     ));
   };
@@ -144,7 +186,7 @@ export default function CustomerBookings() {
             </>
           ) : (
             <>
-              {renderGroupedBookings(bookings.upcoming, showAllUpcoming)}
+              {renderGroupedBookings(bookings.upcoming, showAllUpcoming, true)}
               {bookings.upcoming.length > 3 && (
                 <div className="text-center mt-4">
                   <button
@@ -187,7 +229,7 @@ export default function CustomerBookings() {
             </>
           ) : (
             <>
-              {renderGroupedBookings(bookings.past, showAllPast)}
+              {renderGroupedBookings(bookings.past, showAllPast, false)}
               {bookings.past.length > 3 && (
                 <div className="text-center mt-4">
                   <button

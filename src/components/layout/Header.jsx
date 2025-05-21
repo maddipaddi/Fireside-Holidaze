@@ -27,6 +27,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const menuRef = useRef(null);
   const location = useLocation();
   const isCategoryPage = location.pathname.startsWith("/Categories");
 
@@ -43,6 +44,15 @@ export default function Header() {
 
   useEffect(() => {
     function handleClickOutside(event) {
+      if (
+        menuOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        event.target.closest("button[aria-label='Toggle menu']") === null
+      ) {
+        setMenuOpen(false);
+      }
+
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsCategoriesOpen(false);
       }
@@ -52,7 +62,12 @@ export default function Header() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [menuOpen]);
+
+  useEffect(() => {
+    setMenuOpen(false);
+    setIsCategoriesOpen(false);
+  }, [location.pathname]);
 
   return (
     <header className="flex items-center justify-between bg-background dark:bg-darkbackground fixed top-0 left-0 z-50 w-full">
@@ -76,6 +91,7 @@ export default function Header() {
         {menuOpen ? <X size={32} /> : <Menu size={32} />}
       </button>
       <nav
+        ref={menuRef}
         className={`${menuOpen ? "flex" : "hidden"} absolute top-full left-0 w-full flex-col items-center gap-4 px-4 pb-8 shadow-md md:static md:flex md:flex-row md:flex-grow md:justify-evenly md:w-auto md:p-0 md:gap-8 md:shadow-none md:text-l lg:text-xl bg-background dark:bg-darkbackground text-copy dark:text-background`}
       >
         <NavLink

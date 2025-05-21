@@ -209,6 +209,7 @@ function SingleVenue() {
 
         <div className="h-28">
           <CustomCalendar
+            venueId={id}
             dateFrom={dateFrom}
             dateTo={dateTo}
             setDateFrom={setDateFrom}
