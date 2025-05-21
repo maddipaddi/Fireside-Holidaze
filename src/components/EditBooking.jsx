@@ -4,6 +4,8 @@ import CustomCalendar from "./Calender";
 import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 import { apiRequest } from "../utils/api.mjs";
+import { showSuccessMessage } from "../utils/successMessage.mjs";
+import { handleError } from "../utils/errorHandler.mjs";
 
 export default function EditBookingModal({ booking, onClose, onUpdate }) {
   const [dateFrom, setDateFrom] = useState(booking.dateFrom);
@@ -14,7 +16,6 @@ export default function EditBookingModal({ booking, onClose, onUpdate }) {
 
   const handleUpdate = async () => {
     setLoading(true);
-    setError("");
 
     try {
       const payload = {
@@ -29,10 +30,10 @@ export default function EditBookingModal({ booking, onClose, onUpdate }) {
       });
 
       onUpdate(result.data);
+      showSuccessMessage("Your booking was updated!");
       onClose();
     } catch (err) {
-      console.error("Update error:", err);
-      setError("Failed to update booking");
+      handleError(err);
     } finally {
       setLoading(false);
     }
