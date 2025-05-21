@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { SINGLE_BOOKING } from "../utils/constants.mjs";
 import { apiRequest } from "../utils/api.mjs";
+import { showSuccessMessage } from "../utils/successMessage.mjs";
+import { handleError } from "../utils/errorHandler.mjs";
+import { useNavigate } from "react-router-dom";
 
 /**
  * BookingVenue component allows users to book a venue by selecting dates and the number of guests.
@@ -20,8 +23,8 @@ function BookingVenue({ venue, dateFrom, dateTo, setDateFrom, setDateTo }) {
   const [guests, setGuests] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (dateFrom && dateTo) {
@@ -41,7 +44,6 @@ function BookingVenue({ venue, dateFrom, dateTo, setDateFrom, setDateTo }) {
   const handleBooking = async () => {
     setLoading(true);
     setError("");
-    setSuccess(false);
 
     const token = localStorage.getItem("accessToken");
     if (!token) {
@@ -63,13 +65,13 @@ function BookingVenue({ venue, dateFrom, dateTo, setDateFrom, setDateTo }) {
         body: JSON.stringify(payload),
       });
 
-      setSuccess(true);
+      showSuccessMessage("You have booked this venue!");
       setGuests(1);
       setDateFrom("");
       setDateTo("");
+      navigate("/profile");
     } catch (err) {
-      console.error("Booking error:", err.message);
-      setError(err.message || "Failed to make booking.");
+      handleError(err);
     } finally {
       setLoading(false);
     }
@@ -119,8 +121,6 @@ function BookingVenue({ venue, dateFrom, dateTo, setDateFrom, setDateTo }) {
       >
         {loading ? "Booking..." : "Confirm Booking"}
       </button>
-      {success && <p className="mt-4 text-green-600">Booking successful!</p>}
-      {error && <p className="mt-4 text-red-600">{error}</p>}
     </div>
   );
 }
