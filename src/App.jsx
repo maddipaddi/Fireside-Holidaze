@@ -54,8 +54,8 @@ function App() {
           <Route path="/venue/:id" element={<SingleVenue />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path="/venue/edit/:id" element={<UpdateVenue />} />
-          <Route path="/Terms" element={<Terms />} />
-          <Route path="/Privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="/search" element={<SearchResults />} />
         </Route>
       </Routes>

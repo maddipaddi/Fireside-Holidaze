@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { LuSun, LuMoon } from "react-icons/lu";
+import { NavLink } from "react-router-dom";
 
 /**
  * Footer component that displays the website's footer section.
@@ -53,12 +54,12 @@ function Footer() {
       <div className="absolute inset-0 flex items-center justify-center text-white dark:text-copy px-4 text-sm sm:text-base z-10 translate-y-4 sm:translate-y-8">
         <div className="flex flex-wrap sm:flex-nowrap w-full max-w-sm justify-center sm:justify-between items-center font-body gap-6 sm:gap-16 text-center whitespace-nowrap">
           <p>&copy; {new Date().getFullYear()} Holidaze</p>
-          <a href="/terms" className="hover:underline dark:text-copy">
+          <NavLink to="/terms" className="hover:underline dark:text-copy">
             Terms
-          </a>
-          <a href="/privacy" className="hover:underline dark:text-copy">
+          </NavLink>
+          <NavLink to="/privacy" className="hover:underline dark:text-copy">
             Privacy Policy
-          </a>
+          </NavLink>
           <div className="flex gap-2">
             <button
               onClick={() => setTheme("")}
