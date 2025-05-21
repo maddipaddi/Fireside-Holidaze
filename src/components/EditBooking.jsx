@@ -59,6 +59,7 @@ export default function EditBookingModal({ booking, onClose, onUpdate }) {
           <p>Guests: {booking.guests}</p>
           <p>
             {new Date(booking.dateFrom).toLocaleDateString()}
+            {" - "}
             {new Date(booking.dateTo).toLocaleDateString()}
           </p>
         </div>
