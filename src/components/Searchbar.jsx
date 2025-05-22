@@ -120,15 +120,22 @@ const Searchbar = () => {
   };
 
   return (
-    <div
+    <form
+      role="search"
       className="bg-copy dark:bg-primary p-8 rounded-lg shadow-lg max-w-xs md:max-w-2xl mx-auto mt-12"
       ref={wrapperRef}
     >
-      <div className="bg-white text:copy p-4 rounded mb-4 relative">
-        <label className="block text-sm font-semibold font-body text-copy mb-1">
+      <h2 className="sr-only">Search for venues</h2>
+      <div className="bg-white text:copy p-4 rounded relative">
+        <label
+          htmlFor="location"
+          className="block text-sm font-semibold font-body text-copy mb-1"
+        >
           Location
         </label>
         <input
+          name="location"
+          id="location"
           type="text"
           placeholder="Write your destination..."
           value={query}
@@ -137,10 +144,17 @@ const Searchbar = () => {
           className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy"
         />
         {isOpen && (
-          <ul className="absolute z-10 w-full bg-white border border-gray-300 rounded shadow max-h-60 overflow-auto mt-1">
+          <ul
+            role="listbox"
+            aria-live="polite"
+            aria-label="Suggestions"
+            className="absolute z-10 w-full bg-white border border-gray-300 rounded shadow max-h-60 overflow-auto mt-1"
+          >
             {suggestions.length > 0 ? (
               suggestions.map((venue, index) => (
                 <li
+                  role="option"
+                  aria-selected={activeIndex === index}
                   key={venue.id}
                   className={`px-4 py-2 cursor-pointer ${
                     activeIndex === index ? "bg-gray-200" : "hover:bg-gray-100"
@@ -185,17 +199,22 @@ const Searchbar = () => {
         )}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-        <div className="bg-white p-3 rounded w-full md:col-span-3">
-          <label className="block text-sm font-semibold font-body text-copy mb-2">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+        <fieldset className="bg-white p-3 rounded w-full md:col-span-3">
+          <legend className="text-sm font-semibold font-body text-copy pt-10">
             Date
-          </label>
+          </legend>
           <div className="flex flex-col md:flex-row gap-2">
             <div className="w-full md:w-1/2">
-              <label className="block text-xs font-body text-gray-500 mb-1">
+              <label
+                htmlFor="check-in"
+                className="block text-xs font-body text-gray-500 mb-1"
+              >
                 Check in
               </label>
               <input
+                name="check-in"
+                id="check-in"
                 type="date"
                 value={checkIn}
                 onChange={(e) => setCheckIn(e.target.value)}
@@ -203,10 +222,15 @@ const Searchbar = () => {
               />
             </div>
             <div className="w-full md:w-1/2">
-              <label className="block text-xs font-body text-gray-500 mb-1">
+              <label
+                htmlFor="check-out"
+                className="block text-xs font-body text-gray-500 mb-1"
+              >
                 Check out
               </label>
               <input
+                name="check-out"
+                id="check-out"
                 type="date"
                 value={checkOut}
                 onChange={(e) => setCheckOut(e.target.value)}
@@ -214,14 +238,15 @@ const Searchbar = () => {
               />
             </div>
           </div>
-        </div>
+        </fieldset>
 
-        <div className="bg-white p-3 rounded text-center w-full md:col-span-1">
-          <label className="block text-sm font-semibold font-body text-copy mb-2">
-            Travelers
-          </label>
+        <fieldset className="bg-white p-3 rounded text-center w-full md:col-span-1">
+          <legend className="block text-sm font-semibold font-body text-copy pt-10">
+            Guests
+          </legend>
           <div className="flex items-center justify-center gap-2">
             <button
+              type="button"
               onClick={() => decrement(setGuests, guests)}
               disabled={guests <= 1}
               className={`px-2 py-1 rounded ${
@@ -234,6 +259,7 @@ const Searchbar = () => {
             </button>
             <span>{guests}</span>
             <button
+              type="button"
               onClick={() => increment(setGuests, guests)}
               disabled={guests >= 12}
               className={`px-2 py-1 rounded ${
@@ -245,7 +271,7 @@ const Searchbar = () => {
               +
             </button>
           </div>
-        </div>
+        </fieldset>
       </div>
 
       <div className="bg-primary dark:bg-background p-4 text-center -mx-8 -mb-8 rounded-b-lg">
@@ -256,7 +282,7 @@ const Searchbar = () => {
           Search
         </button>
       </div>
-    </div>
+    </form>
   );
 };
 
