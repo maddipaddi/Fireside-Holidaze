@@ -148,7 +148,7 @@ export default function AddVenue() {
 
   return (
     <article className="mx-auto px-4 w-full max-w-6xl mt-8">
-      <h2 className="text-3xl font-bold font-heading mb-4 text-center dark:text-white">
+      <h2 className="text-3xl font-bold font-heading mb-4 text-center dark:text-background">
         Add a venue
       </h2>
       <form
@@ -159,7 +159,7 @@ export default function AddVenue() {
           <h3 className="text-lg font-bold font-body text-white mb-2 text-center">
             Basic info
           </h3>
-          <div className="rounded-xl bg-background dark:bg-background p-4 rounded mb-4">
+          <div className="rounded-xl bg-offwhite dark:bg-background p-4 mb-4">
             <label
               htmlFor="name"
               className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
@@ -176,10 +176,10 @@ export default function AddVenue() {
               value={formData.name}
               onChange={handleChange}
               placeholder="Cozy cabin"
-              className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
+              className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy bg-white"
             />
           </div>
-          <div className="rounded-xl bg-background dark:bg-background p-4 rounded mb-4">
+          <div className="rounded-xl bg-offwhite dark:bg-background p-4 mb-4">
             <label
               htmlFor="description"
               className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
@@ -206,7 +206,7 @@ export default function AddVenue() {
           {formData.media.map((mediaItem, index) => (
             <div
               key={index}
-              className="flex flex-col md:flex-row gap-4 rounded-xl bg-background dark:bg-background p-4 rounded mb-4"
+              className="flex flex-col md:flex-row gap-4 rounded-xl bg-white dark:bg-background p-4 mb-4"
             >
               <div className="w-full md:w-40 h-36 relative rounded overflow-hidden border flex-shrink-0 flex items-center justify-center">
                 {mediaItem.url ? (
@@ -270,7 +270,7 @@ export default function AddVenue() {
             type="button"
             onClick={addImageField}
             disabled={formData.media.length >= 4}
-            className="bg-background text-copy font-body font-bold px-8 py-2 mt-3 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer flex place-self-center"
+            className="bg-offwhite text-copy font-body font-bold px-8 py-2 mt-3 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer flex place-self-center"
           >
             Add image
           </button>
@@ -279,10 +279,10 @@ export default function AddVenue() {
           <h3 className="text-lg font-bold font-body text-white mb-2 text-center">
             Details{" "}
           </h3>
-          <div className="rounded-xl bg-background dark:bg-background p-4 rounded mb-4">
+          <div className="rounded-xl bg-offwhite dark:bg-background p-4 mb-4">
             <label
               htmlFor="price"
-              className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
+              className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1 bg-white"
             >
               Price
             </label>
@@ -296,10 +296,10 @@ export default function AddVenue() {
               className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
             />
           </div>
-          <div className="rounded-xl bg-background dark:bg-background p-4 rounded mb-4">
+          <div className="rounded-xl bg-offwhite dark:bg-background p-4 mb-4">
             <label
               htmlFor="maxGuests"
-              className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
+              className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1 bg-white"
             >
               Maximum number of guests
             </label>
@@ -313,7 +313,7 @@ export default function AddVenue() {
               className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
             />
           </div>
-          <div className="rounded-xl bg-background dark:bg-background p-4 rounded mb-4">
+          <div className="rounded-xl bg-offwhite dark:bg-background p-4 mb-4">
             <label
               htmlFor="rating"
               className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
@@ -334,7 +334,7 @@ export default function AddVenue() {
           <h3 className="text-lg font-bold font-body text-white mb-2 text-center">
             Facilities
           </h3>
-          <div className="rounded-xl bg-background dark:bg-background">
+          <div className="rounded-xl bg-offwhite dark:bg-background">
             <div className="font-medium pt-10 pb-6 pl-24 rounded flex items-center gap-2">
               <input
                 type="checkbox"
@@ -405,7 +405,7 @@ export default function AddVenue() {
           <h3 className="text-lg font-bold font-body text-white mb-2 text-center">
             Location
           </h3>
-          <div className="rounded-xl bg-background dark:bg-background p-4 rounded mb-4">
+          <div className="rounded-xl bg-offwhite dark:bg-background p-4 mb-4">
             <label
               htmlFor="address"
               className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
@@ -424,7 +424,7 @@ export default function AddVenue() {
               className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
             />
           </div>
-          <div className="rounded-xl bg-background dark:bg-background p-4 rounded mb-4">
+          <div className="rounded-xl bg-offwhite dark:bg-background p-4 mb-4">
             <label
               htmlFor="city"
               className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
@@ -442,7 +442,7 @@ export default function AddVenue() {
               className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
             />
           </div>
-          <div className="rounded-xl bg-background dark:bg-background p-4 rounded mb-4">
+          <div className="rounded-xl bg-offwhite dark:bg-background p-4 mb-4">
             <label
               htmlFor="zip"
               className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
@@ -461,7 +461,7 @@ export default function AddVenue() {
               className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
             />
           </div>
-          <div className="rounded-xl bg-background dark:bg-background p-4 rounded mb-4">
+          <div className="rounded-xl bg-offwhite dark:bg-background p-4 mb-4">
             <label
               htmlFor="country"
               className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
@@ -481,7 +481,7 @@ export default function AddVenue() {
             />
           </div>{" "}
           <div className="md:col-span-2 xl:col-span-2 xl:col-start-2">
-            <div className="rounded-xl bg-background dark:bg-background p-4 rounded mb-4">
+            <div className="rounded-xl bg-offwhite dark:bg-background p-4 mb-4">
               <label
                 htmlFor="continent"
                 className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"

@@ -27,7 +27,7 @@ function Home() {
       </div>
 
       <div className="py-20 flex items-center justify-center px-4">
-        <div className="relative bg-copy dark:bg-background text-background dark:text-copy w-full max-w-6xl rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-8 shadow-lg overflow-visible">
+        <div className="relative bg-copy dark:bg-background text-white dark:text-copy w-full max-w-6xl rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-8 shadow-lg overflow-visible">
           <div className="flex flex-col items-start justify-center gap-4 w-full md:w-1/2 h-auto">
             <h1 className="font-heading text-3xl sm:text-4xl">
               Welcome to Holidaze!
@@ -38,7 +38,7 @@ function Home() {
             <button className="font-body bg-background dark:bg-primary px-6 py-3 rounded-2xl shadow-md hover:bg-accent hover:text-copy dark:hover:bg-copy dark:hover:text-copy transition">
               <Link
                 to="/venues"
-                className="text-copy dark:text-background font-bold"
+                className="text-copy dark:text-white font-bold"
               >
                 View all locations
               </Link>

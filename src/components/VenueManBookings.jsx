@@ -145,7 +145,7 @@ export default function VenueManagerBookings() {
         onClick={() => setShowUpcoming((prev) => !prev)}
       >
         <h2 className="text-3xl font-bold font-heading text-copy dark:text-background">
-          Upcoming bookings
+          Upcoming bookings on my venues
         </h2>
         <ChevronDown
           className={`transition-transform duration-300 dark:text-background ${
@@ -191,7 +191,7 @@ export default function VenueManagerBookings() {
         onClick={() => setShowPast((prev) => !prev)}
       >
         <h2 className="text-3xl font-bold font-heading text-copy dark:text-background">
-          Past bookings
+          Past bookings on my venues
         </h2>
         <ChevronDown
           aria-hidden="false"
