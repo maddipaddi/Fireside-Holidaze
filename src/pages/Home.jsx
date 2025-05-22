@@ -32,9 +32,9 @@ function Home() {
             <h1 className="font-heading text-3xl sm:text-4xl">
               Welcome to Holidaze!
             </h1>
-            <h2 className="font-body text-lg sm:text-xl">
+            <p className="font-body text-lg sm:text-xl">
               Your forest retreat awaits
-            </h2>
+            </p>
             <button className="font-body bg-background dark:bg-primary px-6 py-3 rounded-2xl shadow-md hover:bg-accent hover:text-copy dark:hover:bg-copy dark:hover:text-copy transition">
               <Link
                 to="/venues"
@@ -55,9 +55,9 @@ function Home() {
       </div>
       <PopularCarousel />
       <div>
-        <h1 className="font-heading text-3xl font-bold text-center py-8 dark:text-background">
+        <h2 className="font-heading text-3xl font-bold text-center py-8 dark:text-background">
           Categories
-        </h1>
+        </h2>
       </div>
       <div className="w-full max-w-5xl mx-auto flex flex-wrap justify-center gap-6 px-4">
         <CategoryItem
