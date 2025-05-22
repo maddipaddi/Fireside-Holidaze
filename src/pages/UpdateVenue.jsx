@@ -74,7 +74,6 @@ export default function UpdateVenue() {
           },
         });
       } catch (error) {
-        console.error("Error fetching venues:", error); // remove after development
         handleError(error);
       }
     }
@@ -166,13 +165,12 @@ export default function UpdateVenue() {
     event.preventDefault();
 
     try {
-      const result = await request(`${SINGLE_VENUE}/${id}`, {
+      await request(`${SINGLE_VENUE}/${id}`, {
         method: "PUT",
         body: JSON.stringify(cleanedFormData),
       });
 
       showSuccessMessage("Success! You have updated the venue.");
-      console.log("Success:", result); // remove after development
       navigate("/Profile");
     } catch (error) {
       handleError(error);

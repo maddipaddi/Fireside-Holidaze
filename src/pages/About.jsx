@@ -25,7 +25,6 @@ export default function About() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("Contact form submitted:", formData);
     setSubmitted(true);
     setFormData({ name: "", email: "", message: "" });
     setTimeout(() => setSubmitted(false), 3000);
