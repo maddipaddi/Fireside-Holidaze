@@ -35,14 +35,12 @@ function Home() {
             <p className="font-body text-lg sm:text-xl">
               Your forest retreat awaits
             </p>
-            <button className="font-body bg-background dark:bg-primary px-6 py-3 rounded-2xl shadow-md hover:bg-accent hover:text-copy dark:hover:bg-copy dark:hover:text-copy transition">
-              <Link
-                to="/venues"
-                className="text-copy dark:text-background font-bold"
-              >
-                View all locations
-              </Link>
-            </button>
+            <Link
+              to="/venues"
+              className="text-copy dark:text-background font-bold font-body bg-background dark:bg-primary px-6 py-3 rounded-2xl shadow-md hover:bg-accent dark:hover:bg-copy transition"
+            >
+              View all locations
+            </Link>
           </div>
           <div className="w-full md:w-1/2 flex justify-center">
             <img
