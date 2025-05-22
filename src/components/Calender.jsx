@@ -6,12 +6,45 @@ import { handleError } from "../utils/errorHandler.mjs";
 
 const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
+/**
+ * Formats a JavaScript Date object into a local ISO date string (YYYY-MM-DD).
+ *
+ * @param {Date} date - The date to format.
+ * @returns {string} The formatted date string in YYYY-MM-DD format.
+ */
+
 function formatDateToLocalISO(date) {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
 }
+
+/**
+ * CustomCalendar component displays a calendar UI for selecting date ranges,
+ * highlighting booked and available dates for a specific venue.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {string|number} props.venueId - The ID of the venue to fetch bookings for.
+ * @param {string} props.dateFrom - The currently selected start date (ISO string).
+ * @param {string} props.dateTo - The currently selected end date (ISO string).
+ * @param {function} props.setDateFrom - Function to update the start date.
+ * @param {function} props.setDateTo - Function to update the end date.
+ * @param {string|number} [props.bookingIdToIgnore] - Optional booking ID to ignore when checking for overlaps (useful for editing existing bookings).
+ *
+ * @returns {JSX.Element} The rendered calendar component.
+ *
+ * @example
+ * <CustomCalendar
+ *   venueId="123"
+ *   dateFrom={dateFrom}
+ *   dateTo={dateTo}
+ *   setDateFrom={setDateFrom}
+ *   setDateTo={setDateTo}
+ *   bookingIdToIgnore="456"
+ * />
+ */
 
 function CustomCalendar({
   venueId,
@@ -56,6 +89,18 @@ function CustomCalendar({
     return start1 <= end2 && start2 <= end1;
   };
 
+  /**
+   * Handles the logic when a day is clicked in the calendar.
+   *
+   * - If no start date is selected or both start and end dates are set, sets the start date to the clicked date and clears the end date.
+   * - If a start date is selected and the clicked date is after the start date, checks for booking overlaps:
+   *   - If there is an overlap with existing bookings, triggers an error and resets the start date.
+   *   - Otherwise, sets the end date to the clicked date.
+   * - If the clicked date is before the start date, resets the start date to the clicked date and clears the end date.
+   *
+   * @param {string} dateStr - The date string representing the clicked day.
+   */
+
   const handleDayClick = (dateStr) => {
     if (!dateFrom || (dateFrom && dateTo)) {
       setDateFrom(dateStr);
@@ -87,6 +132,24 @@ function CustomCalendar({
       setDateTo("");
     }
   };
+
+  /**
+   * Generates an array of React elements representing the days of a calendar month,
+   * including empty slots for alignment, selectable days, and days marked as booked or past.
+   *
+   * @returns {JSX.Element[]} Array of day cells as React elements for rendering in a calendar grid.
+   *
+   * The function uses the following external variables:
+   * - year: {number} The year for the calendar.
+   * - month: {number} The month (0-indexed) for the calendar.
+   * - today: {Date} The current date for comparison.
+   * - dateFrom: {string} The selected start date in ISO format.
+   * - dateTo: {string} The selected end date in ISO format.
+   * - bookings: {Array<{id: string, dateFrom: string, dateTo: string}>} List of booked date ranges.
+   * - bookingIdToIgnore: {string} Booking ID to ignore when checking for booked dates.
+   * - handleDayClick: {(dateStr: string) => void} Callback for when a day is clicked.
+   * - formatDateToLocalISO: {(date: Date) => string} Function to format a Date to local ISO string.
+   */
 
   const generateDays = () => {
     const days = [];

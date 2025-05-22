@@ -41,7 +41,7 @@ export default function EditBookingModal({ booking, onClose, onUpdate }) {
 
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/50">
-      <div className="bg-copy dark:bg-darkbackground rounded-lg shadow-lg p-6 w-full max-w-xl relative">
+      <div className="h-[90vh] flex flex-col bg-copy dark:bg-darkbackground rounded-lg shadow-lg p-6 w-full max-w-xl relative">
         <button
           onClick={onClose}
           className="absolute top-3 right-3 cursor-pointer text-background"
@@ -49,53 +49,55 @@ export default function EditBookingModal({ booking, onClose, onUpdate }) {
         >
           <X />
         </button>
+        <div className="overflow-y-auto flex-grow custom-scrollbar pr-2">
+          <h2 className="text-xl font-bold font-heading mt-4 text-background dark:text-background text-center">
+            Edit booking for {booking.venue.name}
+          </h2>
 
-        <h2 className="text-xl font-bold font-heading mt-4 text-background dark:text-background text-center">
-          Edit booking for {booking.venue.name}
-        </h2>
+          <div className="flex gap-6 py-6 text-background dark:text-background justify-center font-medium">
+            <p className="font-bold">Current booking:</p>
+            <p>Guests: {booking.guests}</p>
+            <p>
+              {new Date(booking.dateFrom).toLocaleDateString()}
+              {" - "}
+              {new Date(booking.dateTo).toLocaleDateString()}
+            </p>
+          </div>
 
-        <div className="flex gap-6 py-6 text-background dark:text-background justify-center font-medium">
-          <p className="font-bold">Current booking:</p>
-          <p>Guests: {booking.guests}</p>
-          <p>
-            {new Date(booking.dateFrom).toLocaleDateString()}
-            {" - "}
-            {new Date(booking.dateTo).toLocaleDateString()}
-          </p>
+          <CustomCalendar
+            venueId={booking.venue.id}
+            dateFrom={dateFrom}
+            dateTo={dateTo}
+            setDateFrom={setDateFrom}
+            setDateTo={setDateTo}
+            bookingIdToIgnore={booking.id}
+          />
+          <div className="bg-background rounded p-4 mx-4 mt-4 mb-20">
+            <label htmlFor="guests" className="block text-black font-medium">
+              Guests:
+              <input
+                id="guests"
+                name="guests"
+                type="number"
+                min="1"
+                max={booking.venue.maxGuests}
+                value={guests}
+                onChange={(e) => {
+                  const value = Number(e.target.value);
+                  if (value > booking.venue.maxGuests) {
+                    setGuests(booking.venue.maxGuests);
+                  } else if (value < 1) {
+                    setGuests(1);
+                  } else {
+                    setGuests(value);
+                  }
+                }}
+                className="w-full mt-1 p-2 border rounded text-black"
+              />
+            </label>
+          </div>
         </div>
 
-        <CustomCalendar
-          venueId={booking.venue.id}
-          dateFrom={dateFrom}
-          dateTo={dateTo}
-          setDateFrom={setDateFrom}
-          setDateTo={setDateTo}
-          bookingIdToIgnore={booking.id}
-        />
-        <div className="bg-background rounded p-4 mx-4 mt-4 mb-20">
-          <label htmlFor="guests" className="block text-black font-medium">
-            Guests:
-            <input
-              id="guests"
-              name="guests"
-              type="number"
-              min="1"
-              max={booking.venue.maxGuests}
-              value={guests}
-              onChange={(e) => {
-                const value = Number(e.target.value);
-                if (value > booking.venue.maxGuests) {
-                  setGuests(booking.venue.maxGuests);
-                } else if (value < 1) {
-                  setGuests(1);
-                } else {
-                  setGuests(value);
-                }
-              }}
-              className="w-full mt-1 p-2 border rounded text-black"
-            />
-          </label>
-        </div>
         <div className="absolute bottom-0 left-0 w-full bg-primary dark:bg-background p-6 text-center rounded-b-lg">
           <button
             onClick={handleUpdate}

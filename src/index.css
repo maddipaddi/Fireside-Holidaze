@@ -14,3 +14,16 @@
   --font-heading: "Gluten", sans-serif;
   --font-body: "Roboto", sans-serif;
 }
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #ebe8cf;
+  border-radius: 4px;
+}
