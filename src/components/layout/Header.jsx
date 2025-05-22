@@ -109,6 +109,8 @@ export default function Header() {
         <div ref={dropdownRef}>
           <button
             onClick={toggleCategories}
+            aria-expanded={isCategoriesOpen}
+            aria-controls="category-menu"
             className={`flex items-center gap-1 cursor-pointer font-heading px-2 py-1 rounded ${
               isCategoryPage
                 ? "bg-primary text-white"
@@ -123,7 +125,11 @@ export default function Header() {
             )}
           </button>
           {isCategoriesOpen && (
-            <div className="ml-4 mt-2 flex flex-col md:min-w-37 bg-background dark:bg-darkbackground gap-4 md:fixed md:px-6 md:py-4 md:m-0 md:rounded md:rounded-t-none md:border-r md:border-l md:border-b md:border-t0 md:bg-accent md:dark:bg-accent md:dark:text-copy">
+            <div
+              id="category-menu"
+              role="menu"
+              className="ml-4 mt-2 flex flex-col md:min-w-37 bg-background dark:bg-darkbackground gap-4 md:fixed md:px-6 md:py-4 md:m-0 md:rounded md:rounded-t-none md:border-r md:border-l md:border-b md:border-t0 md:bg-accent md:dark:bg-accent md:dark:text-copy"
+            >
               <NavLink
                 to="/categories/forest"
                 className="font-heading font-extralight hover:font-normal"
