@@ -73,7 +73,7 @@ function CustomCalendar({
         const venue = await apiRequest(`${VENUES}/${id}?_bookings=true`);
         setBookings(venue.data.bookings || []);
       } catch (error) {
-        console.error("Error fetching venue bookings:", error);
+        handleError(error);
       } finally {
         setLoading(false);
       }

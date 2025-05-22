@@ -6,6 +6,7 @@ import { PROFILE } from "../utils/constants.mjs";
 import { UserContext } from "./context/UserContext";
 import DeleteVenueButton from "./DeleteVenues";
 import { Globe } from "lucide-react";
+import { handleError } from "../utils/errorHandler.mjs";
 
 /**
  * ProfileVenues component displays a list of venues associated with the current user profile.
@@ -33,7 +34,7 @@ export default function ProfileVenues() {
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching venues:", error);
+        handleError(error);
         setLoading(false);
       });
   }, []);
