@@ -51,14 +51,14 @@ export default function ProfileVenues() {
 
   return (
     <section>
-      <h1 className="text-3xl font-bold font-heading mb-4 text-center text-copy dark:text-background">
+      <h2 className="text-3xl font-bold font-heading mb-4 text-center text-copy dark:text-background">
         My venues
-      </h1>
+      </h2>
       <VenueGrid
         venues={venues}
         renderFooter={(venue) => (
           <div className="text-center">
-            <h2 className="text-base font-semibold mb-2">{venue.name}</h2>
+            <h3 className="text-base font-semibold mb-2">{venue.name}</h3>
             <div className="flex justify-center gap-8">
               <button
                 onClick={() => navigate(`/venue/edit/${venue.id}`)}
