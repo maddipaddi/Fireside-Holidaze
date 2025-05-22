@@ -160,7 +160,9 @@ export default function CustomerBookings() {
 
   return (
     <section className="px-4 md:px-8 max-w-screen-xl mx-auto">
-      <div
+      <button
+        aria-expanded={showUpcoming}
+        aria-controls="upcoming-bookings"
         className="cursor-pointer flex justify-center items-center gap-2 mb-6"
         onClick={() => setShowUpcoming((prev) => !prev)}
       >
@@ -172,10 +174,10 @@ export default function CustomerBookings() {
             showUpcoming ? "rotate-180" : "rotate-0"
           }`}
         />
-      </div>
+      </button>
 
       {showUpcoming && (
-        <>
+        <div id="upcoming-bookings">
           {bookings.upcoming.length === 0 ? (
             <>
               <Tent className="mx-auto mb-2 h-6 w-6 text-primary dark:text-background" />
@@ -201,10 +203,12 @@ export default function CustomerBookings() {
               )}
             </>
           )}
-        </>
+        </div>
       )}
 
-      <div
+      <button
+        aria-expanded={showPast}
+        aria-controls="past-bookings"
         className="cursor-pointer flex justify-center items-center gap-2 mt-16"
         onClick={() => setShowPast((prev) => !prev)}
       >
@@ -212,14 +216,15 @@ export default function CustomerBookings() {
           Past bookings
         </h2>
         <ChevronDown
+          aria-hidden="false"
           className={`transition-transform duration-300 dark:text-background ${
             showPast ? "rotate-180" : "rotate-0"
           }`}
         />
-      </div>
+      </button>
 
       {showPast && (
-        <>
+        <div id="past-bookings">
           {bookings.past.length === 0 ? (
             <>
               <Map className="mx-auto mb-2 h-6 w-6 text-primary dark:text-background mt-4" />
@@ -242,7 +247,7 @@ export default function CustomerBookings() {
               )}
             </>
           )}
-        </>
+        </div>
       )}
     </section>
   );
