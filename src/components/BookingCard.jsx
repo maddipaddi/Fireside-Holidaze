@@ -47,7 +47,7 @@ function BookingVenue({ venue, dateFrom, dateTo, setDateFrom, setDateTo }) {
 
     const token = localStorage.getItem("accessToken");
     if (!token) {
-      setError("No access token found. Please log in.");
+      setError("Have to be logged in to book a venue");
       setLoading(false);
       return;
     }
@@ -104,6 +104,7 @@ function BookingVenue({ venue, dateFrom, dateTo, setDateFrom, setDateTo }) {
           className="w-full mt-1 p-2 border rounded text-black bg-white"
         />
       </label>
+      {error && <div className="mt-2 text-red-600 font-medium">{error}</div>}
       <p className="mt-4 text-lg font-medium text-black">
         Total Price: ${totalPrice}
       </p>
