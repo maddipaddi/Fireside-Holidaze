@@ -61,7 +61,7 @@ export default function About() {
           onSubmit={handleSubmit}
           className="bg-copy dark:bg-primary p-6 rounded-lg shadow-lg"
         >
-          <div className="bg-white dark:bg-background p-4 rounded mb-4">
+          <div className="bg-offwhite dark:bg-background p-4 rounded mb-4">
             <label
               htmlFor="name"
               className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
@@ -79,7 +79,7 @@ export default function About() {
               className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
             />
           </div>
-          <div className="bg-white dark:bg-background p-4 rounded mb-4">
+          <div className="bg-offwhite dark:bg-background p-4 rounded mb-4">
             <label
               htmlFor="email"
               className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
@@ -97,7 +97,7 @@ export default function About() {
               className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
             />
           </div>
-          <div className="bg-white dark:bg-background p-4 rounded mb-6">
+          <div className="bg-offwhite dark:bg-background p-4 rounded mb-6">
             <label
               htmlFor="message"
               className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"

@@ -192,7 +192,7 @@ export default function UpdateVenue() {
           <h3 className="text-lg font-bold font-body text-white mb-2 text-center">
             Basic info
           </h3>
-          <div className="bg-white dark:bg-background p-4 rounded mb-4">
+          <div className="bg-offwhite dark:bg-background p-4 rounded mb-4">
             <label
               htmlFor="name"
               className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
@@ -212,7 +212,7 @@ export default function UpdateVenue() {
               className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
             />
           </div>
-          <div className="bg-white dark:bg-background p-4 rounded mb-4">
+          <div className="bg-offwhite dark:bg-background p-4 rounded mb-4">
             <label
               htmlFor="description"
               className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
@@ -254,7 +254,7 @@ export default function UpdateVenue() {
                   </button>
                 </div>
               ) : (
-                <div className="flex-grow bg-white dark:bg-background p-4 rounded mb-4">
+                <div className="flex-grow bg-offwhite dark:bg-background p-4 rounded mb-4">
                   <label
                     htmlFor="url"
                     className="block text-xs font-semibold font-body text-copy dark:text-copy mb-1"
@@ -272,7 +272,7 @@ export default function UpdateVenue() {
                   />
                 </div>
               )}
-              <div className="flex-grow bg-white dark:bg-background p-4 rounded mb-4">
+              <div className="flex-grow bg-offwhite dark:bg-background p-4 rounded mb-4">
                 <label
                   htmlFor="alt"
                   className="block text-xs font-semibold font-body text-copy dark:text-copy mb-1"
@@ -295,7 +295,7 @@ export default function UpdateVenue() {
             type="button"
             onClick={addImageField}
             disabled={formData.media.length >= 4}
-            className="bg-background text-copy font-body font-bold px-8 py-2 mt-3 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer flex place-self-center"
+            className="bg-white text-copy font-body font-bold px-8 py-2 mt-3 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer flex place-self-center"
           >
             Add image
           </button>
@@ -304,7 +304,7 @@ export default function UpdateVenue() {
           <h3 className="text-lg font-bold font-body text-white mb-2 text-center">
             Details
           </h3>
-          <div className="bg-white dark:bg-background p-4 rounded mb-4">
+          <div className="bg-offwhite dark:bg-background p-4 rounded mb-4">
             <label
               htmlFor="price"
               className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
@@ -321,7 +321,7 @@ export default function UpdateVenue() {
               className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
             />
           </div>
-          <div className="bg-white dark:bg-background p-4 rounded mb-4">
+          <div className="bg-offwhite dark:bg-background p-4 rounded mb-4">
             <label
               htmlFor="maxGuests"
               className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
@@ -338,7 +338,7 @@ export default function UpdateVenue() {
               className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
             />
           </div>
-          <div className="bg-white dark:bg-background p-4 rounded mb-4">
+          <div className="bg-offwhite dark:bg-background p-4 rounded mb-4">
             <label
               htmlFor="rating"
               className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
@@ -359,7 +359,7 @@ export default function UpdateVenue() {
           <h3 className="text-lg font-bold font-body text-white mb-2 text-center">
             Facilities
           </h3>
-          <div className="bg-white dark:bg-background p-4 rounded mb-6 flex items-center gap-2">
+          <div className="bg-offwhite dark:bg-background p-4 rounded mb-6 flex items-center gap-2">
             <input
               type="checkbox"
               name="wifi"
@@ -375,7 +375,7 @@ export default function UpdateVenue() {
               Wifi
             </label>
           </div>
-          <div className="bg-white dark:bg-background p-4 rounded mb-6 flex items-center gap-2">
+          <div className="bg-offwhite dark:bg-background p-4 rounded mb-6 flex items-center gap-2">
             <input
               type="checkbox"
               name="parking"
@@ -392,7 +392,7 @@ export default function UpdateVenue() {
             </label>
           </div>
 
-          <div className="bg-white dark:bg-background p-4 rounded mb-6 flex items-center gap-2">
+          <div className="bg-offwhite dark:bg-background p-4 rounded mb-6 flex items-center gap-2">
             <input
               type="checkbox"
               name="breakfast"
@@ -409,7 +409,7 @@ export default function UpdateVenue() {
             </label>
           </div>
 
-          <div className="bg-white dark:bg-background p-4 rounded mb-6 flex items-center gap-2">
+          <div className="bg-offwhite dark:bg-background p-4 rounded mb-6 flex items-center gap-2">
             <input
               type="checkbox"
               name="pets"
@@ -430,7 +430,7 @@ export default function UpdateVenue() {
           <h3 className="text-lg font-bold font-body text-white mb-2 text-center">
             Location
           </h3>
-          <div className="bg-white dark:bg-background p-4 rounded mb-4">
+          <div className="bg-offwhite dark:bg-background p-4 rounded mb-4">
             <label
               htmlFor="address"
               className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
@@ -449,7 +449,7 @@ export default function UpdateVenue() {
               className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
             />
           </div>
-          <div className="bg-white dark:bg-background p-4 rounded mb-4">
+          <div className="bg-offwhite dark:bg-background p-4 rounded mb-4">
             <label
               htmlFor="city"
               className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
@@ -467,7 +467,7 @@ export default function UpdateVenue() {
               className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
             />
           </div>
-          <div className="bg-white dark:bg-background p-4 rounded mb-4">
+          <div className="bg-offwhite dark:bg-background p-4 rounded mb-4">
             <label
               htmlFor="zip"
               className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
@@ -486,7 +486,7 @@ export default function UpdateVenue() {
               className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
             />
           </div>
-          <div className="bg-white dark:bg-background p-4 rounded mb-4">
+          <div className="bg-offwhite dark:bg-background p-4 rounded mb-4">
             <label
               htmlFor="country"
               className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
@@ -505,7 +505,7 @@ export default function UpdateVenue() {
               className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
             />
           </div>
-          <div className="bg-white dark:bg-background p-4 rounded mb-4">
+          <div className="bg-offwhite dark:bg-background p-4 rounded mb-4">
             <label
               htmlFor="continent"
               className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"

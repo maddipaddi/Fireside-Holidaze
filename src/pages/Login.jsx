@@ -85,7 +85,7 @@ export default function Login() {
       className="bg-copy dark:bg-primary p-6 rounded-lg shadow-lg max-w-xs md:max-w-2xl mx-auto mt-18"
     >
       <h1 className="sr-only">Log in</h1>
-      <div className="bg-white dark:bg-background p-4 rounded mb-4">
+      <div className="bg-offwhite dark:bg-background p-4 rounded mb-4">
         <label
           htmlFor="email"
           className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
@@ -104,7 +104,7 @@ export default function Login() {
           className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
         />
       </div>
-      <div className="bg-white dark:bg-background p-4 rounded mb-4">
+      <div className="bg-offwhite dark:bg-background p-4 rounded mb-4">
         <label
           htmlFor="password"
           className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"

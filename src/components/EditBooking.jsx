@@ -92,7 +92,7 @@ export default function EditBookingModal({ booking, onClose, onUpdate }) {
                     setGuests(value);
                   }
                 }}
-                className="w-full mt-1 p-2 border rounded text-black"
+                className="w-full mt-1 p-2 border rounded text-black bg-white"
               />
             </label>
           </div>

@@ -101,7 +101,7 @@ function BookingVenue({ venue, dateFrom, dateTo, setDateFrom, setDateTo }) {
               setGuests(value);
             }
           }}
-          className="w-full mt-1 p-2 border rounded text-black"
+          className="w-full mt-1 p-2 border rounded text-black bg-white"
         />
       </label>
       <p className="mt-4 text-lg font-medium text-black">
