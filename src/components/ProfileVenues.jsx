@@ -74,6 +74,12 @@ export default function ProfileVenues() {
                 }
               />
             </div>
+            <button
+              className="bg-copy text-white font-body font-bold px-6 py-1 mt-4 rounded shadow hover:bg-accent/50 hover:text-white transition cursor-pointer"
+              onClick={() => navigate(`/venue/${venue.id}`)}
+            >
+              View venue
+            </button>
           </div>
         )}
       />
