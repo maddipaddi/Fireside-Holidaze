@@ -166,6 +166,8 @@ Veronika Aas - @veronikaaas
 Herman Hylland - @hermanhyl
 Madelen Sletteberg - @maddipaddi
 
+---
+
 ## License
 
 This project is for educational purposes only as part of the Noroff Frontend Development curriculum. It is not intended for commercial use.
