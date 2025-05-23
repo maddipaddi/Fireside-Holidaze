@@ -95,11 +95,12 @@ export default function CustomerBookings() {
                 key={booking.id}
                 className="bg-secondary dark:bg-background text-white dark:text-copy p-4 rounded-lg shadow flex flex-col items-center"
               >
-                <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-darkbackground dark:border-copy mb-4">
+                <div className="w-32 h-32 rounded-full  aspect-[1/1] overflow-hidden border-4 border-darkbackground dark:border-copy mb-4">
                   <img
                     src={image}
                     alt={alt}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                 </div>
                 <div className="text-center">

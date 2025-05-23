@@ -47,6 +47,7 @@ function Home() {
               src="/assets/zachary-kyra-derksen-unsplash.jpg"
               alt="Picture of a cozy cabin in the woods"
               className="w-60 sm:w-72 h-auto rounded-2xl md:-mb-28 shadow-lg object-cover"
+              loading="lazy"
             />
           </div>
         </div>

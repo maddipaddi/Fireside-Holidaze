@@ -93,7 +93,9 @@ export default function PopularCarousel() {
                 }
                 alt={venue.media?.[0]?.alt || "Venue image"}
                 className="w-full h-48 object-cover rounded-t-xl"
+                loading="lazy"
               />
+
               <div className="p-3 text-left flex-grow flex flex-col justify-between bg-primary text-white font-body border-copy">
                 <div>
                   <h3 className="font-semibold text-base">{venue.name}</h3>
