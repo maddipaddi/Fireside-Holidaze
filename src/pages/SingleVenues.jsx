@@ -208,7 +208,7 @@ function SingleVenue() {
           </ul>
         </section>
 
-        <div className="h-28 p-2 m-4 mb-12 md:mb-6">
+        <div className="h-28 p-2 m-4 mb-16 md:mb-10">
           <CustomCalendar
             venueId={id}
             dateFrom={dateFrom}
