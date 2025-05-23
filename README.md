@@ -13,7 +13,7 @@ This project is the **frontend implementation** of Holidaze, built on an existin
 
 ## Table of Contents
 
-1. [Features (Planned)](#features-planned)
+1. [Features](#features)
 2. [Target Audience](#target-audience)
 3. [Getting Started](#getting-started)
    - [Prerequisites](#prerequisites)
@@ -24,8 +24,9 @@ This project is the **frontend implementation** of Holidaze, built on an existin
 5. [Commit Message Guidelines](#commit-message-guidelines)
    - [Format](#format)
    - [Types](#types)
+7. [Authors](#authors)
 6. [License](#license)
-7. [Future Updates](#future-updates)
+
 
 ---
 
@@ -162,9 +163,11 @@ Keep the description concise but meaningful.
 
 ## Authors
 
-Veronika Aas - @veronikaaas
-Herman Hylland - @hermanhyl
-Madelen Sletteberg - @maddipaddi
+Veronika Aas - [@VeronikaAas](https://github.com/VeronikaAas)
+
+Herman Hylland - [@Hermanhyl](https://github.com/Hermanhyl)
+
+Madelen Sletteberg - [@maddipaddi](https://github.com/maddipaddi)
 
 ---
 
