@@ -38,7 +38,7 @@ function Footer() {
   }, [theme]);
 
   return (
-    <footer className="relative w-full overflow-hidden bg-background dark:bg-darkbackground">
+    <footer className="relative w-full overflow-hidden bg-background dark:bg-darkbackground mt-10">
       <img
         src="/assets/footer-light.png"
         alt="Footer lightmode"
