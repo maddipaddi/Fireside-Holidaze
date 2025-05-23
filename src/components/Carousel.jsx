@@ -88,7 +88,7 @@ export default function PopularCarousel() {
             >
               <img
                 src={
-                  venue.media?.[0]?.url ||
+                  `${venue.media?.[0]?.url}?auto=format&fit=crop&w=600&q=80` ||
                   "https://via.placeholder.com/400x300?text=No+Image"
                 }
                 alt={venue.media?.[0]?.alt || "Venue image"}

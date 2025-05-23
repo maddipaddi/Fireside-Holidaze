@@ -18,7 +18,7 @@ export default function VenueCard({ venue, renderFooter }) {
       <div className="w-44 h-44 rounded-full overflow-hidden border-3 border-darkbackground dark:border-background mx-auto -mb-6 z-0">
         <img
           src={
-            venue.media?.[0]?.url ||
+            `${venue.media?.[0]?.url}?auto=format&fit=crop&w=600&q=80` ||
             "https://placehold.co/150x150?text=No+Image"
           }
           alt={venue.media?.[0]?.alt || venue.name}

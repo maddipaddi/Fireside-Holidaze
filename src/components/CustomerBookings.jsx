@@ -86,7 +86,7 @@ export default function CustomerBookings() {
         <ul className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {bookings.map((booking) => {
             const image =
-              booking.venue.media?.[0]?.url ||
+              `${booking.venue.media?.[0]?.url}?auto=format&fit=crop&w=600&q=80` ||
               "https://placehold.co/150x150?text=No+Image";
             const alt = booking.venue.media?.[0]?.alt || booking.venueName;
 
