@@ -24,7 +24,6 @@ export default function CancelBookingButton({ bookingId, onDeleted }) {
       showSuccessMessage("The booking has been cancelled successfully.");
       onDeleted(bookingId);
     } catch (error) {
-      console.error("Error deleting booking:", error);
       handleError(error);
     } finally {
       setDeleting(false);

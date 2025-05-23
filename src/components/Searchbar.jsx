@@ -127,7 +127,7 @@ const Searchbar = () => {
       ref={wrapperRef}
     >
       <h2 className="sr-only">Search for venues</h2>
-      <div className="bg-white text:copy p-4 rounded relative">
+      <div className="bg-offwhite text:copy p-4 rounded relative">
         <label
           htmlFor="location"
           className="block text-sm font-semibold font-body text-copy mb-1"
@@ -201,7 +201,7 @@ const Searchbar = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
-        <fieldset className="bg-white p-3 rounded w-full md:col-span-3">
+        <fieldset className="bg-offwhite p-3 rounded w-full md:col-span-3">
           <legend className="text-sm font-semibold font-body text-copy pt-10">
             Date
           </legend>
@@ -241,7 +241,7 @@ const Searchbar = () => {
           </div>
         </fieldset>
 
-        <fieldset className="bg-white p-3 rounded text-center w-full md:col-span-1">
+        <fieldset className="bg-offwhite p-3 rounded text-center w-full md:col-span-1">
           <legend className="block text-sm font-semibold font-body text-copy pt-10">
             Guests
           </legend>

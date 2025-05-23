@@ -103,48 +103,48 @@ export default function Login() {
         />
         <meta property="og:type" content="website" />
       </Helmet>
-      <form
-        onSubmit={handleSubmit}
-        className="bg-copy dark:bg-primary p-6 rounded-lg shadow-lg max-w-xs md:max-w-2xl mx-auto mt-18"
-      >
-        <h1 className="sr-only">Log in</h1>
-        <div className="bg-white dark:bg-background p-4 rounded mb-4">
-          <label
-            htmlFor="email"
-            className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
-          >
-            Email
-          </label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            maxLength={40}
-            required
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="johndoe@noroff.no"
-            className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
-          />
-        </div>
-        <div className="bg-white dark:bg-background p-4 rounded mb-4">
-          <label
-            htmlFor="password"
-            className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
-          >
-            Password
-          </label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            minLength={8}
-            maxLength={20}
-            required
-            value={formData.password}
-            onChange={handleChange}
-            placeholder="password123"
-            className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
+         <form
+      onSubmit={handleSubmit}
+      className="bg-copy dark:bg-primary p-6 rounded-lg shadow-lg max-w-xs md:max-w-2xl mx-auto mt-18"
+    >
+      <h1 className="sr-only">Log in</h1>
+      <div className="bg-offwhite dark:bg-background p-4 rounded mb-4">
+        <label
+          htmlFor="email"
+          className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
+        >
+          Email
+        </label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          maxLength={40}
+          required
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="johndoe@noroff.no"
+          className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
+        />
+      </div>
+      <div className="bg-offwhite dark:bg-background p-4 rounded mb-4">
+        <label
+          htmlFor="password"
+          className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
+        >
+          Password
+        </label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          minLength={8}
+          maxLength={20}
+          required
+          value={formData.password}
+          onChange={handleChange}
+          placeholder="password123"
+          className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
           />
         </div>
         <div className="bg-primary dark:bg-background p-4 text-center -mx-6 -mb-6 rounded-b-lg">

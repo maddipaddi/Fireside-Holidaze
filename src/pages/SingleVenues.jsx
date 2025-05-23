@@ -18,6 +18,8 @@ import {
 import CustomCalendar from "../components/Calender";
 import BookingVenue from "../components/BookingCard";
 import { Helmet } from "react-helmet-async";
+import { handleError } from "../utils/errorHandler.mjs";
+
 
 /**
  * Displays detailed information about a single venue, including images, description, facilities, location,
@@ -96,7 +98,7 @@ function SingleVenue() {
         const json = await response.json();
         setVenue(json.data);
       } catch (error) {
-        console.error("Error fetching venue:", error);
+        handleError(error);
       } finally {
         setLoading(false);
       }
