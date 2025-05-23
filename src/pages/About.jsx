@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 /**
  * About page component for Holidaze.
@@ -33,6 +34,33 @@ export default function About() {
 
   return (
     <>
+      <Helmet>
+        <title>About us | Holidaze</title>
+        <meta
+          name="description"
+          content="Holidaze is your trusted cabin rental platform for unique stays
+            around the world. Created by a group of passionate travelers who love exploring new places, and the great outdoors.
+            "
+        />
+        <meta
+          property="og:title"
+          content="Fireside Holidaze - Cozy Cabins for Every Season"
+        />
+        <meta
+          property="og:description"
+          content="Holidaze is your trusted cabin rental platform for unique stays
+            around the world."
+        />
+        <meta
+          property="og:image"
+          content="https://fireside-holidaze.netlify.app/assets/zachary-kyra-derksen-unsplash.jpg"
+        />
+        <meta
+          property="og:url"
+          content="https://fireside-holidaze.netlify.app/"
+        />
+        <meta property="og:type" content="website" />
+      </Helmet>
       <section className="max-w-2xl mx-auto px-4 pt-28 pb-12 text-copy dark:text-white">
         <h1 className="text-3xl font-bold font-heading mb-4">About Holidaze</h1>
         <div className="space-y-4 font-body text-base">

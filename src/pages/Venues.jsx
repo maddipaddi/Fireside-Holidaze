@@ -4,6 +4,7 @@ import { Star } from "lucide-react";
 import Searchbar from "../components/Searchbar";
 import { useVenues } from "../components/context/VenueContext";
 import { Compass, PlugZap } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 /**
  * Venues page component.
@@ -46,7 +47,28 @@ function Venues() {
     );
 
   return (
-    <div>
+    <>
+      <Helmet>
+        <title>All venues | Holidaze</title>
+        <meta
+          name="description"
+          content="See all venues at Fireside Holidaze"
+        />
+        <meta property="og:title" content="Fireside Holidaze - All venues" />
+        <meta
+          property="og:description"
+          content="See all venues at Fireside Holidaze"
+        />
+        <meta
+          property="og:image"
+          content="https://fireside-holidaze.netlify.app/assets/zachary-kyra-derksen-unsplash.jpg"
+        />
+        <meta
+          property="og:url"
+          content="https://fireside-holidaze.netlify.app/"
+        />
+        <meta property="og:type" content="website" />
+      </Helmet>
       <Searchbar />
       <section className="mt-32">
         <h1 className="text-3xl font-bold font-heading mb-4 text-center text-copy dark:text-background">
@@ -76,7 +98,7 @@ function Venues() {
           )}
         />
       </section>
-    </div>
+    </>
   );
 }
 

@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import CustomCalendar from "../components/Calender";
 import BookingVenue from "../components/BookingCard";
+import { Helmet } from "react-helmet-async";
 
 /**
  * Displays detailed information about a single venue, including images, description, facilities, location,
@@ -117,6 +118,27 @@ function SingleVenue() {
 
   return (
     <>
+      <Helmet>
+        <title>{venue.name} | Holidaze</title>
+        <meta name="description" content={venue.description.slice(0, 150)} />
+        <meta
+          property="og:title"
+          content={`Fireside Holidaze - ${venue.name}`}
+        />
+        <meta
+          property="og:description"
+          content={`Fireside Holidaze - ${venue.description.slice(0, 150)}`}
+        />
+        <meta
+          property="og:image"
+          content="https://fireside-holidaze.netlify.app/assets/zachary-kyra-derksen-unsplash.jpg"
+        />
+        <meta
+          property="og:url"
+          content="https://fireside-holidaze.netlify.app/"
+        />
+        <meta property="og:type" content="website" />
+      </Helmet>
       <VenueCard
         venue={venue}
         renderFooter={(venue) => (
