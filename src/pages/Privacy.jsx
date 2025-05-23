@@ -1,3 +1,5 @@
+import { Helmet } from "react-helmet-async";
+
 /**
  * Privacy Component – Displays the Holidaze privacy policy in expandable sections.
  *
@@ -75,39 +77,59 @@ export default function Privacy() {
   ];
 
   return (
-    <section className="max-w-3xl mx-auto px-4 pt-28 pb-16 text-copy dark:text-white font-body">
-      <h1 className="text-3xl font-bold font-heading mb-6">Privacy Policy</h1>
-      <p className="mb-6">
-        At Holidaze, we are committed to protecting your privacy. This policy
-        explains what information we collect, how we use it, and your rights
-        regarding your personal data.
-      </p>
-      <div className="space-y-4">
-        {policies.map((item) => (
-          <details
-            key={item.id}
-            className="bg-white dark:bg-background p-4 rounded shadow"
-            aria-labelledby={`${item.id}-heading`}
-          >
-            <summary
-              className="cursor-pointer font-semibold dark:text-copy focus:outline-none focus:ring"
-              aria-controls={`${item.id}-content`}
-              aria-expanded="false"
-              role="button"
+    <>
+      <Helmet>
+        <title>Privacy Policy | Holidaze</title>
+        <meta name="description" content="Read our privacy policy." />
+        <meta
+          property="og:title"
+          content="Fireside Holidaze - Privacy Policy"
+        />
+        <meta property="og:description" content="Read our privacy policy." />
+        <meta
+          property="og:image"
+          content="https://fireside-holidaze.netlify.app/assets/zachary-kyra-derksen-unsplash.jpg"
+        />
+        <meta
+          property="og:url"
+          content="https://fireside-holidaze.netlify.app/"
+        />
+        <meta property="og:type" content="website" />
+      </Helmet>
+      <section className="max-w-3xl mx-auto px-4 pt-28 pb-16 text-copy dark:text-white font-body">
+        <h1 className="text-3xl font-bold font-heading mb-6">Privacy Policy</h1>
+        <p className="mb-6">
+          At Holidaze, we are committed to protecting your privacy. This policy
+          explains what information we collect, how we use it, and your rights
+          regarding your personal data.
+        </p>
+        <div className="space-y-4">
+          {policies.map((item) => (
+            <details
+              key={item.id}
+              className="bg-white dark:bg-background p-4 rounded shadow"
+              aria-labelledby={`${item.id}-heading`}
             >
-              <h2 id={`${item.id}-heading`} className="text-lg font-semibold">
-                {item.title}
-              </h2>
-            </summary>
-            <div
-              id={`${item.id}-content`}
-              className="mt-2 text-sm dark:text-copy"
-            >
-              <p>{item.content}</p>
-            </div>
-          </details>
-        ))}
-      </div>
-    </section>
+              <summary
+                className="cursor-pointer font-semibold dark:text-copy focus:outline-none focus:ring"
+                aria-controls={`${item.id}-content`}
+                aria-expanded="false"
+                role="button"
+              >
+                <h2 id={`${item.id}-heading`} className="text-lg font-semibold">
+                  {item.title}
+                </h2>
+              </summary>
+              <div
+                id={`${item.id}-content`}
+                className="mt-2 text-sm dark:text-copy"
+              >
+                <p>{item.content}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }

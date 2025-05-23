@@ -6,6 +6,7 @@ import { handleError } from "../utils/errorHandler.mjs";
 import { LOGIN, PROFILE } from "../utils/constants.mjs";
 import { UserContext } from "../components/context/UserContext";
 import { apiRequest } from "../utils/api.mjs";
+import { Helmet } from "react-helmet-async";
 
 /**
  * Login component renders a login form for user authentication.
@@ -80,7 +81,29 @@ export default function Login() {
   }
 
   return (
-    <form
+    <>
+      <Helmet>
+        <title>Login | Holidaze</title>
+        <meta
+          name="description"
+          content="Login to start booking your next adventure or host for others."
+        />
+        <meta property="og:title" content="Fireside Holidaze - Login" />
+        <meta
+          property="og:description"
+          content="Login to start booking your next adventure or host for others."
+        />
+        <meta
+          property="og:image"
+          content="https://fireside-holidaze.netlify.app/assets/zachary-kyra-derksen-unsplash.jpg"
+        />
+        <meta
+          property="og:url"
+          content="https://fireside-holidaze.netlify.app/"
+        />
+        <meta property="og:type" content="website" />
+      </Helmet>
+         <form
       onSubmit={handleSubmit}
       className="bg-copy dark:bg-primary p-6 rounded-lg shadow-lg max-w-xs md:max-w-2xl mx-auto mt-18"
     >
@@ -122,16 +145,17 @@ export default function Login() {
           onChange={handleChange}
           placeholder="password123"
           className="font-body w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-copy dark:bg-white dark:text-copy"
-        />
-      </div>
-      <div className="bg-primary dark:bg-background p-4 text-center -mx-6 -mb-6 rounded-b-lg">
-        <button
-          disabled={isLoading}
-          className="bg-background dark:bg-primary text-copy dark:text-white font-body font-bold px-8 py-2 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer"
-        >
-          {isLoading ? "Logging in..." : "Log in"}
-        </button>
-      </div>
-    </form>
+          />
+        </div>
+        <div className="bg-primary dark:bg-background p-4 text-center -mx-6 -mb-6 rounded-b-lg">
+          <button
+            disabled={isLoading}
+            className="bg-background dark:bg-primary text-copy dark:text-white font-body font-bold px-8 py-2 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer"
+          >
+            {isLoading ? "Logging in..." : "Log in"}
+          </button>
+        </div>
+      </form>
+    </>
   );
 }

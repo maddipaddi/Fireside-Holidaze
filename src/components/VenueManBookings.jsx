@@ -95,7 +95,7 @@ export default function VenueManagerBookings() {
         <ul className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {bookings.map((booking) => {
             const image =
-              booking.media?.[0]?.url ||
+              `${booking.media?.[0]?.url}?auto=format&fit=crop&w=600&q=80` ||
               "https://placehold.co/150x150?text=No+Image";
             const alt = booking.media?.[0]?.alt || booking.venueName;
             const customerName = booking.customer?.name || "Unknown";
@@ -105,11 +105,12 @@ export default function VenueManagerBookings() {
                 key={booking.id}
                 className="bg-secondary dark:bg-background text-white dark:text-copy p-4 rounded-lg shadow flex flex-col items-center"
               >
-                <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-darkbackground dark:border-copy mb-4">
+                <div className="w-32 h-32 rounded-full aspect-[1/1] overflow-hidden border-4 border-darkbackground dark:border-copy mb-4">
                   <img
                     src={image}
                     alt={alt}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                 </div>
                 <div className="text-center">

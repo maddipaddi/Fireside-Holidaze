@@ -88,12 +88,14 @@ export default function PopularCarousel() {
             >
               <img
                 src={
-                  venue.media?.[0]?.url ||
+                  `${venue.media?.[0]?.url}?auto=format&fit=crop&w=600&q=80` ||
                   "https://via.placeholder.com/400x300?text=No+Image"
                 }
                 alt={venue.media?.[0]?.alt || "Venue image"}
                 className="w-full h-48 object-cover rounded-t-xl"
+                loading="lazy"
               />
+
               <div className="p-3 text-left flex-grow flex flex-col justify-between bg-primary text-white font-body border-copy">
                 <div>
                   <h3 className="font-semibold text-base">{venue.name}</h3>

@@ -121,6 +121,7 @@ const Searchbar = () => {
 
   return (
     <form
+      onSubmit={(e) => e.preventDefault()}
       role="search"
       className="bg-copy dark:bg-primary p-8 rounded-lg shadow-lg max-w-xs md:max-w-2xl mx-auto mt-12"
       ref={wrapperRef}
