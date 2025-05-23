@@ -107,7 +107,7 @@ export default function Profile() {
   }
 
   return (
-    <>
+ <>
       <Helmet>
         <title>Profile | Holidaze</title>
         <meta
@@ -118,7 +118,7 @@ export default function Profile() {
         <meta
           property="og:description"
           content="View your profile page and see the cabins you host and/or the cabins you've booked.
-              "
+            "
         />
         <meta
           property="og:image"
@@ -137,7 +137,8 @@ export default function Profile() {
             alt={user.avatar?.alt || "Profile image"}
             className="w-32 h-32 rounded-full object-cover border-4 border-white absolute -top-16 z-10"
           />
-        
+        </div>
+
         <div className="w-full bg-secondary p-6 rounded-t-lg rounded-b-lg shadow-lg mt-12">
           <h1 className="text-2xl font-semibold text-center mb-6 font-body text-white">
             Hi, {user.name}!
@@ -188,5 +189,4 @@ export default function Profile() {
         )}
       </div>
     </>
-  );
 }
