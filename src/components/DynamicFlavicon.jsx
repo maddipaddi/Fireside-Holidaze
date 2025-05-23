@@ -1,5 +1,18 @@
 import { useEffect } from "react";
 
+/**
+ * DynamicFavicon is a React component that dynamically updates the favicon
+ * based on the user's system color scheme (light or dark mode).
+ *
+ * It listens to changes in the `prefers-color-scheme` media query and swaps
+ * the favicon accordingly.
+ *
+ * This component does not render anything in the UI — it runs effect logic only.
+ *
+ * @component
+ * @returns {null} This component does not render any visible JSX.
+ */
+
 function DynamicFavicon() {
   useEffect(() => {
     const setFavicon = (isDark) => {
