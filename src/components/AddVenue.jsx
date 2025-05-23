@@ -282,7 +282,7 @@ export default function AddVenue() {
           <div className="rounded-xl bg-offwhite dark:bg-background p-4 mb-4">
             <label
               htmlFor="price"
-              className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1 bg-white"
+              className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
             >
               Price
             </label>
@@ -299,7 +299,7 @@ export default function AddVenue() {
           <div className="rounded-xl bg-offwhite dark:bg-background p-4 mb-4">
             <label
               htmlFor="maxGuests"
-              className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1 bg-white"
+              className="block text-sm font-semibold font-body text-copy dark:text-copy mb-1"
             >
               Maximum number of guests
             </label>
