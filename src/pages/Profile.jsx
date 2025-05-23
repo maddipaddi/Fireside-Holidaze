@@ -107,7 +107,7 @@ export default function Profile() {
   }
 
   return (
- <>
+    <>
       <Helmet>
         <title>Profile | Holidaze</title>
         <meta
@@ -137,45 +137,44 @@ export default function Profile() {
             alt={user.avatar?.alt || "Profile image"}
             className="w-32 h-32 rounded-full object-cover border-4 border-white absolute -top-16 z-10"
           />
-        </div>
+          <div className="w-full bg-secondary p-6 rounded-t-lg rounded-b-lg shadow-lg mt-12">
+            <h1 className="text-2xl font-semibold text-center mb-6 font-body text-white">
+              Hi, {user.name}!
+            </h1>
+            <div className="mb-6">
+              <label
+                htmlFor="profile-img-url"
+                className="block text-sm font-semibold font-body text-white mb-1"
+              >
+                Change profile picture
+              </label>
+              <input
+                name="profile-img-url"
+                id="profile-img-url"
+                type="text"
+                value={newAvatarUrl}
+                onChange={(e) => setNewAvatarUrl(e.target.value)}
+                className="font-body w-full px-3 py-2 bg-white text-black border rounded focus:outline-none focus:ring focus:border-copy"
+                placeholder="https://url.com/image.jpg"
+              />
+            </div>
 
-        <div className="w-full bg-secondary p-6 rounded-t-lg rounded-b-lg shadow-lg mt-12">
-          <h1 className="text-2xl font-semibold text-center mb-6 font-body text-white">
-            Hi, {user.name}!
-          </h1>
-          <div className="mb-6">
-            <label
-              htmlFor="profile-img-url"
-              className="block text-sm font-semibold font-body text-white mb-1"
-            >
-              Change profile picture
-            </label>
-            <input
-              name="profile-img-url"
-              id="profile-img-url"
-              type="text"
-              value={newAvatarUrl}
-              onChange={(e) => setNewAvatarUrl(e.target.value)}
-              className="font-body w-full px-3 py-2 bg-white text-black border rounded focus:outline-none focus:ring focus:border-copy"
-              placeholder="https://url.com/image.jpg"
-            />
-          </div>
-
-          <div className="text-center -mx-6 -mb-6 bg-primary dark:bg-background p-4 rounded-b-lg">
-            <button
-              onClick={handleUpdateAvatar}
-              className="bg-background dark:bg-primary text-copy dark:text-background font-body font-bold px-8 py-2 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer w-3/4 mb-4"
-            >
-              Update profile picture
-            </button>
-            <button
-              onClick={handleToggleVenueManager}
-              className="bg-background dark:bg-primary text-copy dark:text-background font-body font-bold px-8 py-2 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer w-3/4"
-            >
-              {user.venueManager
-                ? "Switch to customer"
-                : "Switch to venue manager"}
-            </button>
+            <div className="text-center -mx-6 -mb-6 bg-primary dark:bg-background p-4 rounded-b-lg">
+              <button
+                onClick={handleUpdateAvatar}
+                className="bg-background dark:bg-primary text-copy dark:text-background font-body font-bold px-8 py-2 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer w-3/4 mb-4"
+              >
+                Update profile picture
+              </button>
+              <button
+                onClick={handleToggleVenueManager}
+                className="bg-background dark:bg-primary text-copy dark:text-background font-body font-bold px-8 py-2 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer w-3/4"
+              >
+                {user.venueManager
+                  ? "Switch to customer"
+                  : "Switch to venue manager"}
+              </button>
+            </div>
           </div>
         </div>
 
@@ -189,5 +188,5 @@ export default function Profile() {
         )}
       </div>
     </>
-    );
+  );
 }
