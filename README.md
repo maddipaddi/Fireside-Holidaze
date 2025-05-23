@@ -24,8 +24,8 @@ This project is the **frontend implementation** of Holidaze, built on an existin
 5. [Commit Message Guidelines](#commit-message-guidelines)
    - [Format](#format)
    - [Types](#types)
-7. [Authors](#authors)
-6. [License](#license)
+6. [Authors](#authors)
+7. [License](#license)
 
 
 ---
