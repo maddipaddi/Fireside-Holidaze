@@ -148,7 +148,7 @@ const SearchResults = () => {
                       <p className="text-sm">{v.description}</p>
                       <button
                         onClick={() => navigate(`/venue/${v.id}`)}
-                        className="text-sm underline mt-2 hover:text-accent"
+                        className="text-sm underline mt-2 hover:text-accent cursor-pointer"
                       >
                         Read more
                       </button>
@@ -175,7 +175,7 @@ const SearchResults = () => {
 
                     <button
                       onClick={() => navigate(`/venue/${v.id}`)}
-                      className="text-sm underline mt-2 hover:text-accent"
+                      className="text-sm underline mt-2 hover:text-accent cursor-pointer"
                     >
                       Read more
                     </button>
