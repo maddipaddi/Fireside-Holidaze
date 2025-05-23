@@ -26,6 +26,13 @@ function BookingVenue({ venue, dateFrom, dateTo, setDateFrom, setDateTo }) {
   const [error] = useState("");
   const navigate = useNavigate();
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    setIsLoggedIn(!!token);
+  }, []);
+
   useEffect(() => {
     if (dateFrom && dateTo) {
       const start = new Date(dateFrom);
@@ -84,46 +91,64 @@ function BookingVenue({ venue, dateFrom, dateTo, setDateFrom, setDateTo }) {
       <h2 className="text-xl font-semibold mb-4 text-black">
         Book: {venue.name}
       </h2>
-      <label htmlFor="guests" className="block mb-2 text-black">
-        Guests:
-        <input
-          id="guests"
-          name="guests"
-          type="number"
-          min="1"
-          max={venue.maxGuests}
-          value={guests}
-          onChange={(e) => {
-            const value = Number(e.target.value);
-            if (value > venue.maxGuests) {
-              setGuests(venue.maxGuests);
-            } else if (value < 1) {
-              setGuests(1);
-            } else {
-              setGuests(value);
+
+      {isLoggedIn ? (
+        <>
+          <label htmlFor="guests" className="block mb-2 text-black">
+            Guests:
+            <input
+              id="guests"
+              name="guests"
+              type="number"
+              min="1"
+              max={venue.maxGuests}
+              value={guests}
+              onChange={(e) => {
+                const value = Number(e.target.value);
+                if (value > venue.maxGuests) {
+                  setGuests(venue.maxGuests);
+                } else if (value < 1) {
+                  setGuests(1);
+                } else {
+                  setGuests(value);
+                }
+              }}
+              className="w-full mt-1 p-2 border rounded text-black bg-white"
+            />
+          </label>
+
+          {error && (
+            <div className="mt-2 text-red-600 font-medium">{error}</div>
+          )}
+
+          <p className="mt-4 text-lg font-medium text-black">
+            Total Price: ${totalPrice}
+          </p>
+
+          <button
+            onClick={handleBooking}
+            disabled={
+              loading ||
+              !dateFrom ||
+              !dateTo ||
+              guests < 1 ||
+              new Date(dateFrom) > new Date(dateTo) ||
+              !!error
             }
-          }}
-          className="w-full mt-1 p-2 border rounded text-black bg-white"
-        />
-      </label>
-      {error && <div className="mt-2 text-red-600 font-medium">{error}</div>}
-      <p className="mt-4 text-lg font-medium text-black">
-        Total Price: ${totalPrice}
-      </p>
-      <button
-        onClick={handleBooking}
-        disabled={
-          loading ||
-          !dateFrom ||
-          !dateTo ||
-          guests < 1 ||
-          new Date(dateFrom) > new Date(dateTo) ||
-          !!error
-        }
-        className="mt-4 w-full bg-copy hover:bg-primary dark:bg-primary dark:hover:bg-copy text-white dark:text-white p-2 rounded hover:cursor-pointer transition duration-200 ease-in-out"
-      >
-        {loading ? "Booking..." : "Confirm Booking"}
-      </button>
+            className="mt-4 w-full bg-copy hover:bg-primary dark:bg-primary dark:hover:bg-copy text-white dark:text-white p-2 rounded hover:cursor-pointer transition duration-200 ease-in-out"
+          >
+            {loading ? "Booking..." : "Confirm Booking"}
+          </button>
+        </>
+      ) : (
+        <p className="text-black">
+          You must be logged in to book this venue. Please{" "}
+          <a href="/login" className="text-blue-500 underline">
+            log in
+          </a>{" "}
+          to continue.
+        </p>
+      )}
     </div>
   );
 }
