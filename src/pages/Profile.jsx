@@ -3,11 +3,11 @@ import AddVenue from "../components/AddVenue/";
 import ProfileVenues from "../components/ProfileVenues";
 import { UserContext } from "../components/context/UserContext";
 import { updateProfile } from "../utils/updateProfile.mjs";
-import VenueManagerBookings from "../components/VenueManBookings";
-import CustomerBookings from "../components/CostomerBookings/CustomerBookings";
+import CustomerBookings from "../components/CustomerBookings";
 import { handleError } from "../utils/errorHandler.mjs";
 import { showSuccessMessage } from "../utils/successMessage.mjs";
 import { Helmet } from "react-helmet-async";
+import VenueManagerBookings from "../components/VenueManagerBookings/VenueManBookings";
 
 /**
  * Profile component displays and manages the user's profile information.
