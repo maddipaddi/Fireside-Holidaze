@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { SINGLE_BOOKING } from "../utils/constants.mjs";
-import CustomCalendar from "./Calender";
+import CustomCalendar from "./CustomCalendar";
 import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 import { apiRequest } from "../utils/api.mjs";
