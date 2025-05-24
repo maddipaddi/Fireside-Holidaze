@@ -20,7 +20,7 @@ import SearchButton from "./SearchButton";
  * @returns {JSX.Element} The rendered search bar UI.
  */
 
-const SearchBar = () => {
+export default function SearchBar() {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -140,6 +140,4 @@ const SearchBar = () => {
       <SearchButton onClick={handleSearch} />
     </form>
   );
-};
-
-export default SearchBar;
+}
