@@ -15,11 +15,10 @@ import {
   MapPinned,
   Map,
 } from "lucide-react";
-import CustomCalendar from "../components/Calender";
+import CustomCalendar from "../components/CustomCalendar/CustomCalandar";
 import BookingVenue from "../components/BookingCard";
 import { Helmet } from "react-helmet-async";
 import { handleError } from "../utils/errorHandler.mjs";
-
 
 /**
  * Displays detailed information about a single venue, including images, description, facilities, location,
