@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import AddVenue from "../components/AddVenue";
+import AddVenue from "../components/AddVenue/";
 import ProfileVenues from "../components/ProfileVenues";
 import { UserContext } from "../components/context/UserContext";
 import { updateProfile } from "../utils/updateProfile.mjs";
