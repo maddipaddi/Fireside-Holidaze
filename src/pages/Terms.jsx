@@ -1,3 +1,5 @@
+import { Helmet } from "react-helmet-async";
+
 export default function Terms() {
   const terms = [
     {
@@ -45,42 +47,65 @@ export default function Terms() {
   ];
 
   return (
-    <section className="max-w-3xl mx-auto px-4 pt-28 pb-16 text-copy dark:text-white font-body">
-      <h1 className="text-3xl font-bold font-heading mb-6">
-        Terms and Conditions
-      </h1>
+    <>
+      <Helmet>
+        <title>Terms and Conditions | Holidaze</title>
+        <meta name="description" content="Read our terms and conditions." />
+        <meta
+          property="og:title"
+          content="Fireside Holidaze - Terms and Conditions"
+        />
+        <meta
+          property="og:description"
+          content="Read our terms and conditions."
+        />
+        <meta
+          property="og:image"
+          content="https://fireside-holidaze.netlify.app/assets/zachary-kyra-derksen-unsplash.jpg"
+        />
+        <meta
+          property="og:url"
+          content="https://fireside-holidaze.netlify.app/"
+        />
+        <meta property="og:type" content="website" />
+      </Helmet>
+      <section className="max-w-3xl mx-auto px-4 pt-28 pb-16 text-copy dark:text-white font-body">
+        <h1 className="text-3xl font-bold font-heading mb-6">
+          Terms and Conditions
+        </h1>
 
-      <p className="mb-6">
-        Please read these terms carefully before using Holidaze. By accessing or
-        using our platform, you agree to be bound by these terms.
-      </p>
+        <p className="mb-6">
+          Please read these terms carefully before using Holidaze. By accessing
+          or using our platform, you agree to be bound by these terms.
+        </p>
 
-      <div className="space-y-4">
-        {terms.map((term) => (
-          <details
-            key={term.id}
-            className="bg-white dark:bg-background p-4 rounded shadow"
-            aria-labelledby={`${term.id}-heading`}
-          >
-            <summary
-              className="cursor-pointer font-semibold dark:text-copy focus:outline-none focus:ring"
-              aria-controls={`${term.id}-content`}
-              aria-expanded="false"
-              role="button"
+        <div className="space-y-4">
+          {terms.map((term) => (
+            <details
+              key={term.id}
+              className="bg-white dark:bg-background p-4 rounded shadow"
+              aria-labelledby={`${term.id}-heading`}
             >
-              <h2 id={`${term.id}-heading`} className="text-lg font-semibold">
-                {term.title}
-              </h2>
-            </summary>
-            <div
-              id={`${term.id}-content`}
-              className="mt-2 text-sm dark:text-copy"
-            >
-              <p>{term.content}</p>
-            </div>
-          </details>
-        ))}
-      </div>
-    </section>
+              <summary
+                className="cursor-pointer font-semibold dark:text-copy focus:outline-none focus:ring"
+                aria-controls={`${term.id}-content`}
+                aria-expanded="false"
+                role="button"
+              >
+                <h2 id={`${term.id}-heading`} className="text-lg font-semibold">
+                  {term.title}
+                </h2>
+              </summary>
+              <div
+                id={`${term.id}-content`}
+                className="mt-2 text-sm dark:text-copy"
+              >
+                <p>{term.content}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }

@@ -95,7 +95,7 @@ export default function VenueManagerBookings() {
         <ul className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {bookings.map((booking) => {
             const image =
-              booking.media?.[0]?.url ||
+              `${booking.media?.[0]?.url}?auto=format&fit=crop&w=600&q=80` ||
               "https://placehold.co/150x150?text=No+Image";
             const alt = booking.media?.[0]?.alt || booking.venueName;
             const customerName = booking.customer?.name || "Unknown";
@@ -105,11 +105,12 @@ export default function VenueManagerBookings() {
                 key={booking.id}
                 className="bg-secondary dark:bg-background text-white dark:text-copy p-4 rounded-lg shadow flex flex-col items-center"
               >
-                <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-darkbackground dark:border-copy mb-4">
+                <div className="w-32 h-32 rounded-full aspect-[1/1] overflow-hidden border-4 border-darkbackground dark:border-copy mb-4">
                   <img
                     src={image}
                     alt={alt}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                 </div>
                 <div className="text-center">
@@ -138,22 +139,24 @@ export default function VenueManagerBookings() {
 
   return (
     <section className="px-4 md:px-8 max-w-screen-xl mx-auto">
-      <div
+      <button
+        aria-expanded={showUpcoming}
+        aria-controls="upcoming-bookings"
         className="cursor-pointer flex justify-center items-center gap-2 mb-6"
         onClick={() => setShowUpcoming((prev) => !prev)}
       >
         <h2 className="text-3xl font-bold font-heading text-copy dark:text-background">
-          Upcoming bookings
+          Upcoming bookings on my venues
         </h2>
         <ChevronDown
           className={`transition-transform duration-300 dark:text-background ${
             showUpcoming ? "rotate-180" : "rotate-0"
           }`}
         />
-      </div>
+      </button>
 
       {showUpcoming && (
-        <>
+        <div id="upcoming-bookings">
           {bookings.upcoming.length === 0 ? (
             <>
               <Tent className="mx-auto mb-2 h-6 w-6 text-primary dark:text-background" />
@@ -179,25 +182,28 @@ export default function VenueManagerBookings() {
               )}
             </>
           )}
-        </>
+        </div>
       )}
 
-      <div
+      <button
+        aria-expanded={showPast}
+        aria-controls="past-bookings"
         className="cursor-pointer flex justify-center items-center gap-2 mt-16"
         onClick={() => setShowPast((prev) => !prev)}
       >
         <h2 className="text-3xl font-bold font-heading text-copy dark:text-background">
-          Past bookings
+          Past bookings on my venues
         </h2>
         <ChevronDown
+          aria-hidden="false"
           className={`transition-transform duration-300 dark:text-background ${
             showPast ? "rotate-180" : "rotate-0"
           }`}
         />
-      </div>
+      </button>
 
       {showPast && (
-        <>
+        <div id="past-bookings">
           {bookings.past.length === 0 ? (
             <>
               <Map className="mx-auto mb-2 h-6 w-6 text-primary dark:text-background mt-4" />
@@ -221,7 +227,7 @@ export default function VenueManagerBookings() {
               )}
             </>
           )}
-        </>
+        </div>
       )}
     </section>
   );

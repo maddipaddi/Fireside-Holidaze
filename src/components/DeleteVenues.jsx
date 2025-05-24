@@ -36,7 +36,6 @@ export default function DeleteVenueButton({ venueId, onDeleted }) {
       showSuccessMessage("Venue deleted successfully.");
       onDeleted(venueId);
     } catch (error) {
-      console.error("Error deleting venue:", error);
       handleError(error);
     } finally {
       setDeleting(false);

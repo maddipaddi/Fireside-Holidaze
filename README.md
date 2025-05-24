@@ -13,7 +13,7 @@ This project is the **frontend implementation** of Holidaze, built on an existin
 
 ## Table of Contents
 
-1. [Features (Planned)](#features-planned)
+1. [Features](#features)
 2. [Target Audience](#target-audience)
 3. [Getting Started](#getting-started)
    - [Prerequisites](#prerequisites)
@@ -24,12 +24,13 @@ This project is the **frontend implementation** of Holidaze, built on an existin
 5. [Commit Message Guidelines](#commit-message-guidelines)
    - [Format](#format)
    - [Types](#types)
-6. [License](#license)
-7. [Future Updates](#future-updates)
+6. [Authors](#authors)
+7. [License](#license)
+
 
 ---
 
-## Features (Planned)
+## Features
 
 - User registration and login for authenticated access for both customers and venue managers.
 - Browse and search venues (available to all users).
@@ -160,12 +161,18 @@ Keep the description concise but meaningful.
 
 ---
 
+## Authors
+
+Veronika Aas - [@VeronikaAas](https://github.com/VeronikaAas)
+
+Herman Hylland - [@Hermanhyl](https://github.com/Hermanhyl)
+
+Madelen Sletteberg - [@maddipaddi](https://github.com/maddipaddi)
+
+---
+
 ## License
 
 This project is for educational purposes only as part of the Noroff Frontend Development curriculum. It is not intended for commercial use.
 
 ---
-
-## Future updates
-
-This README will be updated as the project evolves, including details about additional tools (e.g., Tailwind CSS), features, and design changes.

@@ -12,7 +12,6 @@ const VenueProvider = ({ children }) => {
     fetchAllVenues()
       .then(setVenues)
       .catch((err) => {
-        console.error("VenueContext error:", err);
         setError(err);
       })
       .finally(() => setLoading(false));

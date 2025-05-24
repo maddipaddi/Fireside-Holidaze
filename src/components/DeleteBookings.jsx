@@ -5,6 +5,22 @@ import { handleError } from "../utils/errorHandler.mjs";
 import { showConfirmDialog } from "../utils/showConfirmDialog.mjs";
 import { showSuccessMessage } from "../utils/successMessage.mjs";
 
+/**
+ * CancelBookingButton component allows the user to cancel (delete) a booking.
+ *
+ * When clicked, it shows a confirmation dialog. If confirmed, it sends a DELETE request
+ * to the booking API, displays a success message, and calls the `onDeleted` callback
+ * to update the parent component's state.
+ *
+ * Shows a loading state while the cancellation is in progress.
+ *
+ * @component
+ * @param {Object} props - Component props
+ * @param {string} props.bookingId - The ID of the booking to cancel
+ * @param {Function} props.onDeleted - Callback function to be called after successful deletion
+ * @returns {JSX.Element} The rendered CancelBookingButton component
+ */
+
 export default function CancelBookingButton({ bookingId, onDeleted }) {
   const [deleting, setDeleting] = useState(false);
 
@@ -24,7 +40,6 @@ export default function CancelBookingButton({ bookingId, onDeleted }) {
       showSuccessMessage("The booking has been cancelled successfully.");
       onDeleted(bookingId);
     } catch (error) {
-      console.error("Error deleting booking:", error);
       handleError(error);
     } finally {
       setDeleting(false);

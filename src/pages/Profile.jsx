@@ -7,6 +7,7 @@ import VenueManagerBookings from "../components/VenueManBookings";
 import CustomerBookings from "../components/CustomerBookings";
 import { handleError } from "../utils/errorHandler.mjs";
 import { showSuccessMessage } from "../utils/successMessage.mjs";
+import { Helmet } from "react-helmet-async";
 
 /**
  * Profile component displays and manages the user's profile information.
@@ -106,57 +107,86 @@ export default function Profile() {
   }
 
   return (
-    <div className="mt-26 flex flex-col items-center gap-10">
-      <div className="relative w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl flex flex-col items-center m-4 px-4">
-        <img
-          src={newAvatarUrl || "/default-avatar.png"}
-          alt={user.avatar?.alt || "Profile image"}
-          className="w-32 h-32 rounded-full object-cover border-4 border-white absolute -top-16 z-10"
+    <>
+      <Helmet>
+        <title>Profile | Holidaze</title>
+        <meta
+          name="description"
+          content="View your profile page and see the cabins you host and/or the cabins you've booked."
         />
-        <div className="w-full bg-secondary p-6 rounded-t-lg rounded-b-lg shadow-lg mt-12">
-          <h1 className="text-2xl font-semibold text-center mb-6 font-body text-white">
-            Hi, {user.name}!
-          </h1>
-          <div className="mb-6">
-            <label className="block text-sm font-semibold font-body text-white mb-1">
-              Change profile picture
-            </label>
-            <input
-              type="text"
-              value={newAvatarUrl}
-              onChange={(e) => setNewAvatarUrl(e.target.value)}
-              className="font-body w-full px-3 py-2 bg-white text-black border rounded focus:outline-none focus:ring focus:border-copy"
-              placeholder="Paste image URL here"
-            />
-          </div>
+        <meta property="og:title" content="Fireside Holidaze - Profile" />
+        <meta
+          property="og:description"
+          content="View your profile page and see the cabins you host and/or the cabins you've booked.
+            "
+        />
+        <meta
+          property="og:image"
+          content="https://fireside-holidaze.netlify.app/assets/zachary-kyra-derksen-unsplash.jpg"
+        />
+        <meta
+          property="og:url"
+          content="https://fireside-holidaze.netlify.app/"
+        />
+        <meta property="og:type" content="website" />
+      </Helmet>
+      <div className="mt-26 flex flex-col items-center gap-10">
+        <div className="relative w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl flex flex-col items-center m-4 px-4">
+          <img
+            src={newAvatarUrl || "/default-avatar.png"}
+            alt={user.avatar?.alt || "Profile image"}
+            className="w-32 h-32 rounded-full object-cover border-4 border-white absolute -top-16 z-10"
+          />
+          <div className="w-full bg-secondary p-6 rounded-t-lg rounded-b-lg shadow-lg mt-12">
+            <h1 className="text-2xl font-semibold text-center mb-6 font-body text-white">
+              Hi, {user.name}!
+            </h1>
+            <div className="mb-6">
+              <label
+                htmlFor="profile-img-url"
+                className="block text-sm font-semibold font-body text-white mb-1"
+              >
+                Change profile picture
+              </label>
+              <input
+                name="profile-img-url"
+                id="profile-img-url"
+                type="text"
+                value={newAvatarUrl}
+                onChange={(e) => setNewAvatarUrl(e.target.value)}
+                className="font-body w-full px-3 py-2 bg-white text-black border rounded focus:outline-none focus:ring focus:border-copy"
+                placeholder="https://url.com/image.jpg"
+              />
+            </div>
 
-          <div className="text-center -mx-6 -mb-6 bg-primary dark:bg-background p-4 rounded-b-lg">
-            <button
-              onClick={handleUpdateAvatar}
-              className="bg-background dark:bg-primary text-copy dark:text-background font-body font-bold px-8 py-2 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer w-full mb-2"
-            >
-              Update profile picture
-            </button>
-            <button
-              onClick={handleToggleVenueManager}
-              className="bg-background dark:bg-primary text-copy dark:text-background font-body font-bold px-8 py-2 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer w-full"
-            >
-              {user.venueManager
-                ? "Switch to customer"
-                : "Switch to venue manager"}
-            </button>
+            <div className="text-center -mx-6 -mb-6 bg-primary dark:bg-background p-4 rounded-b-lg">
+              <button
+                onClick={handleUpdateAvatar}
+                className="bg-background dark:bg-primary text-copy dark:text-background font-body font-bold px-8 py-2 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer w-3/4 mb-4"
+              >
+                Update profile picture
+              </button>
+              <button
+                onClick={handleToggleVenueManager}
+                className="bg-background dark:bg-primary text-copy dark:text-background font-body font-bold px-8 py-2 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer w-3/4"
+              >
+                {user.venueManager
+                  ? "Switch to customer"
+                  : "Switch to venue manager"}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
 
-      {!user.venueManager && <CustomerBookings />}
-      {user.venueManager && (
-        <>
-          <VenueManagerBookings />
-          <ProfileVenues />
-          <AddVenue />
-        </>
-      )}
-    </div>
+        {!user.venueManager && <CustomerBookings />}
+        {user.venueManager && (
+          <>
+            <VenueManagerBookings />
+            <ProfileVenues />
+            <AddVenue />
+          </>
+        )}
+      </div>
+    </>
   );
 }

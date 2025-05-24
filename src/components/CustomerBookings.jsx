@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { apiRequest } from "../utils/api.mjs";
 import { PROFILE } from "../utils/constants.mjs";
 import { UserContext } from "./context/UserContext";
@@ -21,6 +22,7 @@ import EditBookingModal from "./EditBooking";
 
 export default function CustomerBookings() {
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
   const [bookings, setBookings] = useState({ upcoming: [], past: [] });
   const [loading, setLoading] = useState(true);
   const [showUpcoming, setShowUpcoming] = useState(true);
@@ -37,7 +39,6 @@ export default function CustomerBookings() {
           `${PROFILE}/${user.name}/bookings?_venue=true`,
         );
         const allBookings = venues.data;
-
         const today = new Date();
 
         const upcoming = allBookings
@@ -86,7 +87,7 @@ export default function CustomerBookings() {
         <ul className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {bookings.map((booking) => {
             const image =
-              booking.venue.media?.[0]?.url ||
+              `${booking.venue.media?.[0]?.url}?auto=format&fit=crop&w=600&q=80` ||
               "https://placehold.co/150x150?text=No+Image";
             const alt = booking.venue.media?.[0]?.alt || booking.venueName;
 
@@ -95,11 +96,12 @@ export default function CustomerBookings() {
                 key={booking.id}
                 className="bg-secondary dark:bg-background text-white dark:text-copy p-4 rounded-lg shadow flex flex-col items-center"
               >
-                <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-darkbackground dark:border-copy mb-4">
+                <div className="w-32 h-32 rounded-full aspect-[1/1] overflow-hidden border-4 border-darkbackground dark:border-copy mb-4">
                   <img
                     src={image}
                     alt={alt}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                 </div>
                 <div className="text-center">
@@ -113,27 +115,35 @@ export default function CustomerBookings() {
                   </p>
                 </div>
                 {isUpcoming && (
-                  <div className="flex justify-center gap-4 m-4">
+                  <div className="flex flex-col items-center gap-2 m-4">
+                    <div className="flex justify-center gap-4">
+                      <button
+                        onClick={() => {
+                          setBookingToEdit(booking);
+                          setIsEditModalOpen(true);
+                        }}
+                        className="bg-copy text-white dark:bg-primary dark:text-background font-body font-bold px-4 py-1 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer"
+                      >
+                        Change
+                      </button>
+                      <CancelBookingButton
+                        bookingId={booking.id}
+                        onDeleted={(deletedId) =>
+                          setBookings((prev) => ({
+                            upcoming: prev.upcoming.filter(
+                              (b) => b.id !== deletedId,
+                            ),
+                            past: prev.past,
+                          }))
+                        }
+                      />
+                    </div>
                     <button
-                      onClick={() => {
-                        setBookingToEdit(booking);
-                        setIsEditModalOpen(true);
-                      }}
-                      className="bg-copy text-white dark:bg-primary dark:text-background font-body font-bold px-4 py-1 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer"
+                      className="bg-copy text-white font-body font-bold px-6 py-1 mt-2 rounded shadow hover:bg-accent/50 hover:text-white transition cursor-pointer"
+                      onClick={() => navigate(`/venue/${booking.venue.id}`)}
                     >
-                      Change
+                      View venue
                     </button>
-                    <CancelBookingButton
-                      bookingId={booking.id}
-                      onDeleted={(deletedId) =>
-                        setBookings((prev) => ({
-                          upcoming: prev.upcoming.filter(
-                            (b) => b.id !== deletedId,
-                          ),
-                          past: prev.past,
-                        }))
-                      }
-                    />
                   </div>
                 )}
               </li>
@@ -160,7 +170,9 @@ export default function CustomerBookings() {
 
   return (
     <section className="px-4 md:px-8 max-w-screen-xl mx-auto">
-      <div
+      <button
+        aria-expanded={showUpcoming}
+        aria-controls="upcoming-bookings"
         className="cursor-pointer flex justify-center items-center gap-2 mb-6"
         onClick={() => setShowUpcoming((prev) => !prev)}
       >
@@ -172,10 +184,10 @@ export default function CustomerBookings() {
             showUpcoming ? "rotate-180" : "rotate-0"
           }`}
         />
-      </div>
+      </button>
 
       {showUpcoming && (
-        <>
+        <div id="upcoming-bookings">
           {bookings.upcoming.length === 0 ? (
             <>
               <Tent className="mx-auto mb-2 h-6 w-6 text-primary dark:text-background" />
@@ -191,7 +203,7 @@ export default function CustomerBookings() {
                 <div className="text-center mt-4">
                   <button
                     onClick={() => setShowAllUpcoming(!showAllUpcoming)}
-                    className="underline text-copy dark:text-background hover:text-accent"
+                    className="underline text-copy dark:text-background hover:text-accent cursor-pointer"
                   >
                     {showAllUpcoming
                       ? "Show less"
@@ -201,10 +213,12 @@ export default function CustomerBookings() {
               )}
             </>
           )}
-        </>
+        </div>
       )}
 
-      <div
+      <button
+        aria-expanded={showPast}
+        aria-controls="past-bookings"
         className="cursor-pointer flex justify-center items-center gap-2 mt-16"
         onClick={() => setShowPast((prev) => !prev)}
       >
@@ -216,10 +230,10 @@ export default function CustomerBookings() {
             showPast ? "rotate-180" : "rotate-0"
           }`}
         />
-      </div>
+      </button>
 
       {showPast && (
-        <>
+        <div id="past-bookings">
           {bookings.past.length === 0 ? (
             <>
               <Map className="mx-auto mb-2 h-6 w-6 text-primary dark:text-background mt-4" />
@@ -234,7 +248,7 @@ export default function CustomerBookings() {
                 <div className="text-center mt-4">
                   <button
                     onClick={() => setShowAllPast(!showAllPast)}
-                    className="underline text-copy dark:text-background hover:text-accent"
+                    className="underline text-copy dark:text-background hover:text-accent cursor-pointer"
                   >
                     {showAllPast ? "Show less" : "Show all past bookings"}
                   </button>
@@ -242,7 +256,7 @@ export default function CustomerBookings() {
               )}
             </>
           )}
-        </>
+        </div>
       )}
     </section>
   );

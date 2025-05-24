@@ -39,12 +39,10 @@ export default function PopularCarousel() {
     return (
       <div className="w-full text-center py-12 flex flex-col items-center justify-center">
         <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4"></div>
-        <>
-          <MapPinned className="mx-auto mb-2 h-6 w-6 animate-bounce text-primary" />
-          <p className="text-lg text-copy font-body text-center dark:text-background">
-            Loading popular destinations... 🌍
-          </p>
-        </>
+        <MapPinned className="mx-auto mb-2 h-6 w-6 animate-bounce text-primary" />
+        <p className="text-lg text-copy font-body text-center dark:text-background">
+          Loading popular destinations... 🌍
+        </p>
       </div>
     );
   }
@@ -52,13 +50,11 @@ export default function PopularCarousel() {
   if (error || filtered.length === 0) {
     return (
       <div className="w-full text-black text-center py-12">
-        <>
-          <Globe className="mx-auto mb-2 h-6 w-6 text-primary" />
-          <p className="text-lg text-copy font-body text-center dark:text-background">
-            No hotspots right now — but adventure is always just around the
-            corner!
-          </p>
-        </>
+        <Globe className="mx-auto mb-2 h-6 w-6 text-primary" />
+        <p className="text-lg text-copy font-body text-center dark:text-background">
+          No hotspots right now — but adventure is always just around the
+          corner!
+        </p>
       </div>
     );
   }
@@ -92,12 +88,14 @@ export default function PopularCarousel() {
             >
               <img
                 src={
-                  venue.media?.[0]?.url ||
+                  `${venue.media?.[0]?.url}?auto=format&fit=crop&w=600&q=80` ||
                   "https://via.placeholder.com/400x300?text=No+Image"
                 }
                 alt={venue.media?.[0]?.alt || "Venue image"}
                 className="w-full h-48 object-cover rounded-t-xl"
+                loading="lazy"
               />
+
               <div className="p-3 text-left flex-grow flex flex-col justify-between bg-primary text-white font-body border-copy">
                 <div>
                   <h3 className="font-semibold text-base">{venue.name}</h3>
@@ -112,11 +110,16 @@ export default function PopularCarousel() {
           </SwiperSlide>
         ))}
 
-        {/* Piler */}
-        <button className="custom-prev absolute top-1/2 left-2 z-10 -translate-y-1/2 bg-white text-black shadow p-2 rounded-full hover:bg-gray-200 transition">
+        <button
+          aria-label="Previous slide"
+          className="custom-prev absolute top-1/2 left-2 z-10 -translate-y-1/2 bg-white text-black shadow p-2 rounded-full hover:bg-gray-200 transition"
+        >
           <FaChevronLeft size={20} />
         </button>
-        <button className="custom-next absolute top-1/2 right-2 z-10 -translate-y-1/2 bg-white text-black shadow p-2 rounded-full hover:bg-gray-200 transition">
+        <button
+          aria-label="Next slide"
+          className="custom-next absolute top-1/2 right-2 z-10 -translate-y-1/2 bg-white text-black shadow p-2 rounded-full hover:bg-gray-200 transition"
+        >
           <FaChevronRight size={20} />
         </button>
       </Swiper>

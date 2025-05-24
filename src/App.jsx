@@ -14,6 +14,7 @@ import Profile from "./pages/Profile";
 import UpdateVenue from "./pages/UpdateVenue";
 import SingleVenue from "./pages/SingleVenues";
 import SearchResults from "./pages/SearchResults";
+import DynamicFavicon from "./components/DynamicFlavicon";
 
 /**
  * The main application component that defines the routing structure for the app using React Router.
@@ -43,6 +44,7 @@ import SearchResults from "./pages/SearchResults";
 function App() {
   return (
     <>
+      <DynamicFavicon />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />

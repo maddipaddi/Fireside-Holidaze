@@ -17,6 +17,9 @@ import {
 } from "lucide-react";
 import CustomCalendar from "../components/Calender";
 import BookingVenue from "../components/BookingCard";
+import { Helmet } from "react-helmet-async";
+import { handleError } from "../utils/errorHandler.mjs";
+
 
 /**
  * Displays detailed information about a single venue, including images, description, facilities, location,
@@ -95,7 +98,7 @@ function SingleVenue() {
         const json = await response.json();
         setVenue(json.data);
       } catch (error) {
-        console.error("Error fetching venue:", error);
+        handleError(error);
       } finally {
         setLoading(false);
       }
@@ -117,6 +120,27 @@ function SingleVenue() {
 
   return (
     <>
+      <Helmet>
+        <title>{venue.name} | Holidaze</title>
+        <meta name="description" content={venue.description.slice(0, 150)} />
+        <meta
+          property="og:title"
+          content={`Fireside Holidaze - ${venue.name}`}
+        />
+        <meta
+          property="og:description"
+          content={`Fireside Holidaze - ${venue.description.slice(0, 150)}`}
+        />
+        <meta
+          property="og:image"
+          content="https://fireside-holidaze.netlify.app/assets/zachary-kyra-derksen-unsplash.jpg"
+        />
+        <meta
+          property="og:url"
+          content="https://fireside-holidaze.netlify.app/"
+        />
+        <meta property="og:type" content="website" />
+      </Helmet>
       <VenueCard
         venue={venue}
         renderFooter={(venue) => (
@@ -132,7 +156,7 @@ function SingleVenue() {
           </div>
         )}
       />
-      <div className="bg-copy text-white dark:bg-primary max-w-md md:max-w-2xl lg:max-w-4xl mx-auto -mt-16 pt-16 pb-70">
+      <div className="bg-copy text-white dark:bg-primary max-w-md md:max-w-2xl lg:max-w-4xl mx-auto -mt-16 pt-16 pb-20">
         <div className="flex flex-col items-center gap-4 px-4 py-6">
           {selectedImage && (
             <img
@@ -183,7 +207,7 @@ function SingleVenue() {
           </div>
         </section>
 
-        <section className="bg-background dark:bg-background text-copy rounded-lg shadow-md p-6 max-w-md mx-auto my-8">
+        <section className="mx-4 md:mx-auto my-12 bg-background dark:bg-background text-copy rounded-lg shadow-md p-6 max-w-md">
           <h3 className="text-xl font-heading mb-4 text-center">Location</h3>
           <ul className="space-y-2">
             <li className="flex items-center gap-2">
@@ -207,7 +231,7 @@ function SingleVenue() {
           </ul>
         </section>
 
-        <div className="h-28">
+        <div className="h-28 p-2 m-4 mb-16 md:mb-10">
           <CustomCalendar
             venueId={id}
             dateFrom={dateFrom}
@@ -217,7 +241,7 @@ function SingleVenue() {
           />
         </div>
 
-        <div className="pt-80">
+        <div className="pt-80 m-4">
           <BookingVenue
             venue={venue}
             dateFrom={dateFrom}
