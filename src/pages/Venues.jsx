@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import VenueGrid from "../components/VenueGrid";
 import { Star } from "lucide-react";
-import Searchbar from "../components/SearchBar";
+import SearchBar from "../components/SearchBar";
 import { useVenues } from "../components/context/VenueContext";
 import { Compass, PlugZap } from "lucide-react";
 import { Helmet } from "react-helmet-async";
@@ -69,7 +69,7 @@ function Venues() {
         />
         <meta property="og:type" content="website" />
       </Helmet>
-      <Searchbar />
+      <SearchBar />
       <section className="mt-32">
         <h1 className="text-3xl font-bold font-heading mb-4 text-center text-copy dark:text-background">
           Venues
