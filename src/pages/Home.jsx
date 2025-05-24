@@ -1,7 +1,7 @@
 import React from "react";
 import Searchbar from "../components/Searchbar";
 import CategoryItem from "../components/CategoryItem";
-import PopularCarousel from "../components/Carousel";
+import PopularCarousel from "../components/PopularCarousel/PopularCarousel";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
@@ -51,17 +51,17 @@ function Home() {
         <div className="pt-8">
           <Searchbar />
         </div>
-      <div className="py-20 flex items-center justify-center px-4">
-        <div className="relative bg-copy dark:bg-background text-white dark:text-copy w-full max-w-6xl rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-8 shadow-lg overflow-visible">
-          <div className="flex flex-col items-start justify-center gap-4 w-full md:w-1/2 h-auto">
-            <h1 className="font-heading text-3xl sm:text-4xl">
-              Welcome to Holidaze!
-            </h1>
-            <p className="font-body text-lg sm:text-xl">
-              Your forest retreat awaits
-            </p>
-           
-             <Link
+        <div className="py-20 flex items-center justify-center px-4">
+          <div className="relative bg-copy dark:bg-background text-white dark:text-copy w-full max-w-6xl rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-8 shadow-lg overflow-visible">
+            <div className="flex flex-col items-start justify-center gap-4 w-full md:w-1/2 h-auto">
+              <h1 className="font-heading text-3xl sm:text-4xl">
+                Welcome to Holidaze!
+              </h1>
+              <p className="font-body text-lg sm:text-xl">
+                Your forest retreat awaits
+              </p>
+
+              <Link
                 to="/venues"
                 className="text-copy dark:text-background font-bold font-body bg-background dark:bg-primary px-6 py-3 rounded-2xl shadow-md hover:bg-accent dark:hover:bg-copy transition"
               >
