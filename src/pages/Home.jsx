@@ -1,5 +1,4 @@
-import React from "react";
-import Searchbar from "../components/Searchbar";
+import SearchBar from "../components/SearchBar";
 import CategoryItem from "../components/CategoryItem";
 import PopularCarousel from "../components/PopularCarousel/PopularCarousel";
 import { Link } from "react-router-dom";
@@ -49,7 +48,7 @@ function Home() {
       </Helmet>
       <div className="bg-background dark:bg-darkbackground">
         <div className="pt-8">
-          <Searchbar />
+          <SearchBar />
         </div>
         <div className="py-20 flex items-center justify-center px-4">
           <div className="relative bg-copy dark:bg-background text-white dark:text-copy w-full max-w-6xl rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-8 shadow-lg overflow-visible">
