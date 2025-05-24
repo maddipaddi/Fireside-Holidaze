@@ -15,7 +15,7 @@ import {
   MapPinned,
   Map,
 } from "lucide-react";
-import CustomCalendar from "../components/CustomCalendar/CustomCalandar";
+import CustomCalendar from "../components/CustomCalendar";
 import BookingVenue from "../components/BookingCard";
 import { Helmet } from "react-helmet-async";
 import { handleError } from "../utils/errorHandler.mjs";
