@@ -1,5 +1,5 @@
 import CustomCalendar from "../../components/CustomCalendar/index";
-import BookingVenue from "../../components/BookingCard/Index";
+import BookingVenue from "../../components/BookingCard";
 
 /**
  * Renders the booking section for a single venue, including a custom calendar for date selection
