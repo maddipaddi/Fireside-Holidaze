@@ -5,7 +5,9 @@ import Facilities from "./FacilitiesSection";
 import Location from "./LocationSection";
 import { showSuccessMessage } from "../../utils/successMessage.mjs";
 import { handleError } from "../../utils/errorHandler.mjs";
-import { useAddVenueForm } from "../../hooks/useAddVenueForm.mjs";
+import { useVenueForm } from "../../hooks/useVenueForm.mjs";
+import { VENUES } from "../../utils/constants.mjs";
+import { apiRequest } from "../../utils/api.mjs";
 
 /**
  * AddVenue component renders a form for adding a new venue with details such as
@@ -49,11 +51,19 @@ export default function AddVenue() {
     addImageField,
     removeImage,
     handleSubmit,
-  } = useAddVenueForm(() => {
-    showSuccessMessage("Success! You have added a venue.");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    setTimeout(() => window.location.reload(), 1200);
-  }, handleError);
+  } = useVenueForm({
+    onSubmit: (payload) =>
+      apiRequest(VENUES, {
+        method: "POST",
+        body: JSON.stringify(payload),
+      }),
+    onSuccess: () => {
+      showSuccessMessage("Success! You have added a venue.");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setTimeout(() => window.location.reload(), 1200);
+    },
+    onError: handleError,
+  });
 
   return (
     <article className="mx-auto px-4 w-full max-w-6xl mt-8">
