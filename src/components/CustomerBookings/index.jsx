@@ -59,7 +59,12 @@ export default function CustomerBookings() {
     fetchBookings();
   }, [user.name]);
 
-  if (loading) return <p className="text-center mt-10">Loading bookings...</p>;
+  if (loading)
+    return (
+      <p className="text-center dark:text-background mt-10">
+        Loading bookings...
+      </p>
+    );
 
   return (
     <section className="px-4 md:px-8 max-w-screen-xl mx-auto">
