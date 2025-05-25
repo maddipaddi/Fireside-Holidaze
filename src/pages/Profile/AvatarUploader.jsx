@@ -1,3 +1,13 @@
+/**
+ * AvatarUploader component allows users to change their profile picture by entering an image URL.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {string} props.avatarUrl - The current URL of the user's avatar image.
+ * @param {function} props.onChange - Callback function called when the avatar URL input changes. Receives the new URL as a string argument.
+ * @returns {JSX.Element} The rendered AvatarUploader component.
+ */
+
 export default function AvatarUploader({ avatarUrl, onChange }) {
   return (
     <div className="mb-6">

@@ -10,6 +10,17 @@ import ToggleSection from "./ToggleSection";
 import EmptyState from "./EmptyState";
 import { Tent, Map } from "lucide-react";
 
+/**
+ * Displays the customer's bookings, separated into upcoming and past bookings.
+ * Allows toggling visibility of each section, showing more/less bookings, and editing upcoming bookings.
+ *
+ * Fetches bookings for the current user from the API and sorts them into upcoming and past based on the current date.
+ * Provides UI for editing and deleting upcoming bookings, and viewing past bookings.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered customer bookings section.
+ */
+
 export default function CustomerBookings() {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();

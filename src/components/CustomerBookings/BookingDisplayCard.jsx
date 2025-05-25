@@ -1,5 +1,27 @@
 import CancelBookingButton from "../DeleteBookings";
 
+/**
+ * Displays a card with booking information for a customer, including venue details,
+ * booking dates, guest count, and action buttons for upcoming bookings.
+ *
+ * @component
+ * @param {Object} props
+ * @param {Object} props.booking - The booking object containing venue and booking details.
+ * @param {Object} props.booking.venue - The venue associated with the booking.
+ * @param {string} props.booking.venue.name - The name of the venue.
+ * @param {Array<{url: string, alt?: string}>} [props.booking.venue.media] - Array of media objects for the venue.
+ * @param {number} props.booking.guests - Number of guests for the booking.
+ * @param {string|Date} props.booking.dateFrom - Start date of the booking.
+ * @param {string|Date} props.booking.dateTo - End date of the booking.
+ * @param {string|number} props.booking.id - Unique identifier for the booking.
+ * @param {boolean} props.isUpcoming - Whether the booking is upcoming.
+ * @param {function} props.onEdit - Callback to handle editing the booking.
+ * @param {function} props.onOpenModal - Callback to open the edit modal.
+ * @param {function} props.onDelete - Callback to handle booking deletion.
+ * @param {function} props.navigate - Function to navigate to a different route.
+ * @returns {JSX.Element} The rendered booking display card.
+ */
+
 export default function BookingDisplayCard({
   booking,
   isUpcoming,
@@ -36,14 +58,14 @@ export default function BookingDisplayCard({
                 onEdit(booking);
                 onOpenModal();
               }}
-              className="bg-copy text-white dark:bg-primary dark:text-background px-4 py-1 rounded shadow hover:bg-accent/50"
+              className="bg-copy text-white dark:bg-primary dark:text-background px-4 py-1 rounded shadow hover:bg-accent/50 cursor-pointer"
             >
               Change
             </button>
             <CancelBookingButton bookingId={booking.id} onDeleted={onDelete} />
           </div>
           <button
-            className="bg-copy text-white px-6 py-1 mt-2 rounded shadow hover:bg-accent/50"
+            className="bg-copy text-white px-6 py-1 mt-2 rounded shadow hover:bg-accent/50 cursor-pointer"
             onClick={() => navigate(`/venue/${booking.venue.id}`)}
           >
             View venue

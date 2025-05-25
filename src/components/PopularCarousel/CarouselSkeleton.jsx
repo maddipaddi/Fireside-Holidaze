@@ -1,5 +1,14 @@
 import { MapPinned } from "lucide-react";
 
+/**
+ * CarouselSkeleton is a React functional component that displays a loading skeleton
+ * for the popular destinations carousel. It shows a spinning loader, an animated icon,
+ * and a loading message to indicate that content is being fetched.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered loading skeleton for the carousel.
+ */
+
 export default function CarouselSkeleton() {
   return (
     <div className="w-full text-center py-12 flex flex-col items-center justify-center">

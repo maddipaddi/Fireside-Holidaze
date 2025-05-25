@@ -1,5 +1,15 @@
 import { Map, MapPinned } from "lucide-react";
 
+/**
+ * Displays venue details or appropriate loading/error messages.
+ *
+ * @component
+ * @param {Object} props
+ * @param {boolean} props.loading - Indicates if the venue data is loading.
+ * @param {Object|null} props.venue - The venue data object, or null if not found.
+ * @returns {JSX.Element|null} Rendered component based on loading and venue state.
+ */
+
 function VenueDetails({ loading, venue }) {
   if (loading) {
     return (

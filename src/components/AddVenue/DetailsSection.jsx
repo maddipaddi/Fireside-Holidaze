@@ -1,3 +1,13 @@
+/**
+ * Renders a section for entering venue details such as price, maximum number of guests, and rating.
+ *
+ * @component
+ * @param {Object} props
+ * @param {{ price: number, maxGuests: number, rating: number }} props.data - The current values for the venue details.
+ * @param {function} props.onChange - Callback function to handle input changes.
+ * @returns {JSX.Element} The rendered details section.
+ */
+
 export default function DetailsSection({ data, onChange }) {
   return (
     <section className="md:col-span-1 xl:col-span-2">

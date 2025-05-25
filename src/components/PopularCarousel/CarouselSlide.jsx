@@ -1,3 +1,18 @@
+/**
+ * CarouselSlide component displays a single venue slide for a carousel.
+ *
+ * @component
+ * @param {Object} props
+ * @param {Object} props.venue - The venue data to display.
+ * @param {string} props.venue.name - The name of the venue.
+ * @param {Array<{url: string, alt?: string}>} [props.venue.media] - Array of media objects for the venue.
+ * @param {number|string} [props.venue.rating] - The rating of the venue.
+ * @param {number|string} props.venue.price - The price per night for the venue.
+ * @param {function} props.onClick - Callback function to handle click events on the slide.
+ *
+ * @returns {JSX.Element} The rendered carousel slide component.
+ */
+
 export default function CarouselSlide({ venue, onClick }) {
   const image =
     `${venue.media?.[0]?.url}?auto=format&fit=crop&w=600&q=80` ||

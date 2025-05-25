@@ -1,5 +1,16 @@
 import { Helmet } from "react-helmet-async";
 
+/**
+ * Terms and Conditions page component for Holidaze.
+ *
+ * Renders a list of terms and conditions as expandable sections.
+ * Each section displays a title and corresponding content.
+ * Includes SEO meta tags using Helmet.
+ *
+ * @component
+ * @returns {JSX.Element} The Terms and Conditions page.
+ */
+
 export default function Terms() {
   const terms = [
     {

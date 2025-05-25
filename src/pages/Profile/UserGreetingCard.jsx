@@ -1,6 +1,24 @@
 import AvatarUploader from "./AvatarUploader";
 import RoleToggleButtons from "./RoleToggleButtons";
 
+/**
+ * UserGreetingCard component displays a user's greeting, avatar, and role toggle options.
+ *
+ * @component
+ * @param {Object} props
+ * @param {Object} props.user - The user object containing user details.
+ * @param {string} props.user.name - The name of the user.
+ * @param {Object} [props.user.avatar] - The user's avatar object.
+ * @param {string} [props.user.avatar.alt] - The alt text for the user's avatar.
+ * @param {boolean} props.user.venueManager - Indicates if the user is a venue manager.
+ * @param {string} props.avatarUrl - The URL of the user's avatar image.
+ * @param {Function} props.setAvatarUrl - Function to update the avatar URL.
+ * @param {Function} props.onUpdateAvatar - Callback function when the avatar is updated.
+ * @param {Function} props.onToggleRole - Callback function to toggle the user's role.
+ *
+ * @returns {JSX.Element} The rendered UserGreetingCard component.
+ */
+
 export default function UserGreetingCard({
   user,
   avatarUrl,

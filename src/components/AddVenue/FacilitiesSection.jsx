@@ -1,3 +1,17 @@
+/**
+ * FacilitiesSection component renders a section with checkboxes for selecting available facilities.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {Object} props.meta - An object containing the current state of each facility (wifi, parking, breakfast, pets).
+ * @param {boolean} props.meta.wifi - Indicates if wifi is available.
+ * @param {boolean} props.meta.parking - Indicates if parking is available.
+ * @param {boolean} props.meta.breakfast - Indicates if breakfast is available.
+ * @param {boolean} props.meta.pets - Indicates if pets are allowed.
+ * @param {function} props.onChange - Callback function to handle changes to the facility checkboxes.
+ * @returns {JSX.Element} The rendered FacilitiesSection component.
+ */
+
 export default function FacilitiesSection({ meta, onChange }) {
   return (
     <section className="md:col-span-1 xl:col-span-2">

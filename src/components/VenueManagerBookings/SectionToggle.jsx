@@ -1,5 +1,16 @@
 import { ChevronDown } from "lucide-react";
 
+/**
+ * SectionToggle component renders a toggleable section header with a title and a chevron icon.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {string} props.title - The title to display in the section header.
+ * @param {boolean} props.isOpen - Determines if the section is open (expanded).
+ * @param {Function} props.toggle - Callback function to toggle the section open/closed.
+ * @returns {JSX.Element} The rendered SectionToggle component.
+ */
+
 export default function SectionToggle({ title, isOpen, toggle }) {
   return (
     <button

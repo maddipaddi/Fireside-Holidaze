@@ -18,6 +18,7 @@ import CalendarLegend from "./CalendarLegend";
  * @param {string|number} [props.bookingIdToIgnore] - Optional booking ID to ignore (for editing).
  * @returns {JSX.Element}
  */
+
 export default function CustomCalendar({
   venueId,
   dateFrom,
@@ -55,33 +56,35 @@ export default function CustomCalendar({
   }
 
   return (
-    <div className="max-w-md mx-auto p-4 rounded-lg shadow bg-background">
-      <CalendarHeader
-        currentDate={currentDate}
-        onPrev={prevMonth}
-        onNext={nextMonth}
-      />
+    <>
+      <div className="max-w-md mx-auto p-4 rounded-lg shadow bg-background">
+        <CalendarHeader
+          currentDate={currentDate}
+          onPrev={prevMonth}
+          onNext={nextMonth}
+        />
 
-      <div className="grid grid-cols-7 text-black text-center font-bold mb-2 gap-1 text-xs sm:text-sm">
-        {daysOfWeek.map((day) => (
-          <div key={day} className="truncate">
-            {day}
-          </div>
-        ))}
+        <div className="grid grid-cols-7 text-black text-center font-bold mb-2 gap-1 text-xs sm:text-sm">
+          {daysOfWeek.map((day) => (
+            <div key={day} className="truncate">
+              {day}
+            </div>
+          ))}
+        </div>
+
+        <CalendarGrid
+          currentDate={currentDate}
+          today={today}
+          bookings={bookings}
+          dateFrom={dateFrom}
+          dateTo={dateTo}
+          setDateFrom={setDateFrom}
+          setDateTo={setDateTo}
+          bookingIdToIgnore={bookingIdToIgnore}
+        />
+
+        <CalendarLegend />
       </div>
-
-      <CalendarGrid
-        currentDate={currentDate}
-        today={today}
-        bookings={bookings}
-        dateFrom={dateFrom}
-        dateTo={dateTo}
-        setDateFrom={setDateFrom}
-        setDateTo={setDateTo}
-        bookingIdToIgnore={bookingIdToIgnore}
-      />
-
-      <CalendarLegend />
-    </div>
+    </>
   );
 }

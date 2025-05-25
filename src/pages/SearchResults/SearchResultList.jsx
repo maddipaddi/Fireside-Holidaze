@@ -1,5 +1,15 @@
 import VenueCard from "../../components/VenueCard";
 
+/**
+ * Renders a list of search result venues using the VenueCard component.
+ *
+ * @component
+ * @param {Object} props
+ * @param {Array<Object>} props.results - Array of venue objects to display.
+ * @param {function} props.navigate - Function to navigate to a venue's detail page.
+ * @returns {JSX.Element} The rendered list of venue cards.
+ */
+
 export default function SearchResultList({ results, navigate }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

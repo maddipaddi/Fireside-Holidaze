@@ -4,6 +4,7 @@
  * @component
  * @returns {JSX.Element}
  */
+
 export default function CalendarLegend() {
   return (
     <div className="calendarAvailability mt-3 flex flex-wrap items-center gap-2 text-md sm:text-md">

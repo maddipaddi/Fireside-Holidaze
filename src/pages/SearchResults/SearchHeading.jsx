@@ -1,3 +1,13 @@
+/**
+ * Renders the heading and navigation for search results.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {string} props.query - The search query to display in the heading.
+ * @param {function} props.navigate - Function to navigate to a different route.
+ * @returns {JSX.Element} The rendered search heading and navigation button.
+ */
+
 export default function SearchHeading({ query, navigate }) {
   return (
     <>

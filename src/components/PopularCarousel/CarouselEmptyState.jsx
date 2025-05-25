@@ -1,5 +1,13 @@
 import { Globe } from "lucide-react";
 
+/**
+ * Renders an empty state for the carousel component.
+ * Displays a globe icon and a message indicating that there are no hotspots available.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered empty state for the carousel.
+ */
+
 export default function CarouselEmptyState() {
   return (
     <div className="w-full text-center py-12">

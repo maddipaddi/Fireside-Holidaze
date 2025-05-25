@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
  * Contact form section used on the About page.
  * @returns {JSX.Element}
  */
+
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: "",

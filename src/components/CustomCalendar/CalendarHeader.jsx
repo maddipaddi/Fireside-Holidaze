@@ -9,6 +9,7 @@
  * @param {function} props.onNext - Callback for next month button.
  * @returns {JSX.Element}
  */
+
 export default function CalendarHeader({ currentDate, onPrev, onNext }) {
   const month = currentDate.toLocaleString("default", { month: "long" });
   const year = currentDate.getFullYear();

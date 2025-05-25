@@ -1,3 +1,15 @@
+/**
+ * RoleToggleButtons component renders two buttons for updating the profile picture
+ * and toggling between venue manager and customer roles.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {Function} props.onUpdate - Callback function invoked when the "Update profile picture" button is clicked.
+ * @param {Function} props.onToggle - Callback function invoked when the role toggle button is clicked.
+ * @param {boolean} props.isVenueManager - Indicates if the current role is venue manager.
+ * @returns {JSX.Element} The rendered RoleToggleButtons component.
+ */
+
 export default function RoleToggleButtons({
   onUpdate,
   onToggle,

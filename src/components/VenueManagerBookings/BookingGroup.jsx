@@ -1,6 +1,16 @@
 import BookingManCard from "./BookingCard";
 import { groupByMonth } from "./GroupByMonth";
 
+/**
+ * Renders a group of bookings organized by month.
+ *
+ * @component
+ * @param {Object} props
+ * @param {Array<Object>} props.bookings - The list of booking objects to display.
+ * @param {boolean} props.showAll - Whether to show all bookings or only the first three.
+ * @returns {JSX.Element[]} A list of grouped bookings by month.
+ */
+
 export default function BookingGroup({ bookings, showAll }) {
   const grouped = groupByMonth(showAll ? bookings : bookings.slice(0, 3));
 

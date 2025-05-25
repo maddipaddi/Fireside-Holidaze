@@ -64,11 +64,11 @@ function Footer() {
             <button
               onClick={() => setTheme("")}
               className={`text-xl p-2 rounded cursor-pointer transition border 
-              ${
-                theme === ""
-                  ? "bg-gray-200 text-black border-gray-400 dark:bg-gray-100 dark:text-black dark:border-gray-400"
-                  : "text-gray-400 border-transparent dark:text-copy/45"
-              }`}
+                ${
+                  theme === ""
+                    ? "bg-gray-200 text-black border-gray-400 dark:bg-gray-100 dark:text-black dark:border-gray-400"
+                    : "text-gray-400 border-transparent dark:text-copy/45"
+                }`}
               aria-label="Light mode"
             >
               <LuSun />
@@ -77,11 +77,11 @@ function Footer() {
             <button
               onClick={() => setTheme("dark")}
               className={`text-xl p-2 rounded cursor-pointer transition border 
-              ${
-                theme === "dark"
-                  ? "bg-copy text-white border-gray-600 dark:bg-copy dark:text-white dark:border-gray-400"
-                  : "text-background/80 border-transparent dark:text-gray-500"
-              }`}
+                ${
+                  theme === "dark"
+                    ? "bg-copy text-white border-gray-600 dark:bg-copy dark:text-white dark:border-gray-400"
+                    : "text-background/80 border-transparent dark:text-gray-500"
+                }`}
               aria-label="Dark mode"
             >
               <LuMoon />

@@ -1,3 +1,11 @@
+/**
+ * LoginButton component renders a styled button for login actions.
+ *
+ * @param {Object} props - Component props.
+ * @param {boolean} props.isLoading - Indicates if the login process is ongoing. Disables the button and shows a loading state when true.
+ * @returns {JSX.Element} The rendered login button.
+ */
+
 export default function LoginButton({ isLoading }) {
   return (
     <button

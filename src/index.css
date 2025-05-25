@@ -16,6 +16,10 @@
   --font-body: "Roboto", sans-serif;
 }
 
+body {
+  @apply font-body;
+}
+
 .custom-scrollbar::-webkit-scrollbar {
   width: 4px;
 }

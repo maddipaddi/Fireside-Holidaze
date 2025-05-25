@@ -1,3 +1,13 @@
+/**
+ * Renders the basic information section for adding or editing a venue.
+ *
+ * @component
+ * @param {Object} props
+ * @param {{ name: string, description: string }} props.data - The current values for the venue's name and description.
+ * @param {function} props.onChange - Callback function to handle input changes for the form fields.
+ * @returns {JSX.Element} The rendered section containing input fields for venue name and description.
+ */
+
 export default function BasicInfoSection({ data, onChange }) {
   return (
     <section className="md:col-span-1 xl:col-span-2">

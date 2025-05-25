@@ -19,6 +19,7 @@ import {
  * @param {string|number} [props.bookingIdToIgnore] - Booking ID to ignore (for edit).
  * @returns {JSX.Element[]}
  */
+
 export default function CalendarGrid({
   currentDate,
   today,

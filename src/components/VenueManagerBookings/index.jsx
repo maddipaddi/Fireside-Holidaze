@@ -9,6 +9,19 @@ import BookingGroup from "./BookingGroup";
 import EmptyState from "./EmptyState";
 import SectionToggle from "./SectionToggle";
 
+/**
+ * VenueManagerBookings component displays upcoming and past bookings for venues managed by the current user.
+ *
+ * - Fetches all venues owned by the user and their associated bookings.
+ * - Separates bookings into upcoming and past based on the current date.
+ * - Allows toggling visibility of upcoming and past bookings sections.
+ * - Supports "show all" and "show less" functionality for both booking groups.
+ * - Displays empty state messages when there are no bookings in a group.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered VenueManagerBookings component.
+ */
+
 export default function VenueManagerBookings() {
   const { user } = useContext(UserContext);
   const [bookings, setBookings] = useState({ upcoming: [], past: [] });

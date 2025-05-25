@@ -1,3 +1,22 @@
+/**
+ * BookingManCard component displays a card with booking details for a venue manager.
+ *
+ * @component
+ * @param {Object} props
+ * @param {Object} props.booking - The booking object containing details to display.
+ * @param {Array<{url: string, alt?: string}>} [props.booking.media] - Array of media objects for the venue.
+ * @param {string} [props.booking.media[].url] - URL of the media image.
+ * @param {string} [props.booking.media[].alt] - Alternative text for the image.
+ * @param {string} props.booking.venueName - Name of the venue.
+ * @param {Object} [props.booking.customer] - Customer who made the booking.
+ * @param {string} [props.booking.customer.name] - Name of the customer.
+ * @param {number} props.booking.guests - Number of guests for the booking.
+ * @param {string|Date} props.booking.dateFrom - Start date of the booking.
+ * @param {string|Date} props.booking.dateTo - End date of the booking.
+ *
+ * @returns {JSX.Element} Rendered booking card component.
+ */
+
 export default function BookingManCard({ booking }) {
   const image =
     `${booking.media?.[0]?.url}?auto=format&fit=crop&w=600&q=80` ||

@@ -1,6 +1,23 @@
 import FormInput from "./FormInput";
 import CheckboxInput from "./CheckboxInput";
 
+/**
+ * RegisterForm component renders a registration form with fields for name, email, password,
+ * and an option to register as a venue manager.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {Object} props.formData - The current values of the form fields.
+ * @param {string} props.formData.name - The user's name.
+ * @param {string} props.formData.email - The user's email address.
+ * @param {string} props.formData.password - The user's password.
+ * @param {boolean} props.formData.venueManager - Whether the user is registering as a venue manager.
+ * @param {function} props.onChange - Handler for input changes.
+ * @param {function} props.onSubmit - Handler for form submission.
+ * @param {boolean} props.isLoading - Indicates if the form is submitting.
+ * @returns {JSX.Element} The rendered registration form.
+ */
+
 export default function RegisterForm({
   formData,
   onChange,

@@ -1,6 +1,16 @@
 import VenueCard from "../../components/VenueCard";
 import { SearchX } from "lucide-react";
 
+/**
+ * Displays a message when no search results are found and shows recommended venues.
+ *
+ * @component
+ * @param {Object} props
+ * @param {Array<Object>} props.recommendations - List of recommended venue objects to display.
+ * @param {function} props.navigate - Function to navigate to a specific venue's page.
+ * @returns {JSX.Element} The rendered SearchRecommendations component.
+ */
+
 export default function SearchRecommendations({ recommendations, navigate }) {
   return (
     <div className="text-center mt-12 text-copy dark:text-white font-body">

@@ -1,3 +1,19 @@
+/**
+ * LoginInput is a reusable input component for login forms.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {string} props.id - The id for the input element.
+ * @param {string} props.name - The name attribute for the input element.
+ * @param {string} props.type - The type of the input (e.g., "text", "password").
+ * @param {string} props.label - The label text displayed above the input.
+ * @param {string|number} props.value - The current value of the input.
+ * @param {function} props.onChange - Callback fired when the input value changes.
+ * @param {string} [props.placeholder] - Placeholder text for the input.
+ * @param {...Object} [rest] - Additional props spread to the input element.
+ * @returns {JSX.Element} The rendered input field with label.
+ */
+
 export default function LoginInput({
   id,
   name,

@@ -1,6 +1,18 @@
 import LoginInput from "./LoginInput";
 import LoginButton from "./LoginButton";
 
+/**
+ * LoginForm component renders a login form with email and password fields.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {Object} props.formData - The current values of the form fields.
+ * @param {function} props.handleChange - Callback for handling input changes.
+ * @param {function} props.handleSubmit - Callback for handling form submission.
+ * @param {boolean} props.isLoading - Indicates if the login action is in progress.
+ * @returns {JSX.Element} The rendered login form component.
+ */
+
 export default function LoginForm({
   formData,
   handleChange,

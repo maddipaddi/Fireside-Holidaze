@@ -1,5 +1,12 @@
 import { Helmet } from "react-helmet-async";
 
+/**
+ * HelmetMeta component sets up SEO and Open Graph meta tags for the Login page.
+ *
+ * @component
+ * @returns {JSX.Element} Meta tags for the Login page, including title, description, and Open Graph properties.
+ */
+
 export function HelmetMeta() {
   return (
     <Helmet>

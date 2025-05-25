@@ -7,6 +7,15 @@ const facilityMap = {
   pets: { label: "Pets allowed", icon: <Dog /> },
 };
 
+/**
+ * Renders a list of available venue facilities based on the provided metadata.
+ *
+ * @component
+ * @param {Object} props
+ * @param {Object} props.meta - An object containing facility keys with boolean values indicating availability.
+ * @returns {JSX.Element} A section displaying available facilities with icons and labels.
+ */
+
 function VenueFacilities({ meta }) {
   return (
     <section>
