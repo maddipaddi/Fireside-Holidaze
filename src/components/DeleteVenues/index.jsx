@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { apiRequest } from "../utils/api.mjs";
-import { VENUES } from "../utils/constants.mjs";
-import { handleError } from "../utils/errorHandler.mjs";
-import { showConfirmDialog } from "../utils/showConfirmDialog.mjs";
-import { showSuccessMessage } from "../utils/successMessage.mjs";
+import { apiRequest } from "../../utils/api.mjs";
+import { VENUES } from "../../utils/constants.mjs";
+import { handleError } from "../../utils/errorHandler.mjs";
+import { showConfirmDialog } from "../../utils/showConfirmDialog.mjs";
+import { showSuccessMessage } from "../../utils/successMessage.mjs";
 
 /**
  * DeleteVenueButton component renders a button to delete a venue.

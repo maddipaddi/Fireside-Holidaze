@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import VenueGrid from "../components/VenueGrid";
+import VenueGrid from "../../components/VenueGrid";
 import { Star } from "lucide-react";
-import SearchBar from "../components/SearchBar";
-import { useVenues } from "../components/context/VenueContext";
+import SearchBar from "../../components/SearchBar";
+import { useVenues } from "../../components/context/VenueContext";
 import { Compass, PlugZap } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 

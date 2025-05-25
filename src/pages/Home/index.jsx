@@ -1,6 +1,6 @@
-import SearchBar from "../components/SearchBar";
-import CategoryItem from "../components/CategoryItem";
-import PopularCarousel from "../components/PopularCarousel";
+import SearchBar from "../../components/SearchBar";
+import CategoryItem from "../../components/CategoryItem";
+import PopularCarousel from "../../components/PopularCarousel";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 

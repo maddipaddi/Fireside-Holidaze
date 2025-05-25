@@ -7,7 +7,7 @@ import { handleError } from "../../utils/errorHandler.mjs";
 import BookingGroup from "./BookingGroup";
 
 import EmptyState from "./EmptyState";
-import SectionToggle from "./SectionTogle";
+import SectionToggle from "./SectionToggle";
 
 export default function VenueManagerBookings() {
   const { user } = useContext(UserContext);

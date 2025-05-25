@@ -1,4 +1,4 @@
-import VenueCard from "./VenueCard";
+import VenueCard from "../VenueCard";
 import { Home } from "lucide-react";
 
 /**
