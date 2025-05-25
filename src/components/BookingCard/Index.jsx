@@ -28,7 +28,6 @@ function BookingVenue({ venue, dateFrom, dateTo, setDateFrom, setDateTo }) {
   const [guests, setGuests] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [error] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const navigate = useNavigate();
@@ -50,15 +49,6 @@ function BookingVenue({ venue, dateFrom, dateTo, setDateFrom, setDateTo }) {
   }, [dateFrom, dateTo, venue.price]);
 
   const handleBooking = async () => {
-    setLoading(true);
-    const token = localStorage.getItem("accessToken");
-
-    if (!token) {
-      handleError({ title: "Booking Conflict", message: "Must be logged in" });
-      setLoading(false);
-      return;
-    }
-
     const payload = { dateFrom, dateTo, guests, venueId: venue.id };
 
     try {
@@ -92,9 +82,6 @@ function BookingVenue({ venue, dateFrom, dateTo, setDateFrom, setDateTo }) {
             setGuests={setGuests}
             maxGuests={venue.maxGuests}
           />
-          {error && (
-            <div className="mt-2 text-red-600 font-medium">{error}</div>
-          )}
           <TotalPrice totalPrice={totalPrice} />
           <BookingButton
             loading={loading}

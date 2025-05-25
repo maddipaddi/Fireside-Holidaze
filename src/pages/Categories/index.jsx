@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import { useVenues } from "../components/context/VenueContext";
-import VenueGrid from "../components/VenueGrid";
+import { useVenues } from "../../components/context/VenueContext";
+import VenueGrid from "../../components/VenueGrid";
 import { Star, SearchX, Globe } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";

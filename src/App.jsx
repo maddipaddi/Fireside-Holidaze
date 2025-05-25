@@ -1,4 +1,3 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
 import "./index.css";
 import Layout from "./components/layout/Layout";
@@ -14,7 +13,7 @@ import Profile from "../src/pages/Profile/index";
 import UpdateVenue from "./pages/UpdateVenue";
 import SingleVenue from "./pages/SingleVenues";
 import SearchResults from "./pages/SearchResults";
-import DynamicFavicon from "./components/DynamicFlavicon";
+import DynamicFavicon from "./components/DynamicFavicon";
 
 /**
  * The main application component that defines the routing structure for the app using React Router.

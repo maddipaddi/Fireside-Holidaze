@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
-import VenueGrid from "./VenueGrid";
+import VenueGrid from "../VenueGrid";
 import { useNavigate } from "react-router-dom";
-import { apiRequest } from "../utils/api.mjs";
-import { PROFILE } from "../utils/constants.mjs";
-import { UserContext } from "./context/UserContext";
-import DeleteVenueButton from "./DeleteVenues";
+import { apiRequest } from "../../utils/api.mjs";
+import { PROFILE } from "../../utils/constants.mjs";
+import { UserContext } from "../context/UserContext";
+import DeleteVenueButton from "../DeleteVenues";
 import { Globe } from "lucide-react";
-import { handleError } from "../utils/errorHandler.mjs";
+import { handleError } from "../../utils/errorHandler.mjs";
 
 /**
  * ProfileVenues component displays a list of venues associated with the current user profile.

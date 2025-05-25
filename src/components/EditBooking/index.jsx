@@ -1,18 +1,17 @@
 import { useState } from "react";
-import { SINGLE_BOOKING } from "../utils/constants.mjs";
-import CustomCalendar from "./CustomCalendar";
+import { SINGLE_BOOKING } from "../../utils/constants.mjs";
+import CustomCalendar from "../CustomCalendar";
 import { createPortal } from "react-dom";
 import { X } from "lucide-react";
-import { apiRequest } from "../utils/api.mjs";
-import { showSuccessMessage } from "../utils/successMessage.mjs";
-import { handleError } from "../utils/errorHandler.mjs";
+import { apiRequest } from "../../utils/api.mjs";
+import { showSuccessMessage } from "../../utils/successMessage.mjs";
+import { handleError } from "../../utils/errorHandler.mjs";
 
 export default function EditBookingModal({ booking, onClose, onUpdate }) {
   const [dateFrom, setDateFrom] = useState(booking.dateFrom);
   const [dateTo, setDateTo] = useState(booking.dateTo);
   const [guests, setGuests] = useState(booking.guests);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
   const handleUpdate = async () => {
     setLoading(true);
@@ -32,8 +31,8 @@ export default function EditBookingModal({ booking, onClose, onUpdate }) {
       onUpdate(result.data);
       showSuccessMessage("Your booking was updated!");
       onClose();
-    } catch (err) {
-      handleError(err);
+    } catch (error) {
+      handleError(error);
     } finally {
       setLoading(false);
     }
@@ -107,8 +106,6 @@ export default function EditBookingModal({ booking, onClose, onUpdate }) {
             {loading ? "Updating..." : "Update Booking"}
           </button>
         </div>
-
-        {error && <p className="mt-2 text-red-600">{error}</p>}
       </div>
     </div>,
     document.body,

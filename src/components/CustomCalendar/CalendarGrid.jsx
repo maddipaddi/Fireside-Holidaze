@@ -1,3 +1,4 @@
+import { handleError } from "../../utils/errorHandler.mjs";
 import {
   formatDateToLocalISO,
   isOverlapping,
@@ -54,7 +55,10 @@ export default function CalendarGrid({
       );
 
       if (hasOverlap) {
-        alert("Selected date range overlaps with an existing booking.");
+        handleError({
+          title: "Booking conflict",
+          message: "Selected date range overlaps with an existing booking.",
+        });
         setDateFrom("");
         return;
       }

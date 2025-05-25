@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import ContactForm from "../components/Contact";
+import ContactForm from "../../components/Contact";
 
 /**
  * `About` is a page component for Holidaze that provides information about the platform

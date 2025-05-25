@@ -1,16 +1,16 @@
 import { useNavigate } from "react-router-dom";
-import { useVenueForm } from "../hooks/useVenueForm.mjs";
-import { showSuccessMessage } from "../utils/successMessage.mjs";
-import { handleError } from "../utils/errorHandler.mjs";
-import { apiRequest } from "../utils/api.mjs";
-import { VENUES } from "../utils/constants.mjs";
+import { useVenueForm } from "../../hooks/useVenueForm.mjs";
+import { showSuccessMessage } from "../../utils/successMessage.mjs";
+import { handleError } from "../../utils/errorHandler.mjs";
+import { apiRequest } from "../../utils/api.mjs";
+import { VENUES } from "../../utils/constants.mjs";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import BasicInfo from "../components/AddVenue/BasicInfoSection";
-import Images from "../components/AddVenue/ImageSection";
-import Details from "../components/AddVenue/DetailsSection";
-import Facilities from "../components/AddVenue/FacilitiesSection";
-import Location from "../components/AddVenue/LocationSection";
+import BasicInfo from "../../components/AddVenue/BasicInfoSection";
+import Images from "../../components/AddVenue/ImageSection";
+import Details from "../../components/AddVenue/DetailsSection";
+import Facilities from "../../components/AddVenue/FacilitiesSection";
+import Location from "../../components/AddVenue/LocationSection";
 
 /**
  * UpdateVenue component allows users to edit and update an existing venue.
