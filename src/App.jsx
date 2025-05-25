@@ -10,7 +10,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
-import Profile from "./pages/Profile";
+import Profile from "../src/pages/Profile/index";
 import UpdateVenue from "./pages/UpdateVenue";
 import SingleVenue from "./pages/SingleVenues";
 import SearchResults from "./pages/SearchResults";
