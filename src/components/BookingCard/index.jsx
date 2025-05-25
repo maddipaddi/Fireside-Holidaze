@@ -4,7 +4,6 @@ import { apiRequest } from "../../utils/api.mjs";
 import { showSuccessMessage } from "../../utils/successMessage.mjs";
 import { handleError } from "../../utils/errorHandler.mjs";
 import { useNavigate } from "react-router-dom";
-
 import GuestInput from "./GuestInput";
 import TotalPrice from "./TotalPrice";
 import BookingButton from "./BookingButton";
@@ -62,8 +61,8 @@ function BookingVenue({ venue, dateFrom, dateTo, setDateFrom, setDateTo }) {
       setDateFrom("");
       setDateTo("");
       navigate("/profile");
-    } catch (err) {
-      handleError(err);
+    } catch (error) {
+      handleError(error);
     } finally {
       setLoading(false);
     }
@@ -91,8 +90,7 @@ function BookingVenue({ venue, dateFrom, dateTo, setDateFrom, setDateTo }) {
               !dateFrom ||
               !dateTo ||
               guests < 1 ||
-              new Date(dateFrom) > new Date(dateTo) ||
-              !!error
+              new Date(dateFrom) > new Date(dateTo)
             }
           />
         </>
