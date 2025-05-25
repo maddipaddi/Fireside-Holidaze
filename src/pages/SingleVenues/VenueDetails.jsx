@@ -24,17 +24,15 @@ function VenueDetails({ loading, venue }) {
 
   if (!venue) {
     return (
-      <>
-        <div className="text-center mt-10">
-          <Map className="mx-auto mb-2 h-6 w-6 text-red-600" />
-          <p className="text-red-600 font-body">
-            Oops... we couldn't find that venue.
-          </p>
-          <p className="text-sm text-red-400 italic">
-            It might have been removed or never existed.
-          </p>
-        </div>
-      </>
+      <div className="text-center mt-10">
+        <Map className="mx-auto mb-2 h-6 w-6 text-red-600" />
+        <p className="text-red-600 font-body">
+          Oops... we couldn't find that venue.
+        </p>
+        <p className="text-sm text-red-400 italic">
+          It might have been removed or never existed.
+        </p>
+      </div>
     );
   }
 

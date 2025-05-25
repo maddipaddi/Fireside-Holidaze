@@ -18,24 +18,22 @@ const facilityMap = {
 
 function VenueFacilities({ meta }) {
   return (
-    <>
-      <section>
-        <h3 className="text-center font-heading">Facilities</h3>
-        <div className="grid grid-cols-2 gap-4 max-w-md mx-auto text-center pt-4 pb-8 px-6">
-          {Object.entries(meta)
-            .filter(([_, value]) => value)
-            .map(([key]) => (
-              <div
-                key={key}
-                className="flex items-center gap-2 justify-center bg-background text-copy p-2 rounded"
-              >
-                {facilityMap[key]?.icon}
-                <span>{facilityMap[key]?.label}</span>
-              </div>
-            ))}
-        </div>
-      </section>
-    </>
+    <section>
+      <h3 className="text-center font-heading">Facilities</h3>
+      <div className="grid grid-cols-2 gap-4 max-w-md mx-auto text-center pt-4 pb-8 px-6">
+        {Object.entries(meta)
+          .filter(([_, value]) => value)
+          .map(([key]) => (
+            <div
+              key={key}
+              className="flex items-center gap-2 justify-center bg-background text-copy p-2 rounded"
+            >
+              {facilityMap[key]?.icon}
+              <span>{facilityMap[key]?.label}</span>
+            </div>
+          ))}
+      </div>
+    </section>
   );
 }
 
