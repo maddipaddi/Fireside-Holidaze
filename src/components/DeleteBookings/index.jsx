@@ -47,14 +47,12 @@ export default function CancelBookingButton({ bookingId, onDeleted }) {
   }
 
   return (
-    <>
-      <button
-        onClick={handleDelete}
-        disabled={deleting}
-        className="bg-copy text-white dark:bg-primary dark:text-background font-body font-bold px-4 py-1 rounded shadow hover:bg-red-600 dark:hover:bg-red-500 hover:text-white transition cursor-pointer disabled:opacity-50"
-      >
-        {deleting ? "Cancelling..." : "Cancel"}
-      </button>
-    </>
+    <button
+      onClick={handleDelete}
+      disabled={deleting}
+      className="bg-copy text-white dark:bg-primary dark:text-background px-4 py-1 rounded shadow hover:bg-red-600 dark:hover:bg-red-500 hover:text-white transition cursor-pointer disabled:opacity-50"
+    >
+      {deleting ? "Cancelling..." : "Cancel"}
+    </button>
   );
 }
