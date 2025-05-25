@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 import AddVenue from "../../components/AddVenue";
 import ProfileVenues from "../../components/ProfileVenues";
 import CustomerBookings from "../../components/CustomerBookings";
-import VenueManagerBookings from "../../components/VenueManagerBookings/VenueManBookings";
+import VenueManagerBookings from "../../components/VenueManagerBookings/";
 import { UserContext } from "../../components/context/UserContext";
 import { updateProfile } from "../../utils/updateProfile.mjs";
 import { handleError } from "../../utils/errorHandler.mjs";
