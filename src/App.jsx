@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 import Venues from "./pages/Venues";
 import Categories from "./pages/Categories";
 import About from "./pages/About";
-import Login from "./pages/Login";
+import Login from "../src/pages/Login/index";
 import Register from "./pages/Register";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
