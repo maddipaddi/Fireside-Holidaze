@@ -37,6 +37,7 @@ This project is the **frontend implementation** of Holidaze, built on an existin
 - Create, edit and delete venues, as well as see upcoming bookings on the venues (authenticated users - venue managers).
 - Book venues and view upcoming bookings (authenticated users - customers).
 - Profile management, including avatar updates (authenticated users - customers and venue managers).
+- To ensure a professional feed of venues and avoid clutter, only venues created containing the phrase "Only available through Fireside Holidaze" in the venue description will be displayed on the app. 
 
 ---
 
