@@ -78,13 +78,13 @@ export default function PopularCarousel() {
 
         <button
           aria-label="Previous slide"
-          className="custom-prev absolute top-1/2 left-2 z-10 -translate-y-1/2 bg-white text-black shadow p-2 rounded-full hover:bg-gray-200 transition"
+          className="custom-prev absolute top-1/2 left-2 z-10 -translate-y-1/2 bg-white text-black shadow p-2 rounded-full hover:bg-gray-200 transition cursor-pointer"
         >
           <FaChevronLeft size={20} />
         </button>
         <button
           aria-label="Next slide"
-          className="custom-next absolute top-1/2 right-2 z-10 -translate-y-1/2 bg-white text-black shadow p-2 rounded-full hover:bg-gray-200 transition"
+          className="custom-next absolute top-1/2 right-2 z-10 -translate-y-1/2 bg-white text-black shadow p-2 rounded-full hover:bg-gray-200 transition cursor-pointer"
         >
           <FaChevronRight size={20} />
         </button>
