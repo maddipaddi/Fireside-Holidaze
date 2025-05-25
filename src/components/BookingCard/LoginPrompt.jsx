@@ -1,3 +1,11 @@
+/**
+ * Displays a prompt informing the user that they must be logged in to book a venue.
+ * Provides a link to the login page.
+ *
+ * @component
+ * @returns {JSX.Element} A message with a login link for unauthenticated users.
+ */
+
 function LoginPrompt() {
   return (
     <p className="text-black">

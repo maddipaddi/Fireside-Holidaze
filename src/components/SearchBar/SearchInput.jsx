@@ -1,3 +1,24 @@
+/**
+ * SearchInput component renders a search input field with autocomplete suggestions.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {string} props.query - The current search query value.
+ * @param {function} props.setQuery - Function to update the search query.
+ * @param {Array<Object>} props.suggestions - List of suggestion objects to display.
+ * @param {boolean} props.isOpen - Whether the suggestions dropdown is open.
+ * @param {function} props.setIsOpen - Function to set the dropdown open state.
+ * @param {number} props.activeIndex - Index of the currently highlighted suggestion.
+ * @param {function} props.setActiveIndex - Function to set the active suggestion index.
+ * @param {function} props.handleKeyDown - Handler for keyboard navigation in the input.
+ * @param {function} props.handleSuggestionClick - Handler for clicking a suggestion.
+ * @param {function} props.navigate - Function to navigate to a search results page.
+ * @param {string} props.checkIn - Selected check-in date for search.
+ * @param {string} props.checkOut - Selected check-out date for search.
+ * @param {number} props.guests - Number of guests for search.
+ * @returns {JSX.Element} The rendered SearchInput component.
+ */
+
 const SearchInput = ({
   query,
   setQuery,

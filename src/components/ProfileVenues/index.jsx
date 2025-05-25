@@ -51,38 +51,40 @@ export default function ProfileVenues() {
   }
 
   return (
-    <section>
-      <h2 className="text-3xl font-bold font-heading mb-4 text-center text-copy dark:text-background">
-        My venues
-      </h2>
-      <VenueGrid
-        venues={venues}
-        renderFooter={(venue) => (
-          <div className="text-center">
-            <h3 className="text-base font-semibold mb-2">{venue.name}</h3>
-            <div className="flex justify-center gap-8">
+    <>
+      <section>
+        <h2 className="text-3xl font-bold font-heading mb-4 text-center text-copy dark:text-background">
+          My venues
+        </h2>
+        <VenueGrid
+          venues={venues}
+          renderFooter={(venue) => (
+            <div className="text-center">
+              <h3 className="text-base font-semibold mb-2">{venue.name}</h3>
+              <div className="flex justify-center gap-8">
+                <button
+                  onClick={() => navigate(`/venue/edit/${venue.id}`)}
+                  className="bg-copy text-white dark:bg-primary dark:text-background font-body font-bold px-6 py-1 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer"
+                >
+                  Edit
+                </button>
+                <DeleteVenueButton
+                  venueId={venue.id}
+                  onDeleted={(deletedId) =>
+                    setVenues((prev) => prev.filter((v) => v.id !== deletedId))
+                  }
+                />
+              </div>
               <button
-                onClick={() => navigate(`/venue/edit/${venue.id}`)}
-                className="bg-copy text-white dark:bg-primary dark:text-background font-body font-bold px-6 py-1 rounded shadow hover:bg-accent/50 dark:hover:bg-copy hover:text-white transition cursor-pointer"
+                className="bg-copy text-white font-body font-bold px-6 py-1 mt-4 rounded shadow hover:bg-accent/50 hover:text-white transition cursor-pointer"
+                onClick={() => navigate(`/venue/${venue.id}`)}
               >
-                Edit
+                View venue
               </button>
-              <DeleteVenueButton
-                venueId={venue.id}
-                onDeleted={(deletedId) =>
-                  setVenues((prev) => prev.filter((v) => v.id !== deletedId))
-                }
-              />
             </div>
-            <button
-              className="bg-copy text-white font-body font-bold px-6 py-1 mt-4 rounded shadow hover:bg-accent/50 hover:text-white transition cursor-pointer"
-              onClick={() => navigate(`/venue/${venue.id}`)}
-            >
-              View venue
-            </button>
-          </div>
-        )}
-      />
-    </section>
+          )}
+        />
+      </section>
+    </>
   );
 }

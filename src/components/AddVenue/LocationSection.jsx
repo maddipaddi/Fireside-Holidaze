@@ -1,3 +1,19 @@
+/**
+ * LocationSection component renders a form section for entering venue location details.
+ *
+ * @component
+ * @param {Object} props
+ * @param {Object} props.location - The location data object containing address, city, zip, country, and continent.
+ * @param {string} props.location.address - The address of the venue.
+ * @param {string} props.location.city - The city where the venue is located.
+ * @param {string} props.location.zip - The zip code of the venue.
+ * @param {string} props.location.country - The country where the venue is located.
+ * @param {string} props.location.continent - The continent where the venue is located.
+ * @param {function} props.onChange - Callback function to handle input changes.
+ *
+ * @returns {JSX.Element} The rendered location section form.
+ */
+
 export default function LocationSection({ location, onChange }) {
   return (
     <section className="md:col-span-2 xl:col-span-2 xl:col-start-2 mb-4 sm:mb-12 md:mb-20">

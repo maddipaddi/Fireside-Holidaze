@@ -1,3 +1,12 @@
+/**
+ * SearchButton component renders a styled button for triggering search actions.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {function} props.onClick - Callback function to handle button click events.
+ * @returns {JSX.Element} The rendered SearchButton component.
+ */
+
 const SearchButton = ({ onClick }) => (
   <div className="bg-primary dark:bg-background p-4 text-center -mx-8 -mb-8 rounded-b-lg">
     <button

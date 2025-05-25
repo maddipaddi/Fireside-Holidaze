@@ -14,21 +14,23 @@
 
 export default function VenueCard({ venue, renderFooter }) {
   return (
-    <div className="mt-10">
-      <div className="w-44 h-44 rounded-full aspect-[1/1] overflow-hidden border-3 border-darkbackground dark:border-background mx-auto -mb-6 z-0">
-        <img
-          src={
-            `${venue.media?.[0]?.url}?auto=format&fit=crop&w=600&q=80` ||
-            "https://placehold.co/150x150?text=No+Image"
-          }
-          alt={venue.media?.[0]?.alt || venue.name}
-          className="w-full h-full object-cover"
-          loading="lazy"
-        />
+    <>
+      <div className="mt-10">
+        <div className="w-44 h-44 rounded-full aspect-[1/1] overflow-hidden border-3 border-darkbackground dark:border-background mx-auto -mb-6 z-0">
+          <img
+            src={
+              `${venue.media?.[0]?.url}?auto=format&fit=crop&w=600&q=80` ||
+              "https://placehold.co/150x150?text=No+Image"
+            }
+            alt={venue.media?.[0]?.alt || venue.name}
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+        <div className="bg-secondary dark:bg-secondary text-white dark:text-white border-3 border-darkbackground dark:border-background rounded-lg p-4 z-10 relative max-w-xs mx-auto">
+          {renderFooter && renderFooter(venue)}
+        </div>
       </div>
-      <div className="bg-secondary dark:bg-secondary text-white dark:text-white border-3 border-darkbackground dark:border-background rounded-lg p-4 z-10 relative max-w-xs mx-auto">
-        {renderFooter && renderFooter(venue)}
-      </div>
-    </div>
+    </>
   );
 }

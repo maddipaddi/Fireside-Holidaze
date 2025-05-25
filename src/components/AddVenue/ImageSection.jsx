@@ -1,3 +1,19 @@
+/**
+ * ImagesSection component for displaying and managing a list of image inputs.
+ *
+ * @component
+ * @param {Object[]} media - Array of media objects containing image data.
+ * @param {string} media[].url - The URL of the image.
+ * @param {string} [media[].alt] - The alt text/description for the image.
+ * @param {function} onChange - Callback function called when an image field changes.
+ *   Receives the event, index, and field name as arguments.
+ * @param {function} onAdd - Callback function called when the "Add image" button is clicked.
+ * @param {function} onRemove - Callback function called when an image is removed.
+ *   Receives the index of the image to remove.
+ *
+ * @returns {JSX.Element} The rendered ImagesSection component.
+ */
+
 export default function ImagesSection({ media, onChange, onAdd, onRemove }) {
   return (
     <section className="md:col-span-1 xl:col-span-2">

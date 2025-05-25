@@ -13,33 +13,18 @@ import { showSuccessMessage } from "../../utils/successMessage.mjs";
 import UserGreetingCard from "./UserGreetingCard";
 
 /**
- * Profile component displays and manages the user's profile information.
+ * Profile page component for displaying and managing the user's profile.
  *
- * Features:
- * - Shows the user's avatar, name, and allows updating the profile picture.
- * - Allows toggling between "customer" and "venue manager" roles.
- * - Displays different components based on the user's role:
- *   - CustomerBookings for customers.
- *   - VenueManagerBookings, ProfileVenues, and AddVenue for venue managers.
- *
- * State:
- * - `newAvatarUrl` (string): Holds the URL for the new avatar image.
- *
- * Context:
- * - Uses `UserContext` to access and update the current user.
- *
- * Side Effects:
- * - Updates `newAvatarUrl` when the user or their avatar changes.
- *
- * Methods:
- * - `handleUpdateAvatar`: Updates the user's avatar URL.
- * - `handleToggleVenueManager`: Toggles the user's venue manager status.
- *
- * UI:
- * - Shows loading state if user data is not available.
- * - Provides input for avatar URL and buttons for updating profile and toggling role.
+ * - Shows user information and allows updating the profile avatar.
+ * - Allows toggling between customer and venue manager roles.
+ * - Displays bookings and venues based on the user's role.
  *
  * @component
+ * @returns {JSX.Element} The rendered profile page.
+ *
+ * @example
+ * // Usage in a route
+ * <Route path="/profile" element={<Profile />} />
  */
 
 export default function Profile() {

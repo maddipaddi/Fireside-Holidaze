@@ -49,46 +49,48 @@ export default function PopularCarousel() {
   if (error || filtered.length === 0) return <CarouselEmptyState />;
 
   return (
-    <div className="w-full max-w-screen-xl mx-auto text-center py-12 px-4 relative">
-      <CarouselHeader title="Popular destinations" />
+    <>
+      <div className="w-full max-w-screen-xl mx-auto text-center py-12 px-4 relative">
+        <CarouselHeader title="Popular destinations" />
 
-      <Swiper
-        modules={[Navigation]}
-        navigation={{
-          nextEl: ".custom-next",
-          prevEl: ".custom-prev",
-        }}
-        loop={true}
-        spaceBetween={20}
-        breakpoints={{
-          640: { slidesPerView: 2 },
-          768: { slidesPerView: 3 },
-          1024: { slidesPerView: 4 },
-        }}
-        className="relative"
-      >
-        {slides.map((venue, index) => (
-          <SwiperSlide key={`${venue.id}-${index}`}>
-            <CarouselSlide
-              venue={venue}
-              onClick={() => navigate(`/venue/${venue.id}`)}
-            />
-          </SwiperSlide>
-        ))}
+        <Swiper
+          modules={[Navigation]}
+          navigation={{
+            nextEl: ".custom-next",
+            prevEl: ".custom-prev",
+          }}
+          loop={true}
+          spaceBetween={20}
+          breakpoints={{
+            640: { slidesPerView: 2 },
+            768: { slidesPerView: 3 },
+            1024: { slidesPerView: 4 },
+          }}
+          className="relative"
+        >
+          {slides.map((venue, index) => (
+            <SwiperSlide key={`${venue.id}-${index}`}>
+              <CarouselSlide
+                venue={venue}
+                onClick={() => navigate(`/venue/${venue.id}`)}
+              />
+            </SwiperSlide>
+          ))}
 
-        <button
-          aria-label="Previous slide"
-          className="custom-prev absolute top-1/2 left-2 z-10 -translate-y-1/2 bg-white text-black shadow p-2 rounded-full hover:bg-gray-200 transition"
-        >
-          <FaChevronLeft size={20} />
-        </button>
-        <button
-          aria-label="Next slide"
-          className="custom-next absolute top-1/2 right-2 z-10 -translate-y-1/2 bg-white text-black shadow p-2 rounded-full hover:bg-gray-200 transition"
-        >
-          <FaChevronRight size={20} />
-        </button>
-      </Swiper>
-    </div>
+          <button
+            aria-label="Previous slide"
+            className="custom-prev absolute top-1/2 left-2 z-10 -translate-y-1/2 bg-white text-black shadow p-2 rounded-full hover:bg-gray-200 transition"
+          >
+            <FaChevronLeft size={20} />
+          </button>
+          <button
+            aria-label="Next slide"
+            className="custom-next absolute top-1/2 right-2 z-10 -translate-y-1/2 bg-white text-black shadow p-2 rounded-full hover:bg-gray-200 transition"
+          >
+            <FaChevronRight size={20} />
+          </button>
+        </Swiper>
+      </div>
+    </>
   );
 }

@@ -1,3 +1,13 @@
+/**
+ * BookingButton component renders a styled button for confirming bookings.
+ *
+ * @param {Object} props
+ * @param {boolean} props.loading - Indicates if the booking process is ongoing; shows loading state when true.
+ * @param {Function} props.handleBooking - Callback function to handle the booking action when the button is clicked.
+ * @param {boolean} props.disabled - If true, disables the button to prevent user interaction.
+ * @returns {JSX.Element} The rendered booking button.
+ */
+
 function BookingButton({ loading, handleBooking, disabled }) {
   return (
     <button

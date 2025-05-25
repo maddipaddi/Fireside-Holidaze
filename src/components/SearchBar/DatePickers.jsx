@@ -1,3 +1,22 @@
+/**
+ * DatePickers component renders two date input fields for selecting check-in and check-out dates.
+ *
+ * @component
+ * @param {Object} props
+ * @param {string} props.checkIn - The selected check-in date in YYYY-MM-DD format.
+ * @param {function} props.setCheckIn - Function to update the check-in date.
+ * @param {string} props.checkOut - The selected check-out date in YYYY-MM-DD format.
+ * @param {function} props.setCheckOut - Function to update the check-out date.
+ *
+ * @example
+ * <DatePickers
+ *   checkIn={checkIn}
+ *   setCheckIn={setCheckIn}
+ *   checkOut={checkOut}
+ *   setCheckOut={setCheckOut}
+ * />
+ */
+
 const DatePickers = ({ checkIn, setCheckIn, checkOut, setCheckOut }) => (
   <fieldset className="bg-offwhite p-3 rounded w-full md:col-span-3">
     <legend className="text-sm font-semibold font-body text-copy pt-10">

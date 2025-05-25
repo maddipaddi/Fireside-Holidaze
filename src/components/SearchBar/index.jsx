@@ -111,33 +111,35 @@ export default function SearchBar() {
   };
 
   return (
-    <form
-      onSubmit={(e) => e.preventDefault()}
-      className="bg-copy dark:bg-primary p-8 rounded-lg shadow-lg max-w-xs md:max-w-2xl mx-auto mt-12"
-      ref={wrapperRef}
-    >
-      <SearchInput
-        {...{
-          query,
-          setQuery,
-          suggestions,
-          isOpen,
-          setIsOpen,
-          activeIndex,
-          setActiveIndex,
-          handleKeyDown,
-          handleSuggestionClick,
-          navigate,
-          checkIn,
-          checkOut,
-          guests,
-        }}
-      />
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
-        <DatePickers {...{ checkIn, setCheckIn, checkOut, setCheckOut }} />
-        <GuestSelector {...{ guests, increment, decrement }} />
-      </div>
-      <SearchButton onClick={handleSearch} />
-    </form>
+    <>
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className="bg-copy dark:bg-primary p-8 rounded-lg shadow-lg max-w-xs md:max-w-2xl mx-auto mt-12"
+        ref={wrapperRef}
+      >
+        <SearchInput
+          {...{
+            query,
+            setQuery,
+            suggestions,
+            isOpen,
+            setIsOpen,
+            activeIndex,
+            setActiveIndex,
+            handleKeyDown,
+            handleSuggestionClick,
+            navigate,
+            checkIn,
+            checkOut,
+            guests,
+          }}
+        />
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+          <DatePickers {...{ checkIn, setCheckIn, checkOut, setCheckOut }} />
+          <GuestSelector {...{ guests, increment, decrement }} />
+        </div>
+        <SearchButton onClick={handleSearch} />
+      </form>
+    </>
   );
 }
