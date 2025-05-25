@@ -69,7 +69,12 @@ export default function VenueManagerBookings() {
     fetchBookings();
   }, [user.name]);
 
-  if (loading) return <p className="text-center mt-10">Loading bookings...</p>;
+  if (loading)
+    return (
+      <p className="text-center dark:text-background mt-10">
+        Loading bookings...
+      </p>
+    );
 
   return (
     <section className="px-4 md:px-8 max-w-screen-xl mx-auto">
@@ -95,7 +100,7 @@ export default function VenueManagerBookings() {
                 <div className="text-center mt-4">
                   <button
                     onClick={() => setShowAllUpcoming(!showAllUpcoming)}
-                    className="underline text-copy dark:text-background hover:text-accent"
+                    className="underline text-copy dark:text-background hover:text-accent cursor-pointer"
                   >
                     {showAllUpcoming
                       ? "Show less"
@@ -127,7 +132,7 @@ export default function VenueManagerBookings() {
                 <div className="text-center mt-4">
                   <button
                     onClick={() => setShowAllPast(!showAllPast)}
-                    className="underline text-copy dark:text-background hover:text-accent"
+                    className="underline text-copy dark:text-background hover:text-accent cursor-pointer"
                   >
                     {showAllPast ? "Show less" : "Show all past bookings"}
                   </button>

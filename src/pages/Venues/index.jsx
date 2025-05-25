@@ -26,13 +26,16 @@ function Venues() {
     venue.description?.toLowerCase().includes(appSpecificPhrase),
   );
 
-  if (loading) return;
-  <>
-    <Compass className="mx-auto mb-2 h-6 w-6 animate-spin text-primary" />
-    <p className="text-center mt-4 text-copy">
-      Scouting dreamy escapes for you...
-    </p>
-  </>;
+  if (loading)
+    if (loading)
+      return (
+        <div className="mt-12">
+          <Compass className="mx-auto mb-2 h-6 w-6 animate-spin text-primary dark:text-background" />
+          <p className="text-center mt-4 text-copy dark:text-background">
+            Scouting dreamy escapes for you...
+          </p>
+        </div>
+      );
   if (error)
     return (
       <>
