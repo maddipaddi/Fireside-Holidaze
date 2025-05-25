@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useApiRequest } from "./useApiRequest.mjs";
 import { VENUES } from "../utils/constants.mjs";
 
-export function useAddVenueForm(onSuccess, onError) {
+export function useVenueForm({ venueId, onSubmit, onSuccess, onError }) {
   const INITIAL_FORM_DATA = {
     name: "",
     description: "",
@@ -28,6 +28,40 @@ export function useAddVenueForm(onSuccess, onError) {
   };
   const [formData, setFormData] = useState(INITIAL_FORM_DATA);
   const { request, isLoading } = useApiRequest();
+
+  useEffect(() => {
+    if (!venueId) return;
+    (async () => {
+      try {
+        const { data } = await request(`${VENUES}/${venueId}`);
+        setFormData({
+          name: data.name || "",
+          description: data.description || "",
+          media: data.media.length ? data.media : [{ url: "", alt: "" }],
+          price: data.price || 0,
+          maxGuests: data.maxGuests || 0,
+          rating: data.rating || 0,
+          meta: {
+            wifi: data.meta?.wifi || false,
+            parking: data.meta?.parking || false,
+            breakfast: data.meta?.breakfast || false,
+            pets: data.meta?.pets || false,
+          },
+          location: {
+            address: data.location?.address || "",
+            city: data.location?.city || "",
+            zip: data.location?.zip || "",
+            country: data.location?.country || "",
+            continent: data.location?.continent || "",
+            lat: data.location?.lat || 0,
+            lng: data.location?.lng || 0,
+          },
+        });
+      } catch (err) {
+        onError(err);
+      }
+    })();
+  }, [venueId]);
 
   function handleChange(event) {
     const { name, type, value, checked } = event.target;
@@ -82,22 +116,21 @@ export function useAddVenueForm(onSuccess, onError) {
     });
   }
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    const cleanedFormData = {
+  function cleanFormData() {
+    return {
       ...formData,
-      media: formData.media.filter((item) => item.url.trim() !== ""),
+      media: formData.media.filter((m) => m.url.trim()),
       price: Number(formData.price),
       maxGuests: Number(formData.maxGuests),
       rating: Number(formData.rating),
     };
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
     try {
-      await request(VENUES, {
-        method: "POST",
-        body: JSON.stringify(cleanedFormData),
-      });
-      onSuccess();
-      setFormData(INITIAL_FORM_DATA);
+      const result = await onSubmit(cleanFormData());
+      onSuccess(result);
     } catch (err) {
       onError(err);
     }
