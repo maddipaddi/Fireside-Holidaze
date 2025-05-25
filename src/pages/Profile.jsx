@@ -7,7 +7,7 @@ import CustomerBookings from "../components/CustomerBookings";
 import { handleError } from "../utils/errorHandler.mjs";
 import { showSuccessMessage } from "../utils/successMessage.mjs";
 import { Helmet } from "react-helmet-async";
-import VenueManagerBookings from "../components/VenueManagerBookings/VenueManBookings";
+import VenueManagerBookings from "../components/VenueManagerBookings";
 
 /**
  * Profile component displays and manages the user's profile information.
