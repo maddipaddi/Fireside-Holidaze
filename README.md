@@ -9,6 +9,8 @@ This project is a collaboration between Veronika Aas, Herman Hylland, and Madele
 
 This project is the **frontend implementation** of Holidaze, built on an existing backend API provided by Noroff. The API handles user management, venue listings, and booking functionality, while this frontend will bring the user interface to life with a cozy, responsive design.
 
+![Skjermbilde 2025-06-02 195003](https://github.com/user-attachments/assets/8368e20e-ce46-4ca4-b677-3d918d8a6f11)
+
 ---
 
 ## Table of Contents
